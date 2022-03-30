@@ -1,0 +1,425 @@
+Core Java
+------------
+
+java 1.5	major
+java 1.8	major
+11
+16
+
+Java as a language
+
+writing program in java language
+compilation process
+	translation
+
+platform independent
+
+the compilation process of java is 2 stages
+
+1) compile my java code
+	it is not translated into machine language
+	a byte code		(intermediate language)
+
+when i compile a java code in my computer, it is not translated into machine code
+	common byte code
+
+2) at run time,
+	another compilation process
+		byte code is converted into machine code
+
+
+JRE	is platform specific
+
+java compiler is present in JDK	Java Development Kit
+
+
+
+environment variables
+	path			paste the location upto "bin"
+	java_home			paste the location upto jdk	
+
+
+JDK	is for developers			compiler also
+JRE	is for users				runtime
+
+------------------------------------------------------------------------------
+Java language:
+
+primitive data types		8	fundamentals		(all other types we create are based on these primitives only)
+		byte		1 byte		8 bits		-128 to 127
+		short		2 bytes		16 bits		-32,768 to 32767
+		int		4 bytes		32 bits		-2,14,74,83,648 to 2,14,74,83,647
+		long		8 bytes		64 bits
+	
+		float		4 bytes		32 bits
+		double		8 bytes		64 bits
+		char		2 bytes		16 bits
+
+		boolean		1 bit		1 bit
+
+
+
+data types
+all others are just types
+
+in java, these are the only value types available
+users cannot create value types in java
+
+value vs reference
+
+if i create a variable of any of the primitive type, then it is value type
+
+int age=20;		//value type
+
+age refers to a memory in "stack"
+
+locker	
+	what is found inside?
+		20
+
+
+String str=new String("hello");		//reference type
+
+str??????
+	str is the lable on the locker (stack)
+
+if you go and see inside this "str", what do you see?
+	you will not see "hello" present inside the stack variable
+
+you will see a reference to "heap"
+	
+stack as locker
+heap as a store room
+
+Objects are stored in "heap"
+their references are stored in "stack"
+
+
+Stack
+	Last In First Out
+
+any variable i create inside a method (function) is created in stack
+
+when i run a program, the execution starts from which method?
+	main()
+		fn1()
+			fn2()
+				fn3()
+
+
+
+call stack
+	
+inside some method:
+	Employee rama=new Employee();
+
+rama is a var created in stack
+new Employee() is the object that is created in heap
+
+if you go and see what is inside "rama"?
+	value?????	NO
+	reference to heap
+
+
+byte age=127;
+++age;		//how much is the age now?
+System.out.println(age);		//output??????
+answer: 
+	-128
+	
+
+methods directly
+
+ArrayIndexOutOfBoundsException
+
+
+i have created a java program
+public class MyFirstProgram
+{
+	public static void main(String []args)
+	{
+		//jre will call this method when we run the program
+		//static member (data member or method) of a class, does not belong to any particular instance of the class
+		System.out.println("Hello world");
+	}
+}
+
+i have saved in D:\Jag\wipro\wipro1
+
+go to cmd prompt in that location		(first go the drive d:)
+	cd D:\Jag\wipro\wipro1
+
+javac to compile
+java to run
+
+javac MyFirstProgram.java
+
+java MyFirstProgram
+
+
+-127 to 128		includes a 0 in the middle
+	totally		256 possible values
+
+if 0 is  not there
+	0 - 255
+
+in 8 bit representation, the min value is	0000 0000
+		the max value is 	1111 1111
+
+this is why 256 possible values in a byte data type
+
+
+in short	we can have 65536 possible values
+	-32,768 to 32767
+
+
+
+in int	we can have 4294967295
+
+
+
+
+public class MyFirstProgram
+{
+	public static void main(String []args)
+	{
+		byte age=127;
+		age++;
+		System.out.println(age);
+	}
+}
+
+
+
+
+
+If you declare mobileNo as int
+2,14,74,83,647	(max)
+
+2147483647
+9876543210
+
+	you cannot declare a mobile no as int
+
+String
+
++91
+
+
+for java programming, we used notepad.
+Instead of notepad, we can use IDE	Integrated Development Environment
+
+	eclipse
+	netbeans
+	intelliJ
+	spring tool suite	STS	is also eclipse + spring plugin
+
+i have given the link to STS
+	https://drive.google.com/file/d/1h-E6GG4wZ6sPYQVUGnlKdgHft0o-X-z-/view?usp=sharing
+
+there is no installation required for STS
+
+after downloading, UNZIP
+go inside the folder
+	SpringToolSuite4.exe		(Application)
+		create a shortcut for this file in desktop and pin it to the task bar
+
+I will show you how to work with STS	 (Eclipse)
+
+while working with eclipse/STS
+	we choose a folder where our projects will be created.	This is called as "work space"
+
+	it ask you for workspace 
+		choose a location where you want to create your projects
+
+Java as a language has 3 editions:
+	Java Standard Edition 
+		J2SE until 1.4
+		Java SE 	from 1.5 onwards
+	Java Enterprise Edition
+		J2EE until 1.4
+		Java EE	 from 5 
+	Java Mobile Edition
+		J2ME 	java micro edition until 1.4
+		Java Mobile Edition 	from 5
+
+
+Lets create our first "Java Project" in STS/eclipse
+
+File -> New -> Java project		
+
+name: first-project
+
+what happens when you create a project in IDE?
+	it creates a project folder
+		src folder	
+			contains the source code
+			.java files
+		bin folder
+			.class files
+
+
+After creating a java project in eclipse/sts,
+right click the project -> new -> class
+
+i) give a name for the class
+ii) you can also tick the "public static void main" option if you want main method in the class
+
+
+
+Language features of Java:
+1) data type
+2) programming constructs
+	if
+	if else
+	if else if else
+	switch case
+	while
+	do while
+	for
+	for each
+3) OOP
+	class
+	encapsulation
+		getters, setters
+	interface
+	abstract class
+	inheritance
+	polymorphism
+		overloading
+		overriding
+	
+4) Strings
+5) IO
+6) Collections
+7) Thread
+8) Exception
+9) Java 8 features
+
+
+
+System.out.print
+System.out.println
+
+System is a class
+	inside the class they have a static variable called out
+
+
+
+
+
+System.in
+System.out
+
+class name.variable name????	yes, if the variable is static
+
+
+for output in console:
+	System.out.println()
+
+for input????? from console:
+
+until jdk 1.4, we did not have Scanner
+	we were using java.io package classes like
+		BufferedReader		character input
+		BufferedInputStream		binary input
+
+
+now we use 1.5 or later, 
+	java.util.Scanner
+
+
+
+import java.util.Scanner;
+public class App {
+
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter your name:");
+		String input=sc.next();
+		System.out.println("Your name is "+input);
+	}
+
+}
+
+
+
+sc.next()
+	what are all other methods available in Scanner class?
+
+next()		reads only 1 word	because, <<space>> <<tab>> <<new line>> enter key all are delimiters for a next() method
+	when user inputs as
+		sathish kumar
+	only "sathish" is captured by next() method. a space after sathish makes it delimited
+
+nextLine()		captures all the words as a sentence until a new line char is found <<enter>>
+
+nextInt()
+nextFloat()
+nextDouble()
+
+
+among all the nextX methods, nextLine() only stays different.
+
+get input as
+
+int
+String
+float
+
+
+
+import java.util.Scanner;
+public class App {
+
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		Scanner sc1=new Scanner(System.in);
+		int i=sc.nextInt();
+		String s=sc1.nextLine();
+		float f=sc.nextFloat();
+		System.out.println("Your inputs are");
+		System.out.println(i);
+		System.out.println(s);
+		System.out.println(f);
+	}
+
+}
+
+
+
+import java.util.Scanner;
+public class App {
+
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		int i=sc.nextInt();
+		String s=sc.nextLine();
+		if(s.equals(""))
+			s=sc.nextLine();
+		float f=sc.nextFloat();
+		System.out.println("Your inputs are");
+		System.out.println(i);
+		System.out.println(s);
+		System.out.println(f);
+	}
+
+}
+
+
+
+
+import java.util.Scanner;
+public class App {
+
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		int no1=sc.nextInt();
+		int no2=sc.nextInt();
+		int sum=no1+no2;
+		System.out.printf("The sum of %d and %d is %d", no1, no2, sum);
+	}
+
+}
+
+
