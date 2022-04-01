@@ -1,0 +1,22 @@
+
+public class App3 {
+
+	public static void main(String[] args) {
+		int no=10;
+		do
+		{
+			System.out.println(no);
+		}while(no++<20);
+
+	}
+
+}
+
+//what will be the output?
+//a) 10 ... 19
+//b) 11 ... 19
+//c) 10 ... 18
+//d) 11 ... 20		correct
+//e) only 20
+//f) only 19
+//g) only 21	
