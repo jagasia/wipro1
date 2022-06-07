@@ -1,0 +1,6 @@
+server.port=8383
+
+spring.datasource.url=jdbc:mysql://localhost:3306/wipro3
+spring.datasource.username=root
+spring.datasource.password=
+

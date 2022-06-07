@@ -1,0 +1,222 @@
+SELECT statement:
+------------------------
+WHERE clause
+ORDER BY clause
+GROUP BY clause
+HAVING clause
+
+SUB QUERIES
+JOINES
+
+SINGLE ROW FUNCTIONS
+AGGREGATE FUNCTIONS
+
+Basically, a select statement can do
+	SELECTION
+	PROJECTION
+	UNION
+	UNION ALL
+	INTERSECT
+	MINUS
+	PRODUCT
+	DIVISION
+
+SELECTION
+	selecting only the required ROWs, instead of all rows. WHERE clause is used to do selection	
+	ex:
+		Many candidates apply for a Job. 		
+		But only based on criteria, the selection process is performed.
+
+PROJECTION
+	instead of showing all the COLUMNS, we can PROJECT only the required columns.
+		SELECT * FROM EMPLOYEES		-- NO PROJECTION
+		SELECT EMPLOYEE_ID, FIRST_NAME FROM EMPLOYEES		-- PROJECTION
+
+
+UNION
+	combine the result of 2 select statements
+	ex:
+		First select statement produces 10 rows
+		Second select statement produces 10 rows
+
+		After UNION, how many rows are possible?
+			10 + 10 = maximum 20 rows	(why maximum? if there are common rows, they are not displayed twice. only once)
+
+		10 + 10 (in case of UNION, may not always 20)
+
+UNION ALL
+	10 + 10 is always 20	 in case of UNION ALL
+
+
+INTERSECT
+	Common rows between two SELECT statement results
+
+MINUS
+	All rows from the first SELECT statement but not the common rows between second SELECT
+	First - Intersect = MINUS
+
+PRODUCT
+	10 * 10 = 100
+
+	If we do not give the JOIN condition, then it will lead to CARTESIAN PRODUCT (multiplication)
+
+	ex:
+		There are 10 PRODUCTS
+		There are 10 CUSTOMERS
+
+	We imagine, if all 10 customers, buy all 10 products, 
+	How many transactions can occur?
+		10 * 10 = 100
+
+DIVIDE
+	Display all customers who have purchased all the products.
+
+	in a cartesian product, 10 customers purchase all 10 products. so from 100, divide by 10 =10
+
+	10 is the answer, because, 10 customers are eligible for DIVIDE
+
+	If only 3 customers have matching record in SALES table, then 3 is the answer
+
+
+-----------------------------------------------------
+Group By
+	what is the need for Group By?
+
+Without aggregate function, there is no need for Group By. 
+Some people use group by wrongly for DISTINCT.
+
+Ex:
+	select DISTINCT city from customer;
+
+	select city from customer group by city;	//produces same result but not proper use of group by
+
+
+Lets understand why GROUP BY is introduced.
+
+Aggregate Functions: (Tell me example for aggregate functions)
+AVG
+SUM
+COUNT
+MIN
+MAX
+
+When we use an aggregate function in SELECT statement,
+we get only 1 row
+
+select count(tnumber) from trandetails;	//14 rows found	
+
+but when we want a count per acnumber (not count per table)
+
+select count(tnumber) from trandetails
+group by acnumber;			//4 rows found. Because, there are 4 acnumbers found. For each acnumber, we get a count
+
+select acnumber, count(tnumber) from trandetails
+group by acnumber;
+
+A00001	6
+A00002	4
+A00007	3
+A122	1
+
+For each acnumber, we get a count. ie., count of transactions per acnumber.
+
+
+select transaction_type, count(tnumber) from trandetails
+group by transaction_type;
+
+Deposit		9
+Withdrawal	5
+
+
+Group By is used to obtain one result per group when we use aggregate function
+
+select transaction_type, count(tnumber), min(transaction_amount), max(transaction_amount), avg(transaction_amount), sum(transaction_amount)
+ from trandetails
+group by transaction_type;
+
+NOTICE from the above query, 
+you are allowed to have only aggregate functions or columns that are present in group by clause
+
+
+HAVING:
+------------
+	when you do not want all the groups formed.
+	You want only those groups passing a condition
+	the condition uses aggregate function, then HAVING should be used.
+
+	WHERE condition cannot have aggregate function
+
+select acnumber, sum(transaction_amount)
+ from trandetails
+group by acnumber
+having sum(transaction_amount)<10000;
+
+
+
+
+What is the difference between WHERE and HAVING
+
+WHERE
+	is used to restrict the rows
+
+HAVING
+	is used to restrict the groups
+
+
+HTML,CSS, JavaScript, Jquery, Servlets
+
+----------------------------------------
+
+.elementText
+{
+	color:red;
+	font-weight:bold;
+}
+
+
+<ul class="elementText">
+	<li>India</li>
+	<li>Australia</li>
+</ul>
+
+
+
+
+
+<input type
+
+
+Wipro3 HTML_CSS_JS_Servlet
+-------------------------------------------------
+Problem # 1:   
+Write a query to display the  account number who has done the highest transaction.
+
+For example the account A00023 has done 5 transactions i.e. suppose 3 withdrawal and 2 deposits. Whereas the account A00024 has done 3 transactions i.e. suppose 2 withdrawals and 1 deposit. So account number of A00023 should be displayed. 
+
+
+
+
++----------+--------------------+--------+
+| acnumber | transaction_amount | MAX(c) |
++----------+--------------------+--------+
+| A00001   |               2000 |      6 |
++----------+--------------------+--------+
+1 row in set (0.00 sec)
+
+
+
+
+
+select acnumber, 
+count(tnumber) from trandetails
+group by acnumber
+having count(tnumber)>= ALL
+(select count(tnumber) from trandetails group by acnumber);
+
+
+
+select t1.acnumber, max(t1.c) from (select acnumber, 
+count(tnumber) c from trandetails
+group by acnumber) t1;
+
+---------------------------------------

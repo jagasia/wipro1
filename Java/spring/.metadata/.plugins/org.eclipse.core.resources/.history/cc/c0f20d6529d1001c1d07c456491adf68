@@ -1,0 +1,5 @@
+package com.wipro.hrms.repository;
+
+public interface UserRepository {
+
+}

@@ -1,0 +1,307 @@
+Spring frameworks
+----------------------
+6 sessions for spring
+and
+6 sessions for spring boot
+
+Pending topics in spring framework
+1) Spring AOP
+2) Spring Jdbc
+3) HibernateTemplate		(already learnt hibernate, this is hibernate template in spring)
+4) Spring MVC		(last time, we learnt spring boot mvc. that was very minimal in steps. This is spring (not boot) mvc. So many steps)
+5) Spring REST		(not spring boot)
+
+Demo:
+---------
+Since we know that Spring AOP is used for handling cross cutting concerns, like
+	logging
+	transaction
+	security
+	
+Remember the filter concept we learnt in servlets 
+	we wanted to find the time taken by the servlet to process the request.
+	it was done in a separate filter
+
+Same example, lets do with AOP
+
+Lets create a bean called "Bank" that has methods
+	deposit
+	withdraw
+
+before and after these methods, you want something to be done
+before advice and 
+after advice
+
+1) create a maven project	(quickstart)
+	jun06-aop-1
+2) add the following dependencies
+	spring context
+	spring context support
+	spring aop
+	aspectjrt
+	aspectj weaver
+	  <dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-context</artifactId>
+    <version>5.2.7.RELEASE</version>
+</dependency>
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-context-support</artifactId>
+    <version>5.2.7.RELEASE</version>
+</dependency>
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-aop</artifactId>
+    <version>5.2.7.RELEASE</version>
+</dependency>
+<dependency>
+    <groupId>org.aspectj</groupId>
+    <artifactId>aspectjrt</artifactId>
+    <version>1.9.5</version>
+</dependency>
+<dependency>
+    <groupId>org.aspectj</groupId>
+    <artifactId>aspectjweaver</artifactId>
+    <version>1.9.5</version>
+</dependency>
+
+
+3) we can do aop in xml configuration or using annotations
+	first we do in xml method
+
+	i) we have created a bean
+		AbcBank	
+	that has following methods
+		deposit()
+		withdrawal()
+
+	ii) the AbcBank is defined as a bean in xml configuration
+
+4) App.java
+	main method
+		getBean 
+			call these methods.
+
+	working fine
+
+5) Create an Aspect class
+	BankAspect
+		beforeAdvice()
+		afterAdvice()
+
+
+------------------------------------
+Task:
+
+Create a bean Mathematics, that has methods
+	sum(x,y)
+	product(x,y)
+
+Create an aspect with 
+	beforeAdvice
+	afterAdvice
+	aroundAdvice
+
+use xml configuration for AOP
+
+-------------------------------------------
+
+The last example was done in xml based configuration. Now, the same will be done using annotations.
+Demo:
+1) create a maven project (quick start archetype)
+	jun06-aop-annotations-1
+2) add the same dependencies in pom.xml
+
+
+-----------------
+Task:
+
+The same task you have done using xml configuration,
+now you are going to do it using annotation configuration.
+
+try the following advices:
+	before
+	after
+	around
+
+------------------------------------------
+Annotations are mostly used when compared to xml configuration
+-------
+
+2) Spring Jdbc
+----------------------
+When it comes to spring framework, we have the advantage of Dependency Injection.
+That is possible either we define the beans and thier relationship in xml configuration or we use annotations and autowiring.
+
+We will learn spring jdbc using xml configuration and also
+			annotation configuration.
+
+Xml based configuration for spring jdbc:
+--------------------------------------------------
+	JDBC	-	Java DataBase Connectivity
+
+Disadvantages of jdbc
+	difficult to migrate from one RDBMS to another
+		after completing the project, if you change the backend from mysql to oracle, what are the implications of this change?
+		you have to change SQL statements also. 
+		and if you have mentioned the
+			url
+			driverClassName
+			username
+			password
+		in java code, then it is "hard code". Any change will need recompilation. This is big risk. Once tested, nobody would like to recompile
+
+	configuration
+	dialect		version of SQL that is different
+
+JdbcTemplate
+	is not going to solve these issues much. 
+	But it will help us to handle the db tasks little more effectively.
+	Spring framework will handle the scalability issues by using pool of instances
+	so, jdbc template itself will become a bean
+
+
+manually, i will show you jdbc template in app.java itself.
+
+1) create a maven project "jun06-jdbc-template-xml-1"
+2) in pom.xml, add
+	spring context
+	spring context support
+	spring jdbc
+
+   <dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-context</artifactId>
+    <version>5.2.7.RELEASE</version>
+</dependency>
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-context-support</artifactId>
+    <version>5.2.7.RELEASE</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-jdbc</artifactId>
+    <version>5.2.7.RELEASE</version>
+</dependency>
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>5.1.47</version>
+</dependency>
+
+
+3) in App.java
+
+DriverManagerDataSource dataSource=new DriverManagerDataSource();
+    	dataSource.setUrl("jdbc:mysql://localhost:3306/wipro3");
+    	dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+    	dataSource.setUsername("root");
+    	dataSource.setPassword("");
+    	
+        JdbcTemplate jt=new JdbcTemplate();
+        jt.setDataSource(dataSource);
+        
+        int no = jt.update("INSERT INTO Branch VALUES(2,'Coimbatore','Cbe branch')");
+        System.out.println(no+" row(s) affected");
+
+4) Now, lets create the bean.xml
+	and configure the ht, dmds
+
+<?xml version = "1.0" encoding = "UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="dmds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="url" value="jdbc:mysql://localhost:3306/wipro3" />
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="username" value="root" />
+		<property name="password" value="" />
+	</bean>
+	
+	<bean id="jt" class="org.springframework.jdbc.core.JdbcTemplate" autowire="byType">
+		<!-- <property name="dataSource" ref="dmds" /> -->
+	</bean>
+
+</beans>
+
+5) new App.java will be:
+package com.wipro.hrms;
+
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.jdbc.core.JdbcTemplate;
+
+/**
+ * Hello world!
+ *
+ */
+public class App 
+{
+    public static void main( String[] args )
+    {
+//    	DriverManagerDataSource dataSource=new DriverManagerDataSource();
+//    	dataSource.setUrl("jdbc:mysql://localhost:3306/wipro3");
+//    	dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+//    	dataSource.setUsername("root");
+//    	dataSource.setPassword("");
+//    	
+//        JdbcTemplate jt=new JdbcTemplate();
+//        jt.setDataSource(dataSource);
+//
+    	ClassPathXmlApplicationContext ctx=new ClassPathXmlApplicationContext("bean.xml");
+    	JdbcTemplate jt=(JdbcTemplate) ctx.getBean("jt");
+    	
+    	
+        int no = jt.update("INSERT INTO Branch VALUES(5,'Navi Mumbai','Mahape branch')");
+        System.out.println(no+" row(s) affected");
+    }
+}
+
+
+Task:
+--------
+	download 
+		https://github.com/jagasia/jun06-jdbc-template-xml-1
+	and use it as a template.
+
+	Create a project by yourself and refer to the template whenever required.
+	Just test it with an insert statement on existing table in db.
+
+
+Demo:
+--------
+	entity:	Student
+	dao:	StudentDaoImpl
+
+use jdbc template and row mapper
+
+jdbc template will not create table automatically, and it will not have any mappings also.
+so the table should be present or be created by us.
+
+SELECT queries
+
+whenever we run select statement, what we expect?
+	we expect row(s)
+
+what should the method return?
+	our method should return student object(s)
+	
+That means, we need to translate the row into an object of Student.
+
+This is done by RowMapper
+
+RowMapper is an interface that we need to implement and override a method called "mapRow".
+That method will inform the jt how a row should be translated into a Student object.
+
+rs.getInt(1)
+rs.getString(2)
+rs.getDate(3)
+
+RowMapper is a functional interface
+	that means, this interface has only 1 abstract method.
+	Whenever we need to implement a functional interface, we can also use "Lambda"
+

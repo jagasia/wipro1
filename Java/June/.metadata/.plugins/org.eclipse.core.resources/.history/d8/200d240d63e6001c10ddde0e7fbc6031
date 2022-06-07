@@ -1,0 +1,5 @@
+package com.wipro.hrms.model;
+
+public class StudentRowMapper {
+
+}

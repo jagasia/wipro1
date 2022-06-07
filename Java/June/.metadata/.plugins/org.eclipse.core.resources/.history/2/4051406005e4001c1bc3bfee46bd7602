@@ -1,0 +1,31 @@
+package com.wipro.swiggy;
+
+import org.hibernate.SessionFactory;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.hibernate5.HibernateTemplate;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+
+public class App {
+
+	public static void main(String[] args) {
+		DriverManagerDataSource dmds=new DriverManagerDataSource();
+		dmds.setUrl("jdbc:mysql://localhost:3306/wipro3");
+		dmds.setDriverClassName("com.mysql.jdbc.Driver");
+		dmds.setUsername("root");
+		dmds.setPassword("");
+		
+		
+		LocalSessionFactoryBean sf= new LocalSessionFactoryBean();
+		sf.setDataSource(dmds);
+		
+		HibernateTemplate ht=new HibernateTemplate();
+		ht.setSessionFactory(sf);
+		
+		
+		
+		
+		
+		System.out.println("Hello world");
+	}
+
+}

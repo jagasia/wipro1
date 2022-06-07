@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var arr=[];
+
+        function output()
+        {
+            document.getElementById("divResult").innerHTML="";
+            for(var c of arr)
+            {
+                    // alert(c);
+                    var txt=document.getElementById("divResult").innerHTML;
+                    txt+="<br/>";
+                    txt+=c;
+                    document.getElementById("divResult").innerHTML=txt;
+            }
+        }
+
+        function fnRemove()
+        {
+            // arr.pop();      //removes the last element in the array.
+            // arr.shift();        //removes the first element in the array and shifts other elements
+            //  splice() method of array, removes the element at specific index
+            var country=document.getElementById("txtCountry").value;
+            //find the index of this country from the array
+            var index=0;
+            var foundIndex=-1;
+            for(var c of arr)
+            {                
+                if(c==country)
+                {
+                    foundIndex=index;
+                }
+                index++;
+            }
+            if(foundIndex==-1)
+                alert("Nothing to remove");
+            else
+            {
+                console.log("Removing element at index "+foundIndex);
+                arr.splice(foundIndex,1);
+                console.log("After removal:");
+                console.log(arr);
+            }
+
+            // arr.splice(0,1);
+            output();
+        }
+
+        function fnAdd()
+        {
+            var country=document.getElementById("txtCountry").value;
+            arr.push(country);
+            //now, lets loop the array elements and add them to the div
+            
+            output();
+            console.log(arr);    
+        }
+    </script>
+</head>
+<body>
+    Enter the country: <input type="text" name="" id="txtCountry">
+    <input type="button" value="Remove" onclick="fnRemove()">
+    <input type="button" value="Add" onclick="fnAdd()">
+    <br>
+    <div id="divResult"></div>
+</body>
+</html>

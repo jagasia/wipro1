@@ -1,0 +1,412 @@
+Module 2:
+---------------
+HTML
+CSS
+Bootstrap
+Javascript
+Angular
+
+
+----------------------------------
+Difference between <div> and <span>
+
+div
+	is a block element
+	occupies the entire width of the container
+
+span
+	is an inline element
+	becomes part of the containing element (parent)
+	<p> This is a <span>paragraph </span>type by jag</p>
+
+main reason why we need a span is a specific styling can be done for that span alone.
+
+-----------------
+<TABLE>
+
+	can be used to create a table with rows and columns
+
+	<TABLE>
+		<THEAD>
+			<TR>
+				<TH>S.No.</TH>
+				<TH>Name</TH>
+				<TH>Department</TH>
+			</TR>
+		</THEAD>
+		<TBODY>
+			<TR>
+				<TD>1</TD>
+				<TD>Raja</TD>
+				<TD>ECE</TD>
+			</TR>
+		</TBODY>
+	</TABLE>
+
+
+
+
+
+
+IN TABLE sometimes
+	we merge rows, columns etc
+	we call it as span
+		colspan
+		rowspan
+
+
+
+striped
+	means, every alternate row in a different style
+
+
+<thead>
+and
+<tbody>
+are optional
+
+
+
+Task:
+	identify various attributes of table and its child elements
+
+	create a table and show me
+
+	hint:
+		cell padding	space between the content and the cell edges. That means, the content reserves some space around it
+		cell spacing	space between the cells
+		colspan & rowspan	
+		borders
+
+
+
+usually in HTML space, line breaks are ignored
+
+<pre>
+	use pre element for pre formatted text
+	your spaces, line breaks all are preserved in the pre
+
+
+hyperlinks
+	a for anchor
+	<a href=""
+
+	you can give hyper link to 
+		websites
+		files in your local system
+		to any portion of the same page
+
+
+<div class="header">
+
+</div>
+
+<div class="footer">
+</div>
+
+
+while styling using CSS, we can style an element
+	by using its element name
+	or 
+	by using its ID
+	or
+	by using its class name
+
+ID is unique for every element
+so whenever we want to apply some styles across multiple elements but not all elements, we can use class 
+
+HTML5
+	this version 5 of HTML is the new version and have lot of new features introduced
+
+	i) introduces semantic tags
+
+	instead of 	
+		<div class="header">
+
+		</div>
+
+	in HTML5 we do like:
+		<header>
+		</header>
+
+	ii) input form elements
+
+basically, 
+	what is form element?
+	in a web page, we want to get input from the user.
+		textboxes
+		dropdown lists
+		radio button	one among the given options can be selected
+		check box		multiple options can be selected
+		button
+
+	<input type="text" />
+	<input type="number" />
+
+	in HTML5
+	<input type="date" />
+	<input type="range" />	
+	<input type="email" />
+	<input type="time" />		
+
+
+
+
+<form>
+	groups the input elements and when the user clicks submit button then only the validation happens
+	
+	1) placeholder attribute in input element to prompt the user
+	2) pattern attribute in input element to validate against the regex
+
+
+
+
+input type=date
+	return the date in yyyy-MM-dd
+
+Task:
+	Identify the features of HTML5
+
+
+Saturday
+	Java assessment MCQ
+	60 minutes once you start
+
+
+
+audio 
+video 
+header 
+footer 
+nav tag 
+progress 
+tag
+
+
+
+<video id="myVideo" width="320" height="176" controls="controls">
+  <source src="mov_bbb.mp4" type="video/mp4">
+  <source src="mov_bbb.ogg" type="video/ogg">
+  Your browser does not support HTML5 video.
+</video>
+
+
+
+nav
+	menus 
+	
+web storage	(html5)
+	localStorage			when i login, the login form says "Remember me". where will it remember me????? localStorage
+	
+	sessionStorage			until i logout
+geo locations	(html5)
+	we can obtain the 
+		latitude
+		longitude
+
+	of the user from where they are accessing our website
+
+during javascript, we do demo on this
+	
+-----------------------------------------------------------------------------------------
+CSS
+-----
+	Cascading Style Sheet
+	------------------------------
+why we need CSS?
+	for styling. 
+	control how our webpage.
+	fonts, colors, background
+	
+		in HTML also, we do the same!
+	in CSS it is easier
+	modify the size	
+
+without css, what is that one thing i miss???????????
+	styling separate documents
+		suppose, i have around 5 webpages in a website.
+		i want all these webpages, to have consistent style
+
+		means, if i change my stylesheet, it reflect in all the html pages
+
+css syntax
+
+<<selector1>>,<<selector2>>
+{
+	key1:value1;
+	key2:value2;
+	key3:value;
+}
+
+
+Types of css
+	inline
+	internal
+	external
+
+inline:
+	in a html tag itself, if you use "style" attribute
+	
+	<table style="">
+
+	</table>
+
+<p style="color:red;background-color:yellow;font-family: 'Courier New', Courier, monospace;">This is a paragraph</p>
+    <p>This is another para</p>
+
+
+style as an attribute = inline
+
+internal:
+	style as an element
+		<style>
+		</style>
+
+	it is internal, because, it is applied only inside the current html page
+
+
+
+
+in css
+	color
+		means, text color
+	background-color
+		background color
+
+
+
+inline wins internal
+internal wins external
+when there is no inline/ internal then only external is applied
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        p
+        {
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <p>This is paragraph 1</p>
+    <p>This is second paragraph</p>
+    <p>Third paragraph is here</p>
+</body>
+</html>
+
+
+in the above code, we used element selector:
+	p
+        	{
+	            color: blue;
+	}
+
+in the below code, we use ID selector
+        #p1
+        {
+            color: blue;
+        }
+
+        #p2
+        {
+            color:orange
+        }
+
+        #p3
+        {
+            color:brown
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    #five
+    {
+        color:red
+    }
+    
+    .even
+    {
+        color:blue
+    }
+    p
+        {
+            color:brown
+        }
+    </style>
+</head>
+<body>
+    <p>This is paragraph 1</p>
+    <p class="even">This is second paragraph</p>
+    <p>Third paragraph is here</p>
+    <p class="even">Fourth</p>
+    <p id="five">Fifth</p>
+    <p class="even">Sixth</p>
+</body>
+</html>
+
+
+
+Task:
+Identify the various type of selectors in CSS:
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        p.top
+        {
+            color:red
+        }
+        input[type='text']
+        {
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <p class="top">This is a para</p>
+    <div class="top">
+        This is a div
+    </div>
+    <input type="text" name="" id="" placeholder="Name">
+    <input type="number" name="" id="" placeholder="Age">
+    <input type="email" name="" id="" placeholder="Email">
+</body>
+</html>
+
+
+
+External stylesheet:
+<link rel="stylesheet" href="style1.css">
+

@@ -1,0 +1,159 @@
+Hibernate
+------------
+Yesterday we used hibernate mapping xml configuration file for defining entity and their mappings
+Today we will use annotations for hbm
+
+@Entity
+@Table
+@Id
+@GeneratedValue
+@Column
+@NotNull
+
+
+javax.persistence package
+org.hibernate
+
+When we use annotations, then in hibernate.cfg.xml file, how do we refer it?
+
+instead of 
+	<mapping resource="student.hbm.xml" />
+
+we will use
+	<mapping class="com.wipro.hrms.Student" />
+
+sometimes, the number of entities keep growing or changing.
+
+When we do not configure the entities using <mapping class
+still we can add annotated class in program
+
+Task:
+--------
+
+1) Create a maven project
+	quickstart archetype
+2) add the hibernate and mysql dependencies in pom.xml
+3) Create an entity class 
+	@Entity
+	@Id		must
+4) in hibernate.cfg.xml file
+	add the <mapping class =
+5) create dao class
+6) test it in App.java
+
+When we do not mention the mapping class or mapping resource
+ org.hibernate.UnknownEntityTypeException: Unable to locate persister: com.wipro.hrms.model.Student
+
+in program itself we can add annotated class
+		Configuration cfg=new Configuration();
+		cfg.configure("hibernate.cfg.xml");
+		cfg.addAnnotatedClass(Student.class);
+		
+
+-----------------------------------
+Criteria
+	eq
+	between
+	in
+	
+
+I have use a criteria
+
+	public List<Student> findByName(String name)
+	{
+		Session session = retrieveSession();
+		Criteria c = session.createCriteria(Student.class);
+		c.add(Restrictions.eq("name", name));
+		List<Student> students = c.list();
+		return students;
+	}
+
+Task:
+
+Now, can you create a method that accepts a date as argument
+and display all the students who have born before that date
+
+Hint:
+How do you check if a date is before another date?
+	before()
+	after()
+	compareTo
+
+
+Task:
+Download https://github.com/jagasia/may26-crud-demo
+import and run
+
+Now, translate the jdbc part into hibernate
+
+
+package com.wipro.abcd.model;
+
+import java.util.List;
+
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Restrictions;
+
+public class ItemDaoImpl {
+	public Session retrieveSession()
+	{
+		//create an object representation of the configuration class
+		Configuration cfg=new Configuration();
+		cfg.configure("hibernate.cfg.xml");
+		SessionFactory sf = cfg.buildSessionFactory();
+		return sf.openSession();
+	}
+	
+	public void create(Item item) {
+		Session session = retrieveSession();
+		Transaction tran = session.beginTransaction();
+		session.persist(item);
+		tran.commit();
+		session.close();
+	}
+	public List<Item> read() {
+		Session session = retrieveSession();
+		Criteria c = session.createCriteria(Item.class);
+		return c.list();
+	}
+	public Item read(Integer id) {
+		Session session = retrieveSession();
+		return session.get(Item.class, id);
+	}
+	public void update(Item item) {
+		 Session session = retrieveSession();
+		 Transaction tran = session.beginTransaction();
+		 Item temp=read(item.getId());
+		 temp.setName(item.getName());
+		 temp.setCategory(item.getCategory());
+		 temp.setPrice(item.getPrice());
+		 if(item.getPicture().length>0)
+			 temp.setPicture(item.getPicture());
+		 session.update(temp);
+		 tran.commit();
+		 session.close();
+	}
+	public void delete(Integer id) {
+		Session session = retrieveSession();
+		Transaction tran = session.beginTransaction();
+		Item i = read(id);
+		session.delete(i);
+		tran.commit();
+		session.close();
+	}
+	
+}
+
+==============================
+Task:
+	download https://github.com/jagasia/may30-web-1
+
+provide view and controller for this model.
+
+item.jsp		(view)
+
+ItemServlet.java	(controller)

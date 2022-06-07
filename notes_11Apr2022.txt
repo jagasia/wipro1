@@ -1,0 +1,362 @@
+Exceptions
+Java 8 features
+Junit
+
+
+Friday, what we discussed last,
+File handling
+	ObjectOutputStream
+
+BufferedReader
+	Before jdk 1.5 was introduced, we used BufferedReader/ BufferedInputStream for getting inputs from the user.
+
+	There was no Scanner class till jdk 1.4	Scanner was introduced in 1.5 version of Java
+
+BufferedReader br=new BufferedReader(<<Reader>>);		the constructor of BufferedReader expects a Reader (NOT an InputStream)
+BufferedInputStream bis=new BufferedInputStream(<<InputStream>>) 
+
+What does System.in comes under?
+	InputStream	
+
+so we need BufferedReader, because, we need to get input as character		readLine()	 method belongs BufferedReader
+
+
+BufferedReader br=new BufferedReader(new InputStreamReader(System.in));		
+
+-----------------------------------------------------------------------
+Exceptions
+	What is an Exception?
+		Unexcepted
+		Error which can be handled		(Exception handling)
+		something we have to handle		(Exception handling)
+
+	a situation, where you are not able to make decision
+
+	divide by zero
+
+	int i=20;
+	int j=0;
+	int k=i/j;		//DivisionByZero
+		If the program knows, what to do in this situation, then it is not an exception
+
+	Only those arise at run time, we call them as Exceptions
+	we are not discussing about
+		Compilation errors, syntax errors
+		Logical errors 
+
+
+	Have you raised any exceptions in your project?
+	
+
+Siva Sankar has developed a class that has a method
+	class Bank
+	{
+		public void withdraw(int amount)
+		{
+			if(amount>30000)
+			{
+				//daily limit is 30k. So you cannot withdraw more than that
+				System.out.println("daily limit is 30k. So you cannot withdraw more than that");
+				throw new InvalidAmountException("daily limit is 30k. So you cannot withdraw more than that");
+			}
+		}
+	}
+
+
+Tejawini uses the Bank class in her project
+
+	Bank sbi=new Bank();
+	try{
+	withdraw(35000);		//gets an exception
+	}catch
+
+Exception
+	for every exception that occurs, there is an object which is thrown, that can be handled and obtained to know the cause and provide a path for the program to continue.
+
+	Why the program terminates abruptly whenever exception occurs.
+
+Object
+	Throwable
+		Exception		(can be handled)
+		Error		
+
+
+Exception is the super class for all checked exception
+RuntimeException is the super class for all unchecked exception
+
+What is checked exception?
+	an exception which is checked by the compiler
+	ex
+		IOException 
+
+		when a method throws a checked exception,
+			the calling method is forced to 
+				i) handle the exception using try-catch blocks
+				ii) declare the exception using throws class		(means, i am not handling the exception here)
+
+Unchecked exceptions
+		ArrayIndexOutOfBoundsException
+
+Handling exceptions
+-----------------------
+surround a block of code with try block
+	all the code inside the try block are called as guarded section.
+	if an exception occur inside a try block,
+	then it will look for appropriate catch block
+
+catch
+	there can be 0 or more catch blocks for a try
+
+finally
+
+
+
+
+try
+catch
+
+
+
+try
+finally
+
+
+
+try
+catch
+catch
+
+
+
+try
+catch
+catch
+finally
+
+
+there can be only 1 finally for a try
+	0 or 1 finally allowed for a try block
+
+between these blocks, nothing else is allowed
+
+
+the order of catch blocks should be properly arranged
+in such way, the general purpose catch block should be in the bottom
+
+try
+{}
+catch(FileNotFoundException fnfe)
+{}
+catch(IOException ioe)
+{}
+//the above is fine. But
+
+
+try
+{}
+catch(IOException ioe)
+{}
+catch(FileNotFoundException fnfe)
+{}
+
+	//THE ABOVE IS NOT OK
+
+Because, this is top down approach
+first catch block IOException can handle FileNotFoundException also. because, FileNotFoundException is sub class for IOException
+
+so second catch block becomes, "Unreachable code"
+
+This will not compile
+
+
+what is the need for finally?
+	always
+
+	when there is no exception occurred,
+		then catch blocks are skipped
+	when there is any exception occurred,
+		then try block some portion are missed
+
+
+	in either scenario, something is skipped. So better we write those important lines inside finally block
+	
+	Finally block always execute whenever the 
+	program enters into a try block
+		jdbc connection close
+		file close
+			these are some of the final tasks, before exiting the program
+
+
+	even if the exception is unhandled, the program terminates only after executing the finally block
+
+Task:
+-------
+	create a class Bank, which has a method "withdraw"
+	withdraw method accepts amount as argument.
+	if the amount is >30000 then raise "NumberFormatException" with a message "Invalid amount"
+
+	create App.java with main method
+		in main, create an object of Bank, "sbi"
+		and call this method with 
+			30000
+			31000
+			29000
+
+	Observe that when the amount is >30k, you should get exception
+
+	Now, surrond the method call with try-catch-finally
+
+	
+Now, why should we throw, NumberFormatException??????
+	that is not meaningful. So we create our own Exception class.
+
+	What is an exception class??????
+		anything that is throwable
+
+	which class should i inherit????
+	If you extend Exception class or any of its subclass, then you are creating a checked exception
+	if you extend RuntimeException or any of its subclass, then you are creating an unchecked exception
+
+
+difference between throw and throws
+	throw is used to throw an object of exception
+	throws is used to inform the compiler that this method throws this exception, but does not handle this exception. The calling method must handle this exception.
+	throws, can declare multiple exceptions that are thrown by the method
+
+-------------------------------------------------------------------------------------------
+Java 8 features
+
+1.1 to 1.4
+1.5
+1.8		
+
+1) interfaces allowed us to have 
+	static methods
+	default methods
+
+	all that you declare inside an interface is public only (even if you do not mention public)
+
+	Prior to java 8, the interfaces, had only 2 things inside.
+
+		i) only abstract methods were present inside an interface	
+		(But in java 8 onwards, there can be
+			abstract methods
+			static methods (with body)
+			default methods (with body)
+		ii) public static final data members allowed	(no change)
+
+
+
+
+
+static methods
+	static methods can be called without creating objects
+	An interface cannot be instantiated. Means, we cannot create objects of an interface.
+	since we cannot create objects, the methods cannot have body. 
+	but a static method can be called without object. So static methods allowed inside interface and those methods can have body.
+
+What is the difference between
+	static and default methods of a java 8 interface?
+
+
+	static is meant for calling interface name. static method name
+	default is meant for providing default implementation, but it is advised for the implementing classes to implement / override
+
+	static is not meant to override
+	default is meant to override. 
+
+	
+2) lambdas
+	whenever we need to implement a functional interface
+	What is a functional interface?
+		an interface that has only 1 abstract method
+
+	ex:
+		Comparable			compareTo()
+		Comparator			compare()
+		Runnable				run()
+
+
+	it is easy to implement these interfaces, as they have only 1 method (abstract)
+
+
+3) Stream API
+	is not IO stream. That is different
+
+	Stream API is useful whenever we want to query a collection.
+	compare this with SELECT query in SQL language
+
+	Streams never hold the data. They are like queries.
+
+	when we do an operation on a stream, it results in another stream. and so on
+
+
+
+Arrays/ Collections of Objects
+
+	List<Employee>
+
+Sort it by a particular field
+Filter by a particular field
+
+Group by 
+
+
+
+You want to display only few things
+
+PROJECTION		only those columns i want to project. Instead of  	SELECT * FROM
+SELECTION		only those rows i want to select	Instead of ALL ROWS, I use where condition
+
+
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class App5 {
+
+	public static void main(String[] args) {
+		List<Employee> empList=new ArrayList<Employee>();
+		empList.add(new Employee(12, "Ram", "ECE", 12121212.2f));
+		empList.add(new Employee(1, "Kumar", "ECE", 8989898.2f));
+		empList.add(new Employee(152, "Abdul", "Mech", 7798797.2f));
+		empList.add(new Employee(8, "Zaheer", "ECE", 8989898.2f));
+		empList.add(new Employee(11, "Xavier", "Mech", 3434344.2f));
+		empList.add(new Employee(10, "Babu", "Mech", 6868689689.2f));
+		empList.add(new Employee(7, "Raja", "CSE", 2342424.2f));
+		empList.add(new Employee(9, "Mohan", "ECE", 1234566.2f));
+		empList.add(new Employee(5, "Kumaresh", "CSE", 9876.2f));
+		empList.add(new Employee(18, "Jag", "ECE", 8765.2f));
+		empList.add(new Employee(4, "Dinesh", "CSE", 89890.2f));
+		empList.add(new Employee(2, "Rajesh", "ECE", 89898.2f));
+		empList.add(new Employee(3, "Sakthi", "CSE", 866686.2f));
+		
+		List<String> result = empList.stream()
+		.map((e)->e.getName().toUpperCase())
+		.filter((n)->n.length()>5)
+		.sorted()
+		.collect(Collectors.toList());
+		
+		for(String n:result)
+		{
+			System.out.println(n);
+		}
+	}
+
+}
+
+
+Sort the employees by Department ASC, ID DESC
+
+Group by
+	SELECT department, SUM(salary)
+	FROM employee
+	GROUP BY department;
+
+
+Do this in Stream API
+	result should be a map
+
+	Map<String, Float> result=????????
+

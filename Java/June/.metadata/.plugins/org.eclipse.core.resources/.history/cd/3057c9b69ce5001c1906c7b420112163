@@ -1,0 +1,26 @@
+package com.wipro.bank.aop;
+
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.stereotype.Component;
+
+@Aspect
+@Component("aspect")
+public class MyAspect {
+
+	@Pointcut("execution()")
+	public void all()
+	{
+		
+	}
+	
+	public void beforeAdvice()
+	{
+		System.out.println("This is before advice");
+	}
+	
+	public void afterAdvice()
+	{
+		System.out.println("After advice is working now");
+	}
+}

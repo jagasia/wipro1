@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function fnSubmit()
+        {
+            var empObject={};
+            empObject.id=parseInt(document.getElementById("id").value);
+            empObject.firstName=document.getElementById("firstName").value;
+            empObject.lastName=document.getElementById("lastName").value;
+            empObject.email=document.getElementById("email").value;
+            console.log(empObject);
+            console.log(JSON.stringify(empObject)); //convert object into json string
+
+        }
+        function fnImport()
+        {
+            var jsonStr=document.getElementById("txt1").value;
+            // alert(jsonStr);
+            
+        //convert json string to object
+            var obj=JSON.parse(jsonStr);
+            document.getElementById("id").value=obj.id;
+            document.getElementById("firstName").value=obj.firstName;
+            document.getElementById("lastName").value=obj.lastName;
+            document.getElementById("email").value=obj.email;
+        }
+    </script>
+</head>
+<body>
+    <form>
+        <input type="text" name="" id="txt1"><input type="button" value="Import" onclick="fnImport()">
+        <br>
+        Id: <input type="number" name="" id="id"><br>
+        First Name: <input type="text" name="" id="firstName"><br>
+        Last Name: <input type="text" name="" id="lastName"><br>
+        Email id: <input type="email" name="" id="email"><br>
+        <br>
+        <input type="button" value="Submit" onclick="fnSubmit()">&nbsp;
+        <input type="reset" value="Reset">
+    </form>
+</body>
+</html>

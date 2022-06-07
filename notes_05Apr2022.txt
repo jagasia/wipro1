@@ -1,0 +1,441 @@
+Yesterday were we left?
+	OOP 
+		class with 
+			constructors
+			getters & setters
+			toString method
+			equals method	to check if 2 objects are same or different
+
+Array of Objects
+Collection of Objects
+
+Have we created any array of objects?????
+
+
+import java.util.Arrays;
+
+public class App1 {
+
+	public static void main(String[] args) {
+		Integer arr[]= {3, 10, 7, 88, 55, 33, 200, 22};
+		//how can we sort this array?
+		//java provides a method for sorting an array. That method is "sort()" which is present inside Arrays class
+		Arrays.sort(arr);		//Arrays class has a static method called sort
+		System.out.println(Arrays.toString(arr));
+	}
+
+}
+
+
+
+Output:
+[3, 7, 10, 22, 33, 55, 88, 200]
+
+
+Arrays.sort()
+Arrays.toString()		//displays the elements of a single dimensional array
+Arrays.deepToString()		//displays the elements of multi-dimensional array
+
+We are able to sort the array which is a scalar type.
+Suppose, if there is an array of Employees, then how to sort that array?
+	because, there are many attributes inside an employee	(id / name/ salary)
+	how will you inform sort method, which attribute wise we need to sort
+
+	
+
+
+import java.util.Arrays;
+
+public class App2 {
+
+	public static void main(String[] args) {
+		Employee []arr=new Employee[5];
+		//arr[0] .. arr[4]			all are just declaration of ref var of Employee		we have to use new operator to create each array element
+		arr[0]=new Employee(10, "John", 42345.3f);
+		arr[1]=new Employee(8, "Suresh", 21345.3f);
+		arr[2]=new Employee(12, "Kumar", 12314.3f);
+		arr[3]=new Employee(5, "Abdul", 61345.3f);
+		arr[4]=new Employee(9, "Raja", 17245.3f);
+		
+		Arrays.sort(arr); 				//error in this line when i run 
+		
+		for(Employee e:arr)
+		{
+			System.out.println(e);
+		}
+	}
+
+}
+
+
+
+Arrays.sort method was not able to sort the array of Employees. Because, it does not know how to compare 2 employees.
+
+So the employee class must implement Comparable interface
+
+Comparable interface has one abstract method that we need to implement 
+	compareTo method
+		this method returns an int
+			if it returns 0, then both objects are equal
+			if it returns >0, positive, then the first object is greater than second object
+			if it returns <0, negative......
+
+
+
+x, y
+
+x.compareTo(y)
+	what is x, this is x
+
+x.id=5
+y.id=4
+
+you will 5-4		=1	positive 		x is greater than y
+
+
+public class Employee implements Comparable<Employee>
+{
+
+	@Override
+	public int compareTo(Employee o) {
+//		return this.getId()-o.getId();
+		return this.getId().compareTo(o.getId());		//id is Integer. it has compareTo method
+	}
+	
+}
+
+
+
+
+Output:
+Employee [id=5, name=Abdul, salary=61345.3]
+Employee [id=8, name=Suresh, salary=21345.3]
+Employee [id=9, name=Raja, salary=17245.3]
+Employee [id=10, name=John, salary=42345.3]
+Employee [id=12, name=Kumar, salary=12314.3]
+
+
+	@Override
+	public int compareTo(Employee o) {
+//		return this.getId()-o.getId();
+		return o.getId().compareTo(this.getId());		//id is Integer. it has compareTo method
+	}
+
+
+Employee [id=12, name=Kumar, salary=12314.3]
+Employee [id=10, name=John, salary=42345.3]
+Employee [id=9, name=Raja, salary=17245.3]
+Employee [id=8, name=Suresh, salary=21345.3]
+Employee [id=5, name=Abdul, salary=61345.3]
+
+
+
+sometimes, i cannot use Comparable. Why?
+	Suppose, if i ask you to sort array of Integers, in descending order,
+		Integer is not our class. So we cannot modify the Integer class. 
+	So how can we create comparison of Integers without modifying integer class.
+
+	Solution:
+		Comparator
+			this will work as external comparator, without modifying the class
+example:
+	sort the employees by their name in descending order
+
+
+
+Comparable	compareTo(Employee)
+Comparator	compare(Employee, Employee)
+
+
+import java.util.Comparator;
+
+public class EmployeeNameDescComparator implements Comparator<Employee>
+{
+
+	@Override
+	public int compare(Employee o1, Employee o2) {
+		return o2.getName().compareTo(o1.getName());
+	}
+
+}
+
+
+How can we use this comparator for sorting an array of Employees?
+	use the object of this comparator class in sort method
+
+import java.util.Arrays;
+
+public class App2 {
+
+	public static void main(String[] args) {
+		Employee []arr=new Employee[6];
+		//arr[0] .. arr[4]			all are just declaration of ref var of Employee		we have to use new operator to create each array element
+		arr[0]=new Employee(10, "John", 42345.3f);
+		arr[1]=new Employee(8, "Suresh", 21345.3f);
+		arr[2]=new Employee(12, "Kumar", 12314.3f);
+		arr[3]=new Employee(5, "Abdul", 61345.3f);
+		arr[4]=new Employee(9, "Raja", 17245.3f);
+		arr[5]=new Employee(7, "Zaheer", 328383.f);
+		
+		Arrays.sort(arr, new EmployeeNameDescComparator()); 				//error in this line when i run 
+		
+		for(Employee e:arr)
+		{
+			System.out.println(e);
+		}
+	}
+
+}
+
+Output:
+Employee [id=7, name=Zaheer, salary=328383.0]
+Employee [id=8, name=Suresh, salary=21345.3]
+Employee [id=9, name=Raja, salary=17245.3]
+Employee [id=12, name=Kumar, salary=12314.3]
+Employee [id=10, name=John, salary=42345.3]
+Employee [id=5, name=Abdul, salary=61345.3]
+
+
+java 8 language introduced "lambda" expression.
+
+this lambda can be used wherever we need to provide implementation of "Functional Interface"
+What is a functional interface?
+	An interface that has only 1 abstract method is called as functional interface
+
+
+import java.util.Arrays;
+
+public class App3 {
+
+	public static void main(String[] args) {
+		Employee []arr=new Employee[6];
+		arr[0]=new Employee(10, "John", 42345.3f);
+		arr[1]=new Employee(8, "Suresh", 21345.3f);
+		arr[2]=new Employee(12, "Kumar", 12314.3f);
+		arr[3]=new Employee(5, "Abdul", 61345.3f);
+		arr[4]=new Employee(9, "Raja", 17245.3f);
+		arr[5]=new Employee(7, "Zaheer", 328383.f);
+		
+//		Arrays.sort(arr, new EmployeeNameDescComparator()); 				//error in this line when i run 
+		
+		//lets use lambda to implement comparator. So that i dont need to create a separate class that implements comparator
+		Arrays.sort(arr, (o1, o2)->o1.getSalary().compareTo(o2.getSalary()));
+		
+		
+		for(Employee e:arr)
+		{
+			System.out.println(e);
+		}
+	}
+
+}
+
+
+Output:
+Employee [id=12, name=Kumar, salary=12314.3]
+Employee [id=9, name=Raja, salary=17245.3]
+Employee [id=8, name=Suresh, salary=21345.3]
+Employee [id=10, name=John, salary=42345.3]
+Employee [id=5, name=Abdul, salary=61345.3]
+Employee [id=7, name=Zaheer, salary=328383.0]
+
+
+difference between Comparable and Comparator:
+	they say,  that comparable is used to sort by single manner
+	comparator is used to sort by multiple field
+
+	a class implements Comparable only once
+	but we can create multiple comparators
+
+	comparator allow us to provide different ways of sorting an array or collection
+
+---------------------------------------------------
+Hands on:
+-------------
+1) Create a class "Student" with the following private attributes:
+	id Integer
+	firstName String
+	lastName String
+	marks Integer
+
+2) constructor with all arguments
+
+3) getters & setters
+
+4) override toString method
+
+5) Student class must implement Comparable interface and override compareTo method
+	that will be useful to sort Students by their marks in asc order
+
+6) Create a class AppStudent with main method.
+	in main, create an array of 5 of students
+7) sort the array 
+
+8) display the array elements
+
+-----------------------------
+So far, we created array of objects
+now, lets learn Java Collections:
+---------------------------------------
+Stack
+ArrayList
+Queue
+LinkedList
+Tree
+Graph
+HashSet
+HashMap
+	these are some of the data structures you have referred
+
+Question is 
+	what is the limitation do you find in Arrays, that forced you to learn data structures
+		i) array size is fixed. Cannot increate or decrease the size of array based on requirement
+		ii) due to fixed array size, sometimes there is waste or shortage of memory
+		iii) arrays are homogenous. They allow same type of elements only to add		(every collection is homogenous only)
+		iv) array has more complexity, when adding or removing elements in between
+			it is because of the arrangement of elements (contigeous memory location)
+
+point #3:
+	If Arrays are homogenous, then what else is heterogenous????????
+
+	Every collection is homogenous only.
+
+		ArrayList marks=new ArrayList();		///java jdk1.4 or earlier
+		marks.add(new Integer(10));
+		marks.add("India");
+		marks.add(new Float(2.2f));
+		marks.add(new Long(10L));
+		marks.add(new Double(2.54));
+		
+		//looks like i am able to add different type of data to an ArrayList
+
+	no this is not heterogenous. Because, 
+	i am adding an Integer, that is cast to Object	(implicit casting)
+	i am adding a String, that is cast to Object
+	i am adding, float, long, double, all are cast to Object type and then only added to arraylist.
+
+	Finally, i have an arraylist of objects.
+
+	similarly in array of objects also, all elements are Object type only. HOMOGENOUS
+
+
+
+
+Collections
+	are able to dynamically allocate memory whenever we add elements. Vice versa, (when we remove elements, they release memory)
+	hence they are scalable.
+
+	when i create an object of collection, i dont even need to know the size of the collection
+		but in array, we must know the size of the array
+
+
+Most important collection classes, you need to learn:
+1) List
+	ArrayList
+	LinkedList
+2) Set
+	HashSet
+	TreeSet
+	LinkedHashSet
+also, there is an application of collection:
+3) Map
+	HashMap
+	TreeMap
+	LinkedHashMap
+
+
+in jdk 1.4 or earlier,
+	ArrayList marks=new ArrayList();		//this is always Object type
+
+in jdk 1.5 onwards,
+	ArrayList<Integer> marks=new ArrayList<Integer>();	//this is generics, type safe collection
+
+Why they call it as generics????
+	Because, if 1.5, 	ie., 1.5 or earlier, there was only 1 type of collection. ie., Object type collection
+but 1.5 onwards,
+	we have the option to create 
+		ArrayList<Integer>
+	or	
+		ArrayList<String>
+	or any type.	Not only ArrayList, all collection classes 
+
+Now, that means, when they created the collection classes, they have not created for only Object type, but a generic type that allows us to customize to any type.
+
+	ArrayList<T>	
+
+in jdk 1.7 onwards,
+	ArrayList<Integer> marks=new ArrayList<>();		
+
+List
+	will allow duplicates to add
+	will remember the order in which the elements are added	(Ordered collection)
+
+	Why the order is remembered?
+	
+	what is the 14th alphabet?
+		3 seconds
+	8th alphabet?
+		8 seconds
+
+	because, your memory is not array	(array means, you would have told immediately based on index)
+
+	your memory is a linked list.
+		if i ask you to write all 26 alphabets but in random order
+
+	you are comfortable to write alphabets in correct order.
+
+	the order is not asc or desc, but the order in which the elements are added to the list
+
+Set		Set is a collection of distinct objects
+	it rejects when we add duplicate element.		DOES NOT ALLOW DUPLICATES
+	order??????
+		Unordered?		what you mean by unordered? Random???? NEVER.
+
+	HashSet
+		how hash set stores elements? which order?
+			the order is decided by the hashCode method
+	TreeSet
+		always maintain the elements in sorted manner		Tree means sorted	
+		the order is based on Comparable/ Comparator
+
+	LinkedHashSet		(ordered)	not allow duplicate
+		remembers the order in which we add elements		(similar to LIST)
+
+Map
+	is a key value pair
+
+	HashMap
+		the keys are HashSet
+	TreeMap	
+		the keys are TreeSet
+	LinkedHashMap
+		the keys are LinkedHashSet
+
+
+
+all list classes implement List interface
+all set classes implement Set interface
+
+
+able to add elements
+remove elements
+iterate the collection
+	traverse from 1st to last element	(forward, reverse)
+
+
+
+we cannot create collection of primitive types. (But WRAPPER classes are allowed)
+	ArrayList<int>		IS NOT POSSIBLE
+	ArrayList<Integer>		is possible
+
+
+
+List category classes maintain the elements in the order in which we add
+	later, we can sort them
+
+		Collections.sort	method works only on list category of collection class.
+
+	You cannot use Collections.sort method over Set or Map
+
+	Because, Set basically adds elements based on some algorithm. After adding, we cannot sort / modify that order
+

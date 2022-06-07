@@ -1,0 +1,28 @@
+package com.wipro.hrms.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.wipro.hrms.entity.Product;
+import com.wipro.hrms.repository.ProductRepository;
+
+@Service
+public class ProductService {
+	@Autowired
+	private ProductRepository pr;
+	
+	public Product create(Product product) {
+		return pr.save(product);
+	}
+	public List<Product> read() {
+		return pr.findAll();
+	}
+	public void read(Integer id) {
+		Object x = pr.findById(id);
+	}
+	public void update(Product product) {}
+	public void delete(Integer id) {}
+	
+}

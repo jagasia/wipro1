@@ -1,0 +1,313 @@
+hyperlinks
+	work when the url is a html page or a part of page (id) etc.
+	how to give link to a component?
+
+		routing
+
+
+@input & Ouput decorators
+
+to install bootstrap
+
+	npm install -g bootstrap jquery --save
+
+style.css
+	@import url(https://unpkg.com/bootstrap@4.1.0/dist/css/bootstrap.min.css)
+
+
+
+in our project, there is only 1 component, 	"AppComponent"
+
+lets create a child component, "LoginComponent"
+	ng g c login
+
+
+App component is the parent component
+Login component is the child component
+
+Now, if parent component, want to give input to the child component, use @Input	decorator
+
+parent component (app) is used by yogita
+child component (login) is created by triveni
+
+yogita is using login component (created by triveni)
+yogita want to decide the title
+yogita want to decide the bgcolor of the component
+
+
+Task:
+
+The parent component should be able to give input
+	to the child component
+
+how?	use @Input() decorator
+
+	the child component variable is decorated by @Input
+
+example:
+	LoginComponent is the child component for AppComponent.
+	
+
+
+steps:
+	create a variable in child component		(decorate it with @Input())
+
+	that variable can be displayed in the html page	(using interpolation / property binding)
+
+	in parent component, in the selector tag
+		<app-login title="Login Page"></app-login>
+
+
+only 2 changes
+	i) in login component,
+		@Input() title : string = "";
+	
+	ii) in app component
+		<app-login></app-login>	is modified to
+		<app-login title="Parent typed this"></app-login>
+
+
+-------------------------
+ng-content
+	directive		<ng-content></ng-content>
+
+place this directive in the child component.
+
+In parent component, between the start tag and end tag of the child component, we put some content. That content will be displayed in the child component where <ng-content> directive is placed
+
+
+
+so we have discussed 2 types of inputs from the parent component to child component.
+1) 	@Input()		decorator
+2)	<ng-content>	directive
+
+-----------------------------------------------------------------------------------
+@Output
+	what is the need for output decorator???????
+		child to parent communication
+
+
+Kumbhar has created login component.
+Jana is using the login component.
+
+
+when kumbhar created the component, she do not decide what happens when the user clicks the login button.
+
+when the Login Button is clicked, what should happen?
+	event handler function should be called. Who creates that function?	
+		owner of login component? or
+		user of login component?
+
+
+		you are correct. When the button is clicked, the function inside login component only will be called.
+
+	but, in that case, only Kumbhar can decide what is login success/ failure.
+
+But, what is the requirement, 
+	Jana uses the login component and Jana wants to handle the login event.
+
+
+in login component (child), in login button click event handler, we are going to raise/ emit an event	(user defined event)
+
+	click
+	keyup
+	blur
+	focus
+
+		lot of events are there in javascript.
+	but, we are going to introduce our own event now
+
+	when the login button is clicked, the function is called in child only. That function will raise an user defined event.
+	this is called as event emit
+
+	emit an event
+
+that even will be handled by the parent component (app)
+
+
+@ is used for decorator
+<> is used for directive
+
+
+Output:
+	login component button click event is handled there itself.
+	but that function can emit an event
+
+
+
+for 2-way data binding		we use [(ngModel)] 
+where should we import what for this?
+
+in app.module.ts
+	we should import FormsModule
+
+
+
+Task:
+-------
+	In login component, when the login button is clicked, emit an event, that event send the username and password as a colon separated string
+
+	In app component, handle that emitted event and obtain the username and password from the child component.
+	split the string and check if the username and password are same. If same, login is failed. Else, login is passed.
+
+
+------------------------------------------------------------------------
+Pipes & Custom Pipes
+
+what is a pipe?
+	| symbol
+
+	in java, we have double pipe symbol for OR operator	||
+
+
+interpolation allows us to use | symbol to transform an output into a format
+
+pipe is used to transform data from one format to another format
+
+{{username | uppercase}}
+
+
+What are the types of pipes available in angular?
+	i) character pipes
+	ii) number pipes
+	iii) currency pipes
+	iv) date pipes
+	v) we can create "custom" pipes
+
+
+i) character pipes:
+	uppercase
+	lowercase
+	titlecase
+
+
+Task:
+	identify what are all the character pipes available in angular
+
+
+
+
+
+login
+logout
+
+when we display, it should be
+	Login
+	Logout
+
+
+slice:x:y
+
+	x is the start index of 0 ordinal
+	y is the end index of 1 ordinal	(in another way, you can also consider that before y)
+
+
+--------------------------------------------------------
+We are going to create our own pipe
+	custom pipe
+
+
+length pipe
+	we are going to create this pipe that will print the length of the string
+
+How to create our own pipe?
+	ng g p length
+	(or)
+	ng generate pipe length
+
+		LengthPipe is created
+	in app.module.ts
+		under declarations, LengthPipe is added
+
+	2 files are created
+		length.pipe.ts	code
+		length.pipe.spec.ts	(testing)
+
+
+
+if you see the 
+	length.pipe.ts
+		class LengthPipe implements PipeTransform
+		and override the transform method
+
+
+if you are not using angular cli
+	without executing the command, we can
+	manually create these files
+	and update the app.module.ts file also
+	
+
+
+	@Pipe({name: 'length'})
+	export class LengthPipe implements PipeTransform
+
+
+Task:
+-------
+	create a "reverse" pipe
+		this pipe is going to transform any string and print the reverse of that string
+
+
+<form action="">
+    User Name: <input type="text" name="username" id="" class="form-control" [(ngModel)]="username">
+    Password: <input type="password" name="password" id="" class="form-control" [(ngModel)]="password"><br>
+    <input type="button" value="Login" class="btn btn-success" (click)="fnLogin()">
+    &nbsp;
+    <input type="reset" value="Reset" class="btn btn-warning">
+</form>
+{{str}}
+<br>
+{{str| reverse}}
+<br>
+{{username}}
+<br>
+{{username | reverse}} 
+<br>
+{{username | uppercase}}
+
+{{username | titlecase}}
+
+{{f | number:'3.0-2'}}
+<br>
+{{arr | slice:-2}}
+<br>
+{{ today | date:'dd-MMM-yyyy'}}
+<br>
+<!-- {{ 'abcd' | length}} -->
+
+
+
+
+
+
+
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+
+
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
+})
+export class LoginComponent implements OnInit {
+  str='abcdef';
+  username:string='';
+  password:string='';
+  f=12.36545454;
+  arr:string[]=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+  today:Date=new Date();
+
+  @Output() loginEvent=new EventEmitter<string>();
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+  fnLogin()
+  {
+    this.loginEvent.emit(this.username+":"+this.password);
+  }
+
+}

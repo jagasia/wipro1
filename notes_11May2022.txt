@@ -1,0 +1,88 @@
+Spring security + JWT
+----------------------------
+1) spring boot app
+2) dependencies
+	spring web
+	spring security
+	jjwt
+	spring data jpa
+	mysql driver
+3) we create a rest api
+	@RestController
+
+	we will create
+		entities
+		repositories
+		service classes
+		rest controllers
+4) we will configure this spring boot app with 
+	jwt filter
+		will intercept every request comes, and look for a header "Authorization".
+
+	in spring configuration		WebMvcConfigurerAdapter
+		we will permitAll for certain URLs So that the user will be able to login and get JWT token
+		logging in means, an URL for login must be allowed
+
+5) we will define
+	JwtUtil class
+		that have methods to
+			generateToken
+			createToken
+			validateToken
+			extractUserName
+
+6) after this,
+	we will create an Angular project for frontend
+
+learn how to use this jwt token whenever we access the rest api
+
+---------------------------------
+we use spring data jpa because, we need to have a "user_master" table
+
+if i want to signup i have to enter:
+	username		(primary key)
+	password
+	firstName
+	lastName
+	
+
+entity:	User		mapped to table	USER_MASTER
+repo:	UserRepository
+service:	UserService
+controller:	UserController
+
+
+
+how do you get username, password in the controller?
+	if you use GetMapping, then anybody can see our password
+
+so we use PostMapping
+	we should get one object for login validation
+
+class AuthRequest
+{
+	String username;
+	String password;
+}
+
+
+
+
+
+
+{"username":"arun","password":"kumar","firstName":"Arun","lastName":"Lal","email":"arun.lal@yahoo.com"}
+
+
+
+eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhcnVuIiwiZXhwIjoxNjUyMzExOTY1LCJpYXQiOjE2NTIyNzU5NjV9.0KBMsRMrsWoG04tlm7wG0Co0bXppHdN7xClVQ-O_TD4
+
+
+
+1) create angular project
+2) create components
+	signup
+	login
+	update
+3) import the following modules in app.module.ts
+	http client module
+	reactive forms module

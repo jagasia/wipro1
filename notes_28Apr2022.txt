@@ -1,0 +1,380 @@
+Spring Core
+-----------------
+xml configurations can be replaced by Annotation
+
+Before that,
+in xml configuration
+
+scope of the bean
+	singleton				only 1 instance available for that bean class
+	prototype				any number of instances can be created
+
+dependency injection
+	constructor based injection
+	setter based injection
+
+Autowiring
+	what is autowiring?
+
+	whenever we want the dependencies to be injected, and if you want spring IOC container to do that injection, then we use autowiring
+	
+	types:
+		byName
+		byType
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="audio" class="com.wipro.hrms.model.Jbl">
+	</bean>
+
+	<bean id="car" class="com.wipro.hrms.model.Car" autowire="byName">
+
+	</bean>
+   </beans>
+
+---------------------------------------------
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="jbl" class="com.wipro.hrms.model.Jbl">
+	</bean>
+
+	<bean id="car" class="com.wipro.hrms.model.Car" autowire="byType">
+
+	</bean>
+   </beans>
+
+----------------------------------------------------
+Lets create a spring core project using annotation configuration	(not using xml configuration)
+
+
+you can mark a class as a bean by using following annotations:
+	@Component
+	@Bean
+
+@Component
+	can be used on a class
+
+@Bean
+	can be used on a method
+	the method returns an object. the name of the method is the bean name
+
+package com.wipro.hrms;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
+@Component
+public class Car {
+	@Autowired
+	@Qualifier("bose")
+	private Audio audio;			//interface.			Loosely coupled		
+	
+	public Car() {}
+
+	public Car(Audio audio) {
+		super();
+		this.audio = audio;
+	}
+
+	public Audio getAudio() {
+		return audio;
+	}
+
+	public void setAudio(Audio audio) {
+		this.audio = audio;
+	}
+	
+}
+
+
+
+
+==============================
+Task:
+------
+create an interface "Furniture" with a method called "display()"
+
+create an implementation class called "Chair" that implements "Furniture" interface	
+	display method should print "Chair is comfortable to sit"
+
+create a class called "ShowRoom" with a dependency "Furniture"
+
+Use annotation configuration to mark
+	Chair & ShowRoom as beans		@Component
+
+use @Autowired annotation on the Furniture dependency
+
+in App, get Bean of ShowRoom and call the display method of furniture that is present inside the showroom.
+
+
+
+------------------------------------------------------------------
+
+
+package com.wipro.hrms;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+@ComponentScan("com")
+public class MyConfiguration {
+
+	@Bean
+	public BookShelf bs()
+	{
+		return new BookShelf();
+	}
+}
+
+
+-------------------------------------------------
+JdbcTemplate
+	DataSource
+
+
+1) add the following dependencies in pom.xml
+			<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>5.3.19</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>5.2.7.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.47</version>
+		</dependency>
+
+
+2) we need to define 
+	jdbctemplate and data source as bean
+
+
+
+3) there is a BRANCH table in the database.
+	So we should have a Branch class in our projectr
+
+	this is called ORM			Object Relational Mapping
+
+
+CRUD
+	Create Read Update Delete
+
+----------------------------------
+Task:
+	create the branch table and insert the records using the script i have given in the chat
+
+Define a bean called BranchDaoImpl and autowire the JdbcTemplate
+the jdbc template has a dependency so define that DriverManagerDataSource as a bean
+and create CRUD methods in impl class
+in App.java, test the dao methods
+----------------------------------------------------------------------------------
+Spring, there are lot of modules
+	i) spring core
+	ii) spring AOP
+	iii) spring MVC
+	iv) spring rest
+
+
+Spring AOP
+---------------
+	Aspect Oriented Programming
+
+	cross cutting concerns
+
+	security
+	transaction
+	logging
+
+parallely we can work on them
+
+suppose, a bean provides some methods
+
+	logging
+		before and after the methods, i want log some information
+
+
+withdrawal method of ATM
+	before withdrawal, there are some pre conditions
+	after withdrawal, there are some post conditions
+
+pre condition?
+	check if atm card is active?
+	check if pin entered is valid?
+	check if a/c has enough balance?
+	check if daily limit is crossed?
+	check if machine have enough funds?
+
+question is?
+	who will do these things?
+		it is not good idea to write all these things inside "withdrawal" method.
+
+Now, 
+	we need to advise somebody who is withdrawing to follow all those pre & post conditions
+
+sbi card
+sbi atm
+
+icici atm
+
+axis atm
+
+those other atms, will withdraw	
+	but we should take care of pre post conditions
+
+in our example, i will call only a bean method.
+	but in response to that, 	before & after, some advice methods will be called automatically
+
+Terms used in AOP:
+	Aspect			cross cutting concern			bean	that works along with the core bean
+	Advice			before advice, after advice
+	JoinPoint			a point in which the bean method and aspect meets
+	Pointcut expression		SpeL	(spring expression language) expression that matches some of the methods.
+
+			only those methods that matches with the expression are advised
+
+Demo:
+--------
+	Lets create before and after advice for some of the methods of a bean
+
+1) add the following dependencies
+	spring - aop
+	aspectj
+	aspectjrt
+
+  <dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-context</artifactId>
+    <version>5.2.7.RELEASE</version>
+</dependency>
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-context-support</artifactId>
+    <version>5.2.7.RELEASE</version>
+</dependency>
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-aop</artifactId>
+    <version>5.2.7.RELEASE</version>
+</dependency>
+<dependency>
+    <groupId>org.aspectj</groupId>
+    <artifactId>aspectjrt</artifactId>
+    <version>1.9.5</version>
+</dependency>
+<dependency>
+    <groupId>org.aspectj</groupId>
+    <artifactId>aspectjweaver</artifactId>
+    <version>1.9.5</version>
+</dependency>
+
+
+2) we can configure using
+	xml
+	annotation
+
+in this demo, we use xml based configuration
+
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" 
+   xmlns:aop = "http://www.springframework.org/schema/aop"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+   http://www.springframework.org/schema/aop 
+   http://www.springframework.org/schema/aop/spring-aop-3.0.xsd ">
+   
+   <aop:config>
+   		<aop:aspect id="aspect1" ref="ba">
+   			<aop:pointcut expression="execution(* com.wipro.hrms.*.d*(..))" id="dmethods"/>
+   			<aop:pointcut expression="execution(* com.wipro.hrms.*.w*(..))" id="wmethods"/>
+   			<aop:before method="beforeAdvice" pointcut-ref="dmethods" />
+   			<aop:after method="afterAdvice" pointcut-ref="dmethods" />
+   			<aop:before method="beforeAdvice2" pointcut-ref="wmethods" />
+   			<aop:after method="afterAdvice2" pointcut-ref="wmethods" />
+   		</aop:aspect>
+   </aop:config>
+   
+   <bean id="bank" class="com.wipro.hrms.Bank">
+   </bean>
+   
+   <bean id="ba" class="com.wipro.hrms.BankAspect">
+   </bean>
+   </beans>
+
+
+3) create the Aspect bean
+package com.wipro.hrms;
+
+public class BankAspect {
+	public void beforeAdvice()
+	{
+		System.out.println("Before advice");
+	}
+	
+	public void beforeAdvice2()
+	{
+		System.out.println("This is ebfore advice 2");
+	}
+	
+	public void afterAdvice()
+	{
+		System.out.println("After advice");
+	}
+	
+	public void afterAdvice2()
+	{
+		System.out.println("This is After advice2");
+	}
+}
+
+
+4) create the bean:
+package com.wipro.hrms;
+
+public class Bank {
+	public void withdraw()
+	{
+		System.out.println("Withdraw successful. Remember to collect the cash");
+	}
+	
+	public void deposit()
+	{
+		System.out.println("Deposit method is called");
+	}
+}
+
+
+-------------------------
+Task:
+	in the spring core project you already have done,
+	add the aop dependencies
+	and in the same bean.xml
+		add the <aop:config>
+
+	and create point cut expression and advice a method or all methods
+
+	run the app and call the bean method and observe that the advice emthods (before, after, around) are called automatically
+
+
+

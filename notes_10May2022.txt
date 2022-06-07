@@ -1,0 +1,201 @@
+Spring security +JWT
+--------------------------
+JWT = JSON Web Token
+
+So what we are going to do?
+
+the users must be allowed to access certain URLs without security 
+	ex:
+		signup
+		login
+		home
+
+these resources are allowed for anybody without authentication.
+because, once you show the login page, then only they can login to our app
+
+when a user login successfully, he should be provided with a token. What is that token? JWT 
+	why it is called json?
+		{key1:value1}
+	key value pair
+
+this token should be used in further communications.
+	while accessing any other resources, the toke must be used.
+How the token can be used?
+	it must be used in the "Authorization" header of each request.
+
+
+ex:
+	in postman, you can find "Headers" section.
+
+there you can provide any key value pair
+
+key = Authorization
+value= Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYWciLCJleHAiOjE2NTEzMjcyNjEsImlhdCI6MTY1MTI5MTI2MX0.yr3uTH57dcFZF9Ddb9zF0Q5ukh6GAm5ECRIq0HzH9W8
+
+the above is an example for JWT 
+
+usually, the value for "Authorization" header will be
+	Bearer <<space>> jwt
+
+----------------------------
+How to generate a token?
+	this is not a random text that we send as a token
+	there are utility classes in spring framework, that can understand this token like
+		expiry date, time
+		user details
+	etc	
+		these details are hidden inside this token.
+
+That means, there is a jwt util class
+
+There should be a jwt filter class that should receive every request coming to our application and check if the jwt is expired or valid
+
+So we need to define
+1) jwt util
+2) jwt filter
+
+we must add the following dependency for that
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.1</version>
+        </dependency>
+
+
+Only if we add the above dependency in pom.xml
+we will be able to use those
+	jwt util
+	jwt filter
+
+
+JwtUtil.java
+--------------
+	this class provides methods to 
+		create/generate token
+		validate token
+
+package com.javatechie.jwt.api.util;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
+
+@Service
+public class JwtUtil {
+
+    private String secret = "jag";
+
+    public String extractUsername(String token) {
+        return extractClaim(token, Claims::getSubject);
+    }
+
+    public Date extractExpiration(String token) {
+        return extractClaim(token, Claims::getExpiration);
+    }
+
+    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
+        final Claims claims = extractAllClaims(token);
+        return claimsResolver.apply(claims);
+    }
+    private Claims extractAllClaims(String token) {
+        return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+    }
+
+    private Boolean isTokenExpired(String token) {
+        return extractExpiration(token).before(new Date());
+    }
+
+    public String generateToken(String username) {
+        Map<String, Object> claims = new HashMap<>();
+        return createToken(claims, username);
+    }
+
+    private String createToken(Map<String, Object> claims, String subject) {
+
+        return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
+                .signWith(SignatureAlgorithm.HS256, secret).compact();
+    }
+
+    public Boolean validateToken(String token, UserDetails userDetails) {
+        final String username = extractUsername(token);
+        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+    }
+}
+
+
+
+-------------------------------------------------------------
+There should be a jwt filter
+	that receives every request and validate
+
+package com.javatechie.jwt.api.filter;
+
+import com.javatechie.jwt.api.service.CustomUserDetailsService;
+import com.javatechie.jwt.api.util.JwtUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@Component
+public class JwtFilter extends OncePerRequestFilter {
+
+    @Autowired
+    private JwtUtil jwtUtil;
+    @Autowired
+    private CustomUserDetailsService service;
+
+
+    @Override
+    protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
+
+        String authorizationHeader = httpServletRequest.getHeader("Authorization");
+
+        String token = null;
+        String userName = null;
+
+        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+            token = authorizationHeader.substring(7);
+            userName = jwtUtil.extractUsername(token);
+        }
+
+        if (userName != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+
+            UserDetails userDetails = service.loadUserByUsername(userName);
+
+            if (jwtUtil.validateToken(token, userDetails)) {
+
+                UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
+                        new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                usernamePasswordAuthenticationToken
+                        .setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
+                SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+            }
+        }
+        filterChain.doFilter(httpServletRequest, httpServletResponse);
+    }
+}
+
+
+
+
+
+
+

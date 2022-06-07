@@ -1,0 +1,221 @@
+Hibernate
+------------
+Relationships in hibernate
+
+Employee
+	id
+	firstName
+	lastName
+	salary
+
+Department
+	id
+	name
+	
+Many Employees belong to one Department
+
+One To One
+One To Many
+Many To One
+Many To Many
+
+
+mostly in 1 to 1, they exist in a single table.
+
+An employee has an id
+An id belongs to an employee
+
+this is 1 to 1
+
+and how do we implement it?
+	id is a part of employee
+
+EMPLOYEE vs EMPLOYEE_PERSONAL_DETAILS
+
+every employee has personal details
+	address
+	phone
+	email
+
+then why we need two tables?
+
+normalization. Whenever we want to access some information,
+	the information is obtained from a table
+	that table, if contains, lot of unnecessary information, that will affect the performance of the query
+
+	even if a table has a picture column (blob), the query performance is affected
+
+so naturally, there is a need to split the table into smaller units
+
+that is why 1 - 1 is required.
+
+--------------
+1 to many
+
+dept vs emp
+
+if i find a department, i get an object of Department
+	that object contains List<Employees>
+	how convenient that will be?
+
+if i find an employee, that employee object
+	has "department" object
+	not just the department id
+
+to display 
+	employee Arun belongs to EEE department
+
+comprehensive
+
+Employee
+Department
+
+	xml configuration
+	annotation
+
+
+To convert any project into a maven project
+	right click the project
+		configure
+			convert to maven project
+
+
+in pom.xml add the following:
+		<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.10.0</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.30</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.jboss.logging/jboss-logging -->
+		<dependency>
+			<groupId>org.jboss.logging</groupId>
+			<artifactId>jboss-logging</artifactId>
+			<version>3.4.1.Final</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.30</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.2.17.Final</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.47</version>
+		</dependency>
+
+
+
+2) hibernate.cfg.xml file
+
+3) Entities
+	Department
+	Employee
+
+
+
+
+if i select a department in dropdownlist
+	all employees should be displayed
+
+even if we create a web application,
+	first test the Dao class separately
+	you can test it by using junit test class
+	or just a class with main method
+	and test them by running as a java application
+
+Employee
+	now we need to think about the relationship annotations
+
+
+
+What are the fetch types?
+	LAZY
+	EAGER
+
+
+LAZY
+	when i find a department
+		read(45);
+			i get a row from department table as an object of department
+			now every department object has a list of employees.			
+			When will the list of employees are loaded into the department object?	WHEN?
+			i) When i obtain an object of Department????	Yes means, EAGER
+			ii) No. When i get an object of Department, it will not have the employees list. only when i call getEmployees(), then only
+				it will query and obtain the list of employees			LAZY
+
+
+
+
+
+Task:
+	download the project from https://github.com/jagasia/jun01-hibernate-1
+	import as existing maven project (after unzip)
+	run the project. Inform me if any issues
+
+
+Now that we have created backend part
+	Employee
+	Department
+
+and the relationships are created in hibernate
+
+created an employee and set department (not a new object of dept. You found an object of department and set it to the employee)
+if you have created a new dept object, then it is a detached entity
+
+you have obtained an object of department 	d
+d.getEmployees();			//believe me, you get all employees belonging to that department 
+
+
+in front end, 
+	there should be a dropdownlist of department ids
+
+when i select a department id,
+the output should be
+
+Department Name:
+below that, a table of employees (who belong to that department should be displayed)
+
+
+Library to convert a java object into json string
+	gson		google json
+
+
+
+
+{"id":45,"name":"ECE","employees":[{"id":1,"firstName":"jag","lastName":"waran","department":{"id":45,"name":"ECE","employees":{}},{},{}]}
+
+
+
+
+
+
+
+
+

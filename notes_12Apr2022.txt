@@ -1,0 +1,453 @@
+Solution for the task we had yesterday, ie., grouping the employees by their Dept and dept wise sum of their salaries.
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+public class App6 {
+
+	public static void main(String[] args) {
+		List<Employee> empList=new ArrayList<Employee>();
+		empList.add(new Employee(12, "Ram", "ECE", 12121212.2f));
+		empList.add(new Employee(1, "Kumar", "ECE", 8989898.2f));
+		empList.add(new Employee(152, "Abdul", "Mech", 7798797.2f));
+		empList.add(new Employee(8, "Zaheer", "ECE", 8989898.2f));
+		empList.add(new Employee(11, "Xavier", "Mech", 3434344.2f));
+		empList.add(new Employee(10, "Babu", "Mech", 6868689689.2f));
+		empList.add(new Employee(7, "Raja", "CSE", 2342424.2f));
+		empList.add(new Employee(9, "Mohan", "ECE", 1234566.2f));
+		empList.add(new Employee(5, "Kumaresh", "CSE", 9876.2f));
+		empList.add(new Employee(18, "Jag", "ECE", 8765.2f));
+		empList.add(new Employee(4, "Dinesh", "CSE", 89890.2f));
+		empList.add(new Employee(2, "Rajesh", "ECE", 89898.2f));
+		empList.add(new Employee(3, "Sakthi", "CSE", 866686.2f));
+		
+		Map<String, Double> result = empList.stream()
+		.collect(Collectors.groupingBy(Employee::getDepartment, Collectors.summingDouble(Employee::getSalary)));
+		
+		System.out.println(result);
+	}
+
+}
+
+
+If you remember, a program we did in Map
+
+input a string as a sentence, 
+and count the alphabets
+
+	india is our country
+
+i = 3
+n = 2
+d = 1
+a = 1
+
+this program, also you can simplify using Stream api
+------------------------------------------------------------------------------
+Junit
+	
+Type of testing
+	unit testing
+	integration testing
+	white/ black box testing
+	regression testing
+	performance testing
+	stress testing
+	UI testing
+
+Unit testing
+	a method in java, can be tested independently
+	a method may need inputs, that is obtained by using parameters
+	a method may give output, that is using return type
+
+	a method, hence can be tested independently
+
+every method, (or unit) should be tested first before, integrating them.
+because, while integrating, we need to check only the issues related to integration. Not the units
+
+why we test a method?
+	mostly to check the logic 
+		inputs , expected output, actual output
+
+	sum(int, int)
+		2, 3, 5				2+3=5
+		10, 20, 30				
+		
+	test cases like this.
+
+	A test case contains, sample inputs, expected and actual outputs and the difference or deviation of expected vs actual makes the test pass / fail
+
+Testing team creates the test cases.
+But as java programmer, i want to test my code myself before i submit it to the testing team.
+
+Test Driven Development
+	i tested my code against 15 test cases
+
+	write the code to fail
+	modify the code to pass
+	refactor the code
+
+
+We use junit
+	for java language
+
+by adding a jar file to our project
+or
+if it is a maven project, we will add dependencies to the pom.xml
+
+
+
+AUT	Application under test
+SUT	Software under test
+
+
+
+--------------------------------------------
+1) Create a java project
+2) Create a class with couple of methods (in my example, i had sum() and difference())
+3) add junit.jar file to the project
+	right click the project
+		-> properties
+			-> java build path
+				-> 3rd tab (Libraries)
+					-> click "Add external jar" button
+						locate the junit.jar file
+4) Create a test class
+	write couple of test cases
+		@Test annotation over the test methods
+5) right click the project 
+	run as
+		junit test 
+6) create an App class with main method
+	Run the test using 
+		JUnitCore.runClasses
+
+
+
+@Before vs @BeforeClass annotation
+
+@Before 
+	methods are executed before every test
+
+@BeforeClass
+	methods are static and are executed only once for the class. 
+
+
+@After vs @AfterClass
+
+
+
+Saturday
+	30 question MCQ in java
+
+
+Marker interface
+Functional interface
+Inheritance
+Wrapper classes
+primitive data types
+String, StringBuilder, StringBuffer
+Regular expressions
+Exception
+	checked
+	unchecked
+	User defined exception
+IO
+	Reader
+	InputStream
+Collection
+	Map
+	LinkedHashSet
+	ArrayList
+	HashSet
+	Iterator
+	Comparable
+	Comparator
+
+programming constructors
+	if
+	switch
+	while
+	do while
+	for
+	for each
+
+---------------------------------------------------------------------------------------------------
+UI Essentials
+----------------
+HTML5
+CSS3
+Bootstrap
+Javascript ES6
+
+HTML5
+	HyperText Markup Language
+
+	can we create a webpage without using HTML?
+		NO
+
+	applet
+		java code runs only if <applet> tag is used. ie., HTML tag
+	what is a webpage?
+		if you run it using browser, it is a web page.	Browser understands HTML
+
+	ex for browser
+		Internet Explorer
+		Google chrome
+		Opera
+		Microsoft Edge
+		Mozilla Firefox
+
+	
+SGML	
+	Standard Generalized Markup Language
+
+	had predefined set of tags and also allowed users to create their own tags
+
+	HTML is based on SGML
+
+There are some rules in SGML that applies to HTML also
+
+<img src="">	works fine in browser
+but in react,
+
+<img src="" />	notice that slace / at the end is compulsory in react
+
+
+
+HTML rules:
+	The root element of a HTML file is HTML
+
+Element is also called as Tag
+
+the root element of a web page is
+<HTML>	
+</HTML>
+
+Why it is called as root element, 
+	all other elements are present only inside the root element
+	there is only 1 root element in any document.
+
+Inside HTML element
+	HEAD
+	BODY
+
+
+head
+	the code inside HEAD element are loaded in the client's memory, even before the web page is displayed.
+	So any script that you want to be available early, can be put inside <HEAD> element
+	
+body
+	this portion of code is meant for display / presentation
+	we can put scripts also in <BODY> element but they are loaded in memory only when it is arrived from Top - Bottom
+
+	cannot call the function here. (top down)
+
+	function 
+	
+	call the function
+
+
+
+HTML language is meant for Presentation
+	all that you do in HTML is to define how the data needs to be displayed
+		<B>	bold
+		<I>	italic
+		<TABLE>
+		<UL>
+		<A>
+		<P>
+		<DIV>
+		<SPAN>
+		<h1>		top heading		largest
+		<h2>		second level heading
+
+
+
+
+basic Markup language rules:
+	i) root element	(only 1) and all elements are inside root element
+	ii) tags must nest properly
+	the below code is nested properly:
+		<tr>
+			<td>
+			</td>
+		</tr>
+	the below coded is not nested properly:
+		<tr>
+			<td>
+			</tr>
+		</td>
+	the above code is overlapping and is incorrect
+
+	iii) Every body tag / content tag should have 
+		start tag
+		end tag
+	ex:
+		<DIV>	</DIV>
+		<P>	</P>
+	otherwise
+	iv) it is an empty tag
+		an empty tag ends with />
+	ex:
+		<BR />
+		<HR />
+		<IMG />
+	v) attribute values in double quotes "" even if it is a number
+
+		<TABLE BORDER="1">		here, BORDER is the attribute for TABLE element
+
+		most browsers do not raise error, if you do not follow this
+
+	vi) entities
+		in any markup language, certains symbols are used as syntax
+	example:
+		> symbol
+		< symbol
+
+		a>b		how to do this?
+
+
+		<p> a>b </p>
+	should be written as
+		<p> a &gt; b </p>		
+
+	&gt;	is	>
+	&lt;	is	<
+	&nbsp;	is	space
+
+	
+
+identify the types of elements:
+	block elements
+	inline elements
+	
+
+block:
+	it is always displayed in separate line
+	ex:
+		<p>
+		<div>
+		
+	THese elements always come in separate line inside the container
+
+
+NOTEPAD:
+Task:
+	create a simple html program and view the output in a browser	
+
+
+Now, these elements by default have some styles (CSS)
+
+in cloud lab, Visual Studio code s/w is already installed
+
+Visual Studio code is different from Visual Studio
+
+Visual Studio code is FREE downloadable from microsoft website itself
+
+
+In vs code, we can create a folder, files (no such create project like eclipse)
+
+File menu -> new file (CTRL+N)
+save the file with .html extension
+
+in code edition
+	type "html:5" and press enter
+
+
+ctrl+space to get such options
+
+<!DOCTYPE html> 		this refers to HTML version 5
+<head> portion, we can mention meta data 
+	<title>	displayed in the title bar of the browser
+	
+1) Identify the block elements in HTML
+2) Identify the  inline elements in HTML
+
+How can we dispay Headings in HTML?
+<h1>
+<h2>
+<h3>
+<h4>
+<h5>
+<h6>
+
+Use all these headings in a HTML file and show me.
+
+completed.	
+
+How many heading elements are there in HTML
+	6
+
+List elements
+	UL
+	OL
+
+UL
+	un ordered list
+		bullets
+		icons
+	
+<ul>
+       <li>India</li>
+       <li>Australia</li>
+       <li>Sri lanka</li>
+       <li>Pakistan</li>
+       <li>China</li>
+       <li>Japan</li>
+   </ul>
+
+•	India
+•	Australia
+•	Srilanka
+•	Pakistan
+•	China
+•	Japan
+
+OL
+	Ordered List
+
+
+1.	India
+2.	Australia
+3.	Srilanka
+4.	Pakistan
+5.	China
+6.	Japan
+
+    <ol>
+        <li>India</li>
+        <li>Australia</li>
+        <li>Sri lanka</li>
+        <li>Pakistan</li>
+        <li>China</li>
+        <li>Japan</li>
+    </ol>
+
+
+Task:
+	create an un ordered list of countries
+	but the bullet should be o
+
+o	India
+o	Australia
+o	Srilanka
+o	Pakistan
+o	China
+o	Japan
+
+
+<ul type="disc | circle | square">
+
+
+Task:
+	display the ordered list of countries, but the order number should start from 21 onwards
+
+
+
+
+
+
+

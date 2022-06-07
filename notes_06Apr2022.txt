@@ -1,0 +1,244 @@
+How can we convert a String into Date????????				parse method
+	SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy");
+	Date dt=sdf.parse(str);
+How can we convert a Date into a	String					format method
+	SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy");
+	String str=sdf.format(dt);
+
+
+Collections
+	List
+		LinkedList		there is no index
+		ArrayList		there is index
+				marks.get(0);		you will  get the element at index 0
+			
+
+ArrayList and Vector are the collections that  has index
+
+
+HashSet
+	how will the elements are added to a hashset??????
+	i am asking the order.
+		Whenever i add an element to a Set, it may not always necessarily be added to the end of the list.
+
+	can anyone tell me, the order of a HashSet?
+		is based on hashCode of the element.
+
+
+
+
+
+
+
+
+public class Employee
+{
+	private Integer id;
+	private String name;
+	private Float salary;
+	
+	public Employee() {}
+	
+	public Employee(Integer id, String name, Float salary) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.salary = salary;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Float getSalary() {
+		return salary;
+	}
+
+	public void setSalary(Float salary) {
+		this.salary = salary;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee [id=" + id + ", name=" + name + ", salary=" + salary + "]";
+	}
+
+	
+}
+
+
+
+HashSet
+	identifies duplicate using "equals()" method
+
+	str1.equals(str2);		
+
+		to check if 2 objects are equal or not
+		we are using equals method
+
+Employee class also should override equals method
+
+	our logic is 
+		if all the fields are equal, then the employees are same
+
+
+
+Employee class override
+	equals method	for finding duplicates
+	hashCode method	for order
+
+
+===========================
+TreeSet
+import java.util.TreeSet;
+
+public class App2 {
+
+	public static void main(String[] args) {
+		TreeSet<Employee> employeeSet=new TreeSet<>((e1,e2)->e2.getId().compareTo(e1.getId()));
+		employeeSet.add(new Employee(10, "John", 42345.3f));
+		employeeSet.add(new Employee(5, "Abdul", 61345.3f));
+		employeeSet.add(new Employee(8, "Suresh", 21345.3f));
+		employeeSet.add(new Employee(12, "Kumar", 12314.3f));
+		employeeSet.add(new Employee(8, "Suresh", 21345.3f));
+		employeeSet.add(new Employee(5, "Abdul", 61345.3f));
+		employeeSet.add(new Employee(9, "Raja", 17245.3f));
+		employeeSet.add(new Employee(7, "Zaheer", 328383.f));
+		employeeSet.add(new Employee(12, "Kumar", 12314.3f));
+		
+		for(Employee e:employeeSet)
+		{
+			System.out.println(e);
+		}
+				
+	}
+
+}
+
+
+
+=========================
+Map
+	is not collection. But application of collection.
+
+	is a key-value pair.
+		1 - Raja
+		2 - Siva
+		3 - Abdul
+		
+
+	the key can be HashSet/ TreeSet/ LinkedHashSet
+
+
+	HashMap
+	TreeMap
+	LinkedHashMap
+
+
+	when List and Set have methods like add(), 
+	map do not have add method.
+		it has 
+			put method		ex:		map.put(1,"India");	 
+			get method		ex:		map.get(1);		//it returns India
+
+	now map do not have elements. Rather, map has entries
+	every element in a map is an entry
+		Entry has
+			key
+			value
+
+	
+	the key is Set,
+		hence, it should be distinct/ unique.
+
+		Now, the question is, if you enter a duplicate key? what happens?????
+			if key is already found, then its value is replaced
+
+		key can be null???????	yes. Only once. If you enter another entry,  where key is null, it is considered as duplicate
+		values, there is no rule. 	values can be null, any number of null, duplicates. anything
+
+
+Demo:
+	accept a sentence as input string from the user.
+	display the output as, each character and their count.
+
+input:
+	this is a sentence
+
+output:
+
+	t: 2
+	h: 1
+	i: 2
+	s: 3
+	 : 3
+	a: 1
+	n: 2
+	e: 2
+	c: 1
+
+HashMap<Character,Integer>
+
+
+College.calculateLocationCount(collegeList);
+
+
+
+
+
+to get the year portion of a Date
+	SimpleDateFormat
+
+Iterator
+	hasNext()
+	next()
+	remove()
+
+once, we were looping a list (array list) and inside the loop, we check a condition, if the condition is true, then we remove that element
+	now, while removing the element, we are affecting the boundary condition of the loop.
+		ConcurrentModificationException
+
+	so, we changed to code to use iterator and remove the current element using it.remove()
+
+
+ListIterator
+	works only with List		(not for Set)
+
+	hasNext()
+	next()
+	remove()
+
+	hasPrevious()
+	previous()
+	
+
+		means, we can iterate in reverse order also.
+
+	But for that, first we need to move to the end of the list.
+
+	ListIterator<Integer> it=marks.listIterator();
+	while(it.hasNext());		//i am moving the iterator to the end
+
+	while(it.hasPrevious())
+		it.previous()
+
+	this program works fine for displaying list elements in reverse orde. BUT IN HACKERRANK, it did not accept the solution as correct
+	because, we have unnecessary loop to move to end. That hackerrank says, your solution has taken more time than expected.
+
+	ListIterator<Integer> it=marks.listIterator(10);		it will move to 10th position
+
+	ListIterator<Integer> it=marks.listIterator(marks.size());
+	while(it.hasPrevious())
+		it.previous()

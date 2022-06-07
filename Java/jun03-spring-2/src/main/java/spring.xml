@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean name="address" class="com.wipro.hrms.model.Address">
+		<constructor-arg value="A123" />
+		<constructor-arg value="Main road" />
+		<constructor-arg value="Chennai" />
+	</bean>
+	<bean name="student" class="com.wipro.hrms.model.Student">
+		<constructor-arg value="101" />
+		<constructor-arg value="Raja" />
+		<constructor-arg ref="address" />
+	</bean>
+</beans>

@@ -1,0 +1,14 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="product" class="com.wipro.hrms.Product" scope="prototype">
+		<constructor-arg name="id" value="12" />
+		<constructor-arg name="name" value="Pencil" />
+		<constructor-arg name="price" value="10.5" />
+	</bean>
+	
+   </beans>

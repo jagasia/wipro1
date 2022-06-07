@@ -1,0 +1,247 @@
+Ensure that all of you have created an angular project (yesterday project is fine)
+
+1) open the angular project folder in visual studio code
+2) Run the project
+	i) cmd prompt (inside the project folder)
+	ii) ng serve 
+		ng serve -o		(o for open the browser)
+
+
+
+------------------------------------
+Components
+	what is a component in Angular?
+		a component is a reusable unit that can be plugged into another component in angular
+
+	whenever we create a project, there is one component that is created already
+		app component
+
+	a component is made up of 
+		html		markup 		presentation
+		css		styling
+		ts		code	(script)
+		spec.ts 		unit testing
+
+	How to create component in angular?
+		ng g c <<component name>>
+		ng generate component <<component name>>
+
+	what happens when i run the below component
+		ng g c login
+
+	login.component.html
+	login.component.css
+	login.component.ts
+	login.component.spec.ts
+
+		these are the 4 files created, when i run the command to create a component.
+
+	ALSO,
+		in app.module.ts file, the component will be declared
+
+we have created a login component now.
+
+conventions:
+	the file name is always in lower case.
+		login.component.ts 
+	if you open this ts file
+		there will be a class "LoginComponent"
+
+	ng g c java-student
+
+		@Component({selector:'app-login'})
+		export class JavaStudentComponent
+		{
+		}
+
+this login component must be plugged into app component
+
+app component has 
+	3 columns
+
+in 2nd column, i am going to place the login component
+
+
+
+TasK:
+-------
+create a sign up component and plug it inside the second column of app component
+
+Hint
+	1) in index.html, inside <head> portion, paste the bootstrap cdn
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+	2) in app.component.html
+		delete all the sample code 
+	put this below scaffolding code in app.component.html
+
+<div class="jumbotron text-center">
+  <h1>My First Bootstrap Page</h1>
+  <p>Resize this responsive page to see the effect!</p> 
+</div>
+  
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <h3>Column 1</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+    </div>
+    <div class="col-sm-4">
+      <h3>Column 2</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+    </div>
+    <div class="col-sm-4">
+      <h3>Column 3</h3>        
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+    </div>
+  </div>
+</div>
+
+
+------------------------------------------------------------------
+binding:		(associating a variable to a html element or attribute)
+-----------
+	there is a variable in .ts file
+	
+	how to display the value of that variable in html file?
+		ans: interpolation
+
+What is interpolation?
+	display the value of a variable
+
+		{{username}}
+
+double set brackets 
+	only for output purpose
+	one way from .ts variable to html output
+
+
+binding types:
+	property binding
+	event binding
+	2 way data binding
+
+
+
+Property binding:
+	there is a variable in .ts file
+	we are binding that variable to a property
+
+User Name: <input type="text" name="" id="" class="form-control" [value]="username">
+
+<p><font [color]="color">This is a paragraph</font></p>
+
+notice [] used for property binding
+
+[value]="username"		username is a variable, whose value will be considered
+[color]="color"		color is a variable, whose value will be considered
+
+
+event binding:
+----------------
+	there is a function in typescript file
+	we are binding that function to an event
+
+
+Task:	property binding & event binding
+------
+	Signup form
+
+		username
+		password
+		confirm password
+		firstname
+		lastname
+		email
+		
+		Signup button and reset button
+
+	the firstname and lastname textboxes should be bound to the variables declared in .ts file and the variables' values must be displayed in html
+	the signup button click event must be handled by a function in typescript
+
+
+2-way data binding:
+-----------------------
+	one side there is a typescript variable
+	another side there is a property in html code
+
+	it is similar to property binding but the difference is, a change in the html element reflects in typescript variable.
+
+	if you notice in "property" binding, it was 1 way. The value of typescript variable is displayed in the html element
+	but not vice versa
+
+	what is 2 way data binding?
+		when the property of html element is changed, then the change should reflect in the .ts variable also
+
+
+	rules:
+		html element must have a name
+
+
+[(ngModel)]	banana in the box
+
+User Name: <input type="text" name="" id="" [(ngModel)]="username" /> <br>
+
+{{username}}
+
+
+ngModel is defined in "FormsModule". so we need to import "FormsModule" in app.module.ts file
+
+import { FormsModule } from '@angular/forms';
+
+ imports: [
+    BrowserModule,
+    FormsModule
+  ],
+
+
+Task:
+	create a component called "home"
+
+	textbox should be bould in 2 way with a variable called "color" (in .ts)
+
+	color:string='blue';	
+	
+	when the texbox value is changed, then the same must be displayed
+
+	a paragraph color should be changed accordingly
+
+
+remember to import "FormsModule" in app.module.ts file
+
+Color: <input type="text" name="" id="" [(ngModel)]="color"><br>
+<p><font [color]="color">This is a paragraph</font></p>
+		
+
+
+Task:
+	create a dropdownlist containing few color names
+	when the dropdownlist is changed, the color of the paragraph also should change
+
+
+
+
+Task:
+	use property binding to bind a text box to a variable in .ts file
+	so that, the textbox will become
+		<input type="text" />		or
+		<input type="password" />	
+
+
+
+	show password???		masked
+
+
+
+
+
+
+
+

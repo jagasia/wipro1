@@ -1,0 +1,21 @@
+package com.wipro.hrms.dao;
+
+import org.springframework.jdbc.core.JdbcTemplate;
+
+public class StudentDaoImpl {
+	private JdbcTemplate jt;
+
+	public JdbcTemplate getJt() {
+		return jt;
+	}
+
+	public void setJt(JdbcTemplate jt) {
+		this.jt = jt;
+	}
+	
+	public void dummy()
+	{
+		System.out.println("Hi this is student dao impl");
+		System.out.println(jt);
+	}
+}

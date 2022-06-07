@@ -1,0 +1,137 @@
+Spring boot REST API
+	we created an employee-service yesterday.
+
+that rest api (restful webservice) has everything about backend but not the front end. 
+	CRUD operations are performed by the REST api. And each method have a URL with http methods like GET, POST, PUT, DELETE
+
+There are sometimes, complex types used in the entity
+	date
+	time
+	picture
+	audio/video
+
+The UI part is not there in a rest api (if UI/ front end is also done, then it is MVC project)
+
+Who will provide the frontend/ UI part?
+	Angular project 
+
+Tell me the steps for creating a rest api
+
+Example for this project is Food
+zomato/swiggy
+	these kind of apps have an entity called food	(menu/ item)
+		id
+		name
+		price
+
+Item.java
+		id
+		name
+		price
+
+1) entity class
+2) repository interface
+3) service class
+4) controller class	
+
+ofcourse, application.properties to have
+	port number		default: 8080
+	data source configuration
+
+after creating the rest api, we will test it in POSTMAN for all the http methods GET/POST/PUT/DELETE
+
+then we create angular project that provides FRONTEND for the same
+
+we have completed the REST API for item
+item-service is ready and running in port 8383
+
+http://localhost:8383/item
+
+
+shall we create the front end in Angular
+
+how to create an angular project?
+	ng new food-app --style=css --routing
+
+we have created a component called "item"
+	ng g c item
+
+we are using ReactiveFormsModule	
+	import it in app.module.ts
+
+
+we have added one more component "item-grid" and display at the bottom (in second row)
+
+this grid should display all the items available in the database
+
+for that we should access the rest api
+
+http://localhost:8383/item
+
+how can angular project call a rest api?
+	remember, we accessed airlines rest api????
+
+Answer:
+	using HttpClientModule
+
+	import this HttpClientModule in app.module.ts
+
+
+
+
+Access to XMLHttpRequest at 'http://localhost:8383/item' from origin 'http://localhost:4200' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+
+CORS
+	Cross Origin Resource Sharing
+		is a policy that protects a service from unauthorized access.
+
+Solution:
+	go to controller class and add the following to allow cors
+	
+@RestController
+@CrossOrigin({"http://localhost:4200","*"})
+@RequestMapping("/item")
+public class ItemController {
+
+
+
+Task:
+pull the food-service rest api from the following git repository
+	https://github.com/jagasia/wipro1/tree/jag3/Java/spring
+
+
+Tell me the categories of the food items:
+Break Fast
+Lunch
+Dinner
+Snacks
+Desserts
+
+The rest api should allow us to get all categories
+
+SELECT DISTINCT i.category FROM Item i;
+
+
+Picture property should be added to the entity class
+	what should be the type of this property
+
+Do you remember, when we learn IO chapter in java
+	streams, reader
+
+we learnt to read all the bytes from the picture file
+
+picture/ audio/ video 
+	all are nothing but bytes
+
+so we will use byte []
+
+in mysql, for image
+	tinyblob		default
+	mediumblob
+	longblob		suitable for images
+
+
+alter table item modify picture longblob;
+
+
+	

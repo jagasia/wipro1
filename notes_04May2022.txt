@@ -1,0 +1,332 @@
+So far we have seen
+	Spring core
+	Spring AOP
+	Spring MVC
+
+Now, lets start Spring Data JPA
+	we will do this in spring MVC project
+
+What JPA?
+	JPA stands for Java Persistence API
+
+what is an API?
+	Application Programming Interface.
+	API is a library, means, code that is already done to help us. For example, JDBC API help us to interact with database.
+	JPA is also such api that help us to interact with database.
+
+	API also forms a layer that makes things transperant. There are lot of RDBMS products in the market, like Oracle, SQL server, Mysql, DB2 etc
+	this API makes java program, transperant across different data sources. Transperant means, consistent. the java code is same for any database.
+
+	The configuration is different. We will configure the project according to the database.
+
+Like hibernate, 
+	Spring data jpa also can create tables automatically
+
+in spring boot, what is the configuration file we use?
+	application.properties
+
+so, we will configure the connection information in the application.properties file
+
+In JDBC,
+	we write SQL statements / queries
+
+if you see a typical jdbc program,
+
+	PreparedStatement st=con.prepareStatement("SELECT * FROM EMPLOYEE");
+	ResultSet rs=st.executeQuery();
+	List<Employee> employeeList=new ArrayList<>();
+	while(rs.next())
+	{
+		//every row becomes an object of Employee class
+		Employee employee=new Employee(rs.getInt(1), rs.getString(2)); 	//same for as many columns present in the table
+		employeeList.add(employee);
+	}
+
+Now, if anybody, who knows, the mapping between, the Employee class and the EMPLOYEE table, can write the above code independently.
+without further instructions, this code can be written.
+
+So why not we create a framework that will automatically do this routine process?
+
+Thats where JPA concept is introduced.
+	JPA will take care of routine, CRUD operations, IF WE PROVIDE A MAPPING BETWEEN a class in java and the table in the database.
+
+JPA is a concept which is implemented by many frameworks including:
+	JPA framework	
+	EJB
+	Hibernate
+	Spring Data JPA	(we learn today)
+
+when it comes too spring boot, spring data jpa becomes most preferred data access layer.
+
+who does it work?
+1) add "spring data jpa" dependency (while creating a spring boot project from spring initializr, we can add this dependency)
+	the moment, we add this dependency, we are supposed to configure the project with the data source properties in application.properties.
+2) we will create repository interfaces for every entity class.
+	What is an entity class?
+		From the E-R diagram, the entity becomes a table in the database. And becomes class in our java program.
+		The entity class is mapped to a table
+		Entity models persistence
+	For every entity, create an interface called as repository interface
+	this interface extends JpaRepository interface
+3) who will provide the implementation of this interface?
+	jpa framework will provide, if we autowire this interface in the service class / controller class
+	sometimes, we can introduce additional methods also in the interface and sometimes, we can write our own queries also
+
+Demo:
+	Lets have an entity class "Product" that has the following properties:
+		id		(primary key)
+		name
+		price
+
+The steps for an mvc project with spring data jpa is always same:
+	1) entity class
+	2) repository interface
+	3) service class
+	4) controller class
+
+ofcourse, the necessary JSP front end and their url mappings in controller
+
+1) creating a spring boot project named:
+	may04-jpa-01
+2) choose the following dependencies
+	spring web
+	spring data jpa
+	mysql driver
+3) application.properties
+server.port=8085
+spring.datasource.url=jdbc:mysql://localhost:3306/wipro3
+spring.datasource.username=root
+spring.datasource.password=
+spring.jpa.hibernate.ddl-auto=update	
+
+	If the class name is RegularCustomer, then the table name will be REGULAR_CUSTOMER
+	this is the default naming strategy followed by jpa. If you dont want this strategy and want the exact spelling, then use
+		spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+4) Product.java
+	Integer id;
+	String name;
+	Double price;
+		constructors
+		generated getters & setters
+
+	i) @Entity annotation on the class
+	ii) @Id annotation & @GeneratedValue(strategy=GenerationType.AUTO) on the id variable
+	
+5) ProductRepository.java	IS AN INTERFACE
+	extends JpaRepository<Product, Integer>
+	i) @Repository annotation on the class
+
+6) ProductService.java		is a class
+	i) @Service annotation on the class
+	ii) autowire the ProductRepository here
+
+7) ProductController.java	is a class
+	i) @Controller annotation on the class
+	ii) autowire the ProductService here
+		
+	@RequestMapping(method = RequestMethod.GET, value = "/showProduct")
+	public String showProductPage()
+	{
+		return "product";
+	}
+
+	the above method will show the "product" jsp file
+
+
+error:
+	"Path with "WEB-INF" or "META-INF": [WEB-INF/views/product.jsp]"
+
+solution:
+
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+		</dependency>
+
+
+also add the jstl dependendy in pom.xml
+
+			<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+
+
+What is JSTL?
+	JSP Standard Tag Library
+
+	it is a set of custom tag libraries	(custom tags are tags which are not there in html but introduced newly for some purpose)
+	ex:
+		core is one of the jstl library that has "if", "forEach", etc
+
+
+
+In jsp file:
+	<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
+
+first one is jstl core tag library		if, forEach
+second one is spring form tag library	spring forms
+
+what is the benefit of spring forms?
+	we can patch an object easily to a spring form		(like we do in angular)
+
+
+What is a ModelAttribute?
+	it is an object of entity that is mapped to the spring form
+
+
+Look at this method: The return type is not String or ModelAndView. How is it possible?
+
+	@RequestMapping(method = RequestMethod.POST, value = "/product")
+	@ResponseBody
+	public Product productDml(@ModelAttribute("product") Product product)
+	{
+		return product;
+	}
+
+
+Notice, the @ResponseBody annotation here. When you use this annotation, the method DOES NOT return "view", but it returns the content that is displayed in the browser
+
+When i submit the form, the form is converted into an object of Product class, the object name being "product" (as mentioned in ModelAttribute),
+the object is now displayed in browser, using @ResponseBody as
+
+	{"id":1,"name":"Pencil","price":12.0}
+
+
+
+1) add the following dependencies in pom.xml
+<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+		</dependency>
+
+
+			<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+
+2) create the "ProductController" (i have given the code in chat)
+package com.example.demo.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.example.demo.model.Product;
+import com.example.demo.service.ProductService;
+
+@Controller
+public class ProductController {
+	@Autowired
+	private ProductService ps;
+
+	@RequestMapping(method = RequestMethod.GET, value = "/showProduct")
+	public String showProductPage(@ModelAttribute("product") Product product)
+	{
+		return "product";
+	}
+	
+//	@RequestMapping(method = RequestMethod.POST, value = "/product")
+//	@ResponseBody			//this method does not return view. But it returns content that is displayed in the browser
+//	public Product productDml(@ModelAttribute("product") Product product)
+//	{
+//		return product;
+//	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "/product", params = "add")
+	public String addProduct(@ModelAttribute("product") Product product)
+	{
+		//to store a row in PRODUCT table, use product object to send to create method of ProductService
+		ps.create(product);
+		return showProductPage(product);
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "/product", params = "update")
+	public String updateProduct(@ModelAttribute("product") Product product)
+	{
+		ps.update(product);
+		return showProductPage(product);
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "/product", params = "delete")
+	public String deleteProduct(@ModelAttribute("product") Product product)
+	{
+		ps.delete(product.getId());
+		return showProductPage(new Product());
+	}
+}
+
+
+
+
+3) in product.jsp
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+	<div class="jumbotron text-center">
+		<h1>My First Bootstrap Page</h1>
+		<p>Resize this responsive page to see the effect!</p>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4">
+				<h3>Column 1</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+				<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco
+					laboris...</p>
+			</div>
+			<div class="col-sm-4">
+			
+			<form:form method="POST" action="/product" modelAttribute="product">
+				Id: <form:input path="id" class="form-control" />
+				Name: <form:input path="name" class="form-control" />
+				Price: <form:input path="price" class="form-control" /><br/>
+				<input type="submit" value="Add" class="btn btn-success" name="add" />&nbsp;
+				<input type="submit" value="Update" class="btn btn-warning" name="update" />&nbsp;
+				<input type="submit" value="Delete" class="btn btn-danger" name="delete" />&nbsp;
+			</form:form>
+			
+			</div>
+			<div class="col-sm-4">
+				<h3>Column 3</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+				<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco
+					laboris...</p>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+</html>
+
+
+create "product.jsp" and add those taglibs and create spring form for "product"

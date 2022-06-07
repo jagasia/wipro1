@@ -1,0 +1,396 @@
+So far, we learnt
+Servlets and JSP
+AJAX
+	Why do we need ajax?
+		whenever, a request is sent to server from the form, the server produces output. That output replaces the original content in the browser
+		this means, there is a post back.
+
+		post back, is an inconvenience for the user.
+
+		imagine, i am selecting the state "Tamil Nadu", in response to that, i get all the cities of tamil nadu in next drop down list.
+		but in this process, all the details i have entered before are vanished. (first name, lastname, all are vanished)
+		because, a new page is displayed.
+
+		ajax avoids a postback. Means, the page is still available, when the request is sent to the server and the output comes back, 
+		the page does not wait for the response, the user is allowed to continue working in the page. 
+
+	Basically, a jsp / html form, that have a select (dropdown) will not call a server side script (but a submit button will call)
+		so, only client side script can handle the "change" event of a dropdownlist.
+		from client side script (like javascript/jquery) how can we call a server side script?
+			AJAX
+
+
+
+Jquery AJAX	(reminder)
+-------------------------------------
+Hibernate
+	What is Hibernate?
+		You know JPA repository (spring data JPA), that is actually based on Hibernate.
+	
+		Hibernate is a ORM framework, that is used to access the database effortlessly.
+
+	ORM
+		Object Relational Mapping
+			There is a class in java. ex: Student
+
+			There is a table in db. ex: STUDENT
+
+			An object of Student class is mapped to a row in STUDENT table.
+			The properties of Student are mapped to columns of STUDENT table.
+
+		If a class can be mapped to a table(s), then that is an ENTITY class
+
+
+JPA concept
+	Java Persistence API
+		defines entities
+		defines configurations that are used to 
+			establish connection information
+			map the class with table
+		define relationships
+		
+	Based on this JPA concepts, there are lot of frameworks.
+		EJB	version 3.0 introduced Entity concept and annotation	(before 3.0, entity beans, session beans were there)
+		JPA 	framework is an implementation of JPA concept
+		Hibernate	we learn now.
+		JpaRepository/ CrudRepository
+		HibernateTemplate
+
+
+Hibernate f/w
+	pure hibernate framework, we learn now
+	This is the basic for many jpa frameworks.
+
+
+
+If you see a project made of many layers, where does the hibernate fit in?
+	Data Layer
+	Data Access Layer
+	Model		(in mvc)
+
+
+Any type of project can use Hibernate
+	java project		(core java project)
+	dynamic web project
+	maven project
+	mvc project
+	rest api
+	
+lets understand the xml configuration system for the hibernate framework.
+	i) hibernate.cfg.xml
+		this configuration file represents the connection information	
+		only 1 file for 1 database connection
+	ii) entity.hbm.xml
+		this configuration file provides the mapping information about ORM
+		for every entity, we create a separate hbm file
+
+
+
+Can you suggest one new entity for example
+	Student
+		in our wipro3 database, there is no table called STUDENT so far. our hibernate can create
+
+
+Entity have lot of states
+	new/ created state		whenever a new entity is created
+	managed state		when the object is in sync with a row in the table
+	detached entity		when an object is created but not in sync with a row in the table
+	deleted state		an object is removed from the table
+
+
+Lets start learning hibernate from a core java project.
+1) create a java project
+	may30-hibernate-1
+2) copy the hibernate jars and mysqlconnector jar to the project folder
+	/bin/jars
+3) right click project
+	-> properties	-> java build path -> libraries tab -> add external jar	-> browse and select all jar files
+4) we need to define an entity class
+	i) using annotations
+	ii)or using xml configuration file
+
+	in this demo, we are going to learn to use xml configuration for entity class mapping
+5) create an entity class
+	Student
+		id
+		name
+		dateOfBirth
+
+6) hibernate.cfg.xml
+	create this file directly in the src (not inside any package)
+
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM 
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="connection.url">jdbc:mysql://localhost:3306/wipro3</property>
+
+		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+
+		<property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
+
+		<property name="connection.username">root</property>
+		<property name="connection.password"></property>
+
+		<!-- DB schema will be updated if needed -->
+		<property name="hbm2ddl.auto">update</property>
+		<property name="show_sql">true</property>
+		<property name="format_sql">false</property>
+		<mapping resource="student.hbm.xml" />
+	<!-- 	<mapping class="mla.mar_20_1.model.Actor" /> -->
+	</session-factory>
+</hibernate-configuration>
+
+7) create a mapping file for Student entity	(student.hbm.xml)
+
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   <class name = "com.wipro.abcd.model.Student" table = "STUDENT">
+      
+      <meta attribute = "class-description">
+         This class contains the Student detail. 
+      </meta>
+      
+      <id name = "id" type = "int" column = "id">
+         <generator class="sequence"/>
+      </id>
+      
+      <property name = "name" column = "name" type = "string"/>
+      <property name = "dateOfBirth"  type = "date"/>      
+   </class>
+</hibernate-mapping>
+
+
+8) StudentDAOImpl.java
+	crud operations here
+
+package com.wipro.abcd.model;
+
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.classic.Session;
+
+public class StudentDaoImpl {
+	
+	public Session retrieveSession()
+	{
+		//create an object representation of the configuration class
+		Configuration cfg=new Configuration();
+		cfg.configure("hibernate.cfg.xml");
+		SessionFactory sf = cfg.buildSessionFactory();
+		return sf.openSession();
+	}
+	
+	public void create(Student student) {
+		Session session = retrieveSession();
+		Transaction tran = session.beginTransaction();
+		session.persist(student);
+		tran.commit();
+		session.close();
+	}
+	public void read() {
+		
+	}
+	public Student read(Integer id) {
+		Session session = retrieveSession();
+		Student student=(Student) session.get(Student.class, id);
+		return student;
+	}
+	public void update(Student student) {
+		Session session = retrieveSession();
+		Transaction tran = session.beginTransaction();
+		//find the existing row and persist it
+//		Student temp = (Student) session.get(Student.class, student.getId());		//	get method is used to find by primary key
+			//temp is a managed entity. 			student is a detached entity
+		Student temp = read(student.getId());
+		temp.setName(student.getName());
+		temp.setDateOfBirth(student.getDateOfBirth());
+		session.persist(temp);
+		tran.commit();
+		session.close();
+	}
+	public void delete(Integer id) {
+		Session session = retrieveSession();
+		Transaction tran = session.beginTransaction();
+		Student temp = read(id);	
+		session.delete(temp);
+		tran.commit();
+		session.close();
+	}
+	
+	
+}
+
+9) Create an App.java to test the dao code
+package com.wipro.abcd.model;
+
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.classic.Session;
+
+public class StudentDaoImpl {
+	
+	public Session retrieveSession()
+	{
+		//create an object representation of the configuration class
+		Configuration cfg=new Configuration();
+		cfg.configure("hibernate.cfg.xml");
+		SessionFactory sf = cfg.buildSessionFactory();
+		return sf.openSession();
+	}
+	
+	public void create(Student student) {
+		Session session = retrieveSession();
+		Transaction tran = session.beginTransaction();
+		session.persist(student);
+		tran.commit();
+		session.close();
+	}
+	public void read() {
+		
+	}
+	public Student read(Integer id) {
+		Session session = retrieveSession();
+		Student student=(Student) session.get(Student.class, id);
+		return student;
+	}
+	public void update(Student student) {
+		Session session = retrieveSession();
+		Transaction tran = session.beginTransaction();
+		//find the existing row and persist it
+//		Student temp = (Student) session.get(Student.class, student.getId());		//	get method is used to find by primary key
+			//temp is a managed entity. 			student is a detached entity
+		Student temp = read(student.getId());
+		temp.setName(student.getName());
+		temp.setDateOfBirth(student.getDateOfBirth());
+//		session.persist(temp);
+//		session.save(temp);
+		session.update(temp);
+		tran.commit();
+		session.close();
+	}
+	public void delete(Integer id) {
+		Session session = retrieveSession();
+		Transaction tran = session.beginTransaction();
+		Student temp = read(id);	
+		session.delete(temp);
+		tran.commit();
+		session.close();
+	}
+	
+	
+}
+-----------------------------------------------
+Task:
+	Product
+		id
+		name
+		price
+
+
+-----------------------------------------------------
+The above project added jar files and hence the project size is huge.
+In case, if we need to change the version of hibernate, then it also needs lot of jars to remove and add.
+
+So we are going to create a maven project and do this same 
+
+1) Create a maven project
+	quick start
+2) in pom.xml
+			<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.30</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.jboss.logging/jboss-logging -->
+		<dependency>
+			<groupId>org.jboss.logging</groupId>
+			<artifactId>jboss-logging</artifactId>
+			<version>3.4.1.Final</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.30</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.2.17.Final</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.47</version>
+		</dependency>
+
+
+
+
+3) create entity class
+4) hibernate.cfg.xml
+5) entity.hbm.xml
+6) StudentDaoImp.java
+7) App.java
+	run
+
+
+Task:
+	Create the same project in maven and update the java version in pom.xml
+	run application for C R U D
+
+
+
+Task:
+	Create a maven project, the archetype is "webapp"
+	run a jsp file
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

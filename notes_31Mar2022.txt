@@ -1,0 +1,945 @@
+<<<<<<< HEAD
+
+import java.util.Scanner;
+
+public class App1 {
+
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter the marks:");
+		int marks=sc.nextInt();
+//		marks=0;					//this is a bad comment, because, we have striked out a code in java
+		if(marks<0 ||	marks>100)	//checking for invalid marks
+		{
+			System.out.println("Invalid Marks");
+		}else if(marks>=50)		//checking for pass mark
+		{
+			System.out.println("Pass");
+		}else
+		{
+			System.out.println("Fail");
+		}
+	}
+
+}
+
+
+switch case?
+	whenever you have fixed set of comparison using == operator, think about switch case
+
+example:
+	input a character from the user.
+	check if the character is a vowel or not?
+
+
+
+sc.nextChar();	//there is no such method
+
+= is for assignment
+== is for comparing equality for primitives only
+
+for comparing objects for equality, use
+	equals()
+
+
+import java.util.Scanner;
+
+public class App2 {
+
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Please enter a character:");
+		char c=sc.next().charAt(0);
+		if(c=='a' || c=='e' || c=='i' || c=='o' || c=='u')
+		{
+			System.out.println("Vowel");
+		}else
+		{
+			System.out.println("Not vowel");
+		}
+	}
+
+}
+
+
+
+
+import java.util.Scanner;
+
+public class App2 {
+
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Please enter a character:");
+		char c=sc.next().charAt(0);
+		switch(c)
+		{
+		case 'a':
+		case 'e':
+		case 'i':
+		case 'o':
+		case 'u':
+			System.out.println("Vowel");
+			break;
+		default:
+			System.out.println("Not vowel");
+		}
+	}
+
+}
+
+
+
+break
+	can be used either in
+		switch	(or)
+		loops
+
+break inside a loop will exit from the loop
+
+
+while loop
+{
+}
+
+
+
+
+
+
+
+
+public class App3 {
+
+	public static void main(String[] args) {
+		int no=10;
+		while(no++<20);
+			System.out.println(no);
+
+	}
+
+}
+
+//what will be the output?
+//a) 10 ... 19
+//b) 11 ... 19
+//c) 10 ... 18
+//d) 11 ... 20
+//e) only 20
+//f) only 19
+//g) only 21		correct
+
+
+
+
+
+
+
+
+
+
+
+public class App3 {
+
+	public static void main(String[] args) {
+		int no=10;
+		while(no++<20)
+			System.out.println(no);
+
+	}
+
+}
+
+//what will be the output?
+//a) 10 ... 19
+//b) 11 ... 19
+//c) 10 ... 18
+//d) 11 ... 20		correct
+//e) only 20
+//f) only 19
+//g) only 21	
+
+
+
+
+
+
+
+
+
+
+public class App3 {
+
+	public static void main(String[] args) {
+		int no=10;
+		do
+		{
+			System.out.println(no);
+		}while(no++<20);
+
+	}
+
+}
+
+//what will be the output?
+//a) 10 ... 20		correct
+//b) 11 ... 19
+//c) 10 ... 18
+//d) 11 ... 20		
+//e) only 20
+//f) only 19
+//g) only 21	
+
+
+
+
+
+while or do while
+there should be a loop exit condition
+
+while(condition)		the exit conditions are put here
+
+
+
+for loop
+
+
+
+
+
+		for(int no=11;no<=21;no++)
+		{
+			System.out.println(no);
+		}
+
+
+
+
+for-each
+enhanced for loop		introduced in jdk 1.5 onwards
+
+instead of ;;		we use :
+
+used with only arrays and collections
+
+
+Arrays are fixed sized collection
+Array elements are stored in memory in contigeous memory locations
+
+
+
+in c, c++ arrays are declared in different manner
+
+int arr[10];		// in c, c++		BUT IN JAVA, this is not corre gt
+
+int arr[]=new int[10];	// in java		there are always 2 steps for an array
+
+step1: (declaration)		creating a variable in stack
+	int arr[];			//ok
+	int []arr;			//ok
+
+
+step2:	(sizing)		exactly when the array is created as an object in Heap
+
+	arr=new int[10];	//notice [] used for sizing the array
+
+single step also like:
+	int arr[]=new int[10];
+
+
+another approach of creating an array just by giving values. How many values, that should be the size of the array.
+
+int []arr={20,10,44,32,29,84,387,20};
+
+
+
+
+
+import java.util.Arrays;
+
+public class App4 {
+
+	public static void main(String[] args) {
+		int []arr={20,10,44,32,29,84,387,20};
+		//to display all the elements of an array 
+//		System.out.println(Arrays.toString(arr));
+		
+		
+//		for(int i:arr)
+//		{
+//			System.out.println(i);
+//		}
+		
+		
+		for(int i=0;i<arr.length;i++)
+		{
+			System.out.println(arr[i]);
+		}
+
+	}
+
+}
+
+
+
+
+break
+continue
+
+what is the difference between break and continue?
+	break exits the loop
+	continue moves to next iteration (if the condition is true)
+what is the similarity between break and continue?
+	once a break is found, or a continue is found, the program does not move to next line.
+
+
+
+for(;;)
+{
+	...
+	...
+	...
+	break;			next few lines are there in the loop. THey are not executed.	BREAK jumps out of the loop. 
+	...
+	...	
+	continue;		next few lines are there in the loop. THey are not executed. 	CONTINUE jumps to next iteration
+	..	
+	...	
+}
+//break jumps to here.....
+
+
+
+
+Array:
+______
+can be single dimension
+or
+multi dimension
+
+int []arr;		//this is a single dimension array
+
+int[][]arr;		//this is a 2 dimension array
+
+int [][][]arr;		//this is a 3 dimension array
+
+
+
+1, 2, 3
+4, 5, 6
+7, 8, 9
+
+
+this is an example for 2 dimensional array	
+first dimension is like a row
+second dimension is like a column
+
+arr[0][0]		first row, first column		1
+
+arr[2][1]		third row, second column	8
+
+
+Arrays in java are JAGGED Array
+
+Jagged means rough surface, means uneven
+
+
+
+
+
+
+
+
+int arr[][]= {
+				{100, 200, 300},
+				{10,20,30},
+				{1,2,3}
+		};
+		
+		//look at this array. It is even. means, every row, has same number of columns.
+		
+		//this is not jagged array
+		
+
+
+
+
+
+
+
+
+
+public class App5 {
+
+	public static void main(String[] args) {
+		int arr[][]= {
+				{100, 200, 300, 400},
+				{10,20,30},
+				{1,2},
+				{55, 66, 77, 88, 99, 101}
+		};
+			//this is an example for jagged array
+		//how can we loop this array??? so that i can display all elements?
+		for(int i=0;i<arr.length;i++)
+		{
+			for(int j=0;j<arr[i].length;j++)
+			{
+				System.out.printf("arr[%d][%d]=%d\t",i,j, arr[i][j]);
+			}
+			System.out.println();
+		}
+	}
+
+}
+
+
+
++=
+-=
+*=
+/=
+%=
+
+
+a+=20;
+is similar to
+a=a+20;
+
+
+
+
+
+
+import java.util.Scanner;
+
+public class Dice1 {
+
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter Value 1:");
+		int input1=sc.nextInt();
+		System.out.println("Enter Value 2:");
+		int input2=sc.nextInt();
+		
+		int sum=input1+input2;
+		if(input1<0 || input1>6 || input2<0 || input2>6)
+		{
+			System.out.println("Invalid Input");
+//			return;//		main method has a return statement means, program terminate
+			System.exit(0);		//terminate the program from any method
+		}
+		if(input1==input2)
+		{
+			sum*=2;		//arithmetic assignment operator
+		}
+		System.out.println("The points scored is "+sum);
+	}
+
+}
+
+
+
+
+Refactoring
+	means, modify the structure of the program without affecting the logic
+
+
+
+import java.util.Scanner;
+
+public class Dice2 {
+
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter Value 1:");
+		int input1=sc.nextInt();
+		System.out.println("Enter Value 2:");
+		int input2=sc.nextInt();
+		if(input1<0 || input2<0 || input1>6 || input2>6)
+		{
+			System.out.println("Invalid Input");
+			System.exit(0);
+		}
+		int sum=input1+input2;
+		int absDiff=Math.abs(8-sum);
+		if(sum<8)
+			System.out.println(absDiff);
+		else
+			System.out.println(absDiff*2);
+
+	}
+
+}
+=======
+
+import java.util.Scanner;
+
+public class App1 {
+
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter the marks:");
+		int marks=sc.nextInt();
+//		marks=0;					//this is a bad comment, because, we have striked out a code in java
+		if(marks<0 ||	marks>100)	//checking for invalid marks
+		{
+			System.out.println("Invalid Marks");
+		}else if(marks>=50)		//checking for pass mark
+		{
+			System.out.println("Pass");
+		}else
+		{
+			System.out.println("Fail");
+		}
+	}
+
+}
+
+
+switch case?
+	whenever you have fixed set of comparison using == operator, think about switch case
+
+example:
+	input a character from the user.
+	check if the character is a vowel or not?
+
+
+
+sc.nextChar();	//there is no such method
+
+= is for assignment
+== is for comparing equality for primitives only
+
+for comparing objects for equality, use
+	equals()
+
+
+import java.util.Scanner;
+
+public class App2 {
+
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Please enter a character:");
+		char c=sc.next().charAt(0);
+		if(c=='a' || c=='e' || c=='i' || c=='o' || c=='u')
+		{
+			System.out.println("Vowel");
+		}else
+		{
+			System.out.println("Not vowel");
+		}
+	}
+
+}
+
+
+
+
+import java.util.Scanner;
+
+public class App2 {
+
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Please enter a character:");
+		char c=sc.next().charAt(0);
+		switch(c)
+		{
+		case 'a':
+		case 'e':
+		case 'i':
+		case 'o':
+		case 'u':
+			System.out.println("Vowel");
+			break;
+		default:
+			System.out.println("Not vowel");
+		}
+	}
+
+}
+
+
+
+break
+	can be used either in
+		switch	(or)
+		loops
+
+break inside a loop will exit from the loop
+
+
+while loop
+{
+}
+
+
+
+
+
+
+
+
+public class App3 {
+
+	public static void main(String[] args) {
+		int no=10;
+		while(no++<20);
+			System.out.println(no);
+
+	}
+
+}
+
+//what will be the output?
+//a) 10 ... 19
+//b) 11 ... 19
+//c) 10 ... 18
+//d) 11 ... 20
+//e) only 20
+//f) only 19
+//g) only 21		correct
+
+
+
+
+
+
+
+
+
+
+
+public class App3 {
+
+	public static void main(String[] args) {
+		int no=10;
+		while(no++<20)
+			System.out.println(no);
+
+	}
+
+}
+
+//what will be the output?
+//a) 10 ... 19
+//b) 11 ... 19
+//c) 10 ... 18
+//d) 11 ... 20		correct
+//e) only 20
+//f) only 19
+//g) only 21	
+
+
+
+
+
+
+
+
+
+
+public class App3 {
+
+	public static void main(String[] args) {
+		int no=10;
+		do
+		{
+			System.out.println(no);
+		}while(no++<20);
+
+	}
+
+}
+
+//what will be the output?
+//a) 10 ... 20		correct
+//b) 11 ... 19
+//c) 10 ... 18
+//d) 11 ... 20		
+//e) only 20
+//f) only 19
+//g) only 21	
+
+
+
+
+
+while or do while
+there should be a loop exit condition
+
+while(condition)		the exit conditions are put here
+
+
+
+for loop
+
+
+
+
+
+		for(int no=11;no<=21;no++)
+		{
+			System.out.println(no);
+		}
+
+
+
+
+for-each
+enhanced for loop		introduced in jdk 1.5 onwards
+
+instead of ;;		we use :
+
+used with only arrays and collections
+
+
+Arrays are fixed sized collection
+Array elements are stored in memory in contigeous memory locations
+
+
+
+in c, c++ arrays are declared in different manner
+
+int arr[10];		// in c, c++		BUT IN JAVA, this is not corre gt
+
+int arr[]=new int[10];	// in java		there are always 2 steps for an array
+
+step1: (declaration)		creating a variable in stack
+	int arr[];			//ok
+	int []arr;			//ok
+
+
+step2:	(sizing)		exactly when the array is created as an object in Heap
+
+	arr=new int[10];	//notice [] used for sizing the array
+
+single step also like:
+	int arr[]=new int[10];
+
+
+another approach of creating an array just by giving values. How many values, that should be the size of the array.
+
+int []arr={20,10,44,32,29,84,387,20};
+
+
+
+
+
+import java.util.Arrays;
+
+public class App4 {
+
+	public static void main(String[] args) {
+		int []arr={20,10,44,32,29,84,387,20};
+		//to display all the elements of an array 
+//		System.out.println(Arrays.toString(arr));
+		
+		
+//		for(int i:arr)
+//		{
+//			System.out.println(i);
+//		}
+		
+		
+		for(int i=0;i<arr.length;i++)
+		{
+			System.out.println(arr[i]);
+		}
+
+	}
+
+}
+
+
+
+
+break
+continue
+
+what is the difference between break and continue?
+	break exits the loop
+	continue moves to next iteration (if the condition is true)
+what is the similarity between break and continue?
+	once a break is found, or a continue is found, the program does not move to next line.
+
+
+
+for(;;)
+{
+	...
+	...
+	...
+	break;			next few lines are there in the loop. THey are not executed.	BREAK jumps out of the loop. 
+	...
+	...	
+	continue;		next few lines are there in the loop. THey are not executed. 	CONTINUE jumps to next iteration
+	..	
+	...	
+}
+//break jumps to here.....
+
+
+
+
+Array:
+______
+can be single dimension
+or
+multi dimension
+
+int []arr;		//this is a single dimension array
+
+int[][]arr;		//this is a 2 dimension array
+
+int [][][]arr;		//this is a 3 dimension array
+
+
+
+1, 2, 3
+4, 5, 6
+7, 8, 9
+
+
+this is an example for 2 dimensional array	
+first dimension is like a row
+second dimension is like a column
+
+arr[0][0]		first row, first column		1
+
+arr[2][1]		third row, second column	8
+
+
+Arrays in java are JAGGED Array
+
+Jagged means rough surface, means uneven
+
+
+
+
+
+
+
+
+int arr[][]= {
+				{100, 200, 300},
+				{10,20,30},
+				{1,2,3}
+		};
+		
+		//look at this array. It is even. means, every row, has same number of columns.
+		
+		//this is not jagged array
+		
+
+
+
+
+
+
+
+
+
+public class App5 {
+
+	public static void main(String[] args) {
+		int arr[][]= {
+				{100, 200, 300, 400},
+				{10,20,30},
+				{1,2},
+				{55, 66, 77, 88, 99, 101}
+		};
+			//this is an example for jagged array
+		//how can we loop this array??? so that i can display all elements?
+		for(int i=0;i<arr.length;i++)
+		{
+			for(int j=0;j<arr[i].length;j++)
+			{
+				System.out.printf("arr[%d][%d]=%d\t",i,j, arr[i][j]);
+			}
+			System.out.println();
+		}
+	}
+
+}
+
+
+
++=
+-=
+*=
+/=
+%=
+
+
+a+=20;
+is similar to
+a=a+20;
+
+
+
+
+
+
+import java.util.Scanner;
+
+public class Dice1 {
+
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter Value 1:");
+		int input1=sc.nextInt();
+		System.out.println("Enter Value 2:");
+		int input2=sc.nextInt();
+		
+		int sum=input1+input2;
+		if(input1<0 || input1>6 || input2<0 || input2>6)
+		{
+			System.out.println("Invalid Input");
+//			return;//		main method has a return statement means, program terminate
+			System.exit(0);		//terminate the program from any method
+		}
+		if(input1==input2)
+		{
+			sum*=2;		//arithmetic assignment operator
+		}
+		System.out.println("The points scored is "+sum);
+	}
+
+}
+
+
+
+
+Refactoring
+	means, modify the structure of the program without affecting the logic
+
+
+
+import java.util.Scanner;
+
+public class Dice2 {
+
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter Value 1:");
+		int input1=sc.nextInt();
+		System.out.println("Enter Value 2:");
+		int input2=sc.nextInt();
+		if(input1<0 || input2<0 || input1>6 || input2>6)
+		{
+			System.out.println("Invalid Input");
+			System.exit(0);
+		}
+		int sum=input1+input2;
+		int absDiff=Math.abs(8-sum);
+		if(sum<8)
+			System.out.println(absDiff);
+		else
+			System.out.println(absDiff*2);
+
+	}
+
+}
+>>>>>>> faf8dc5c43cca2ee76fda5bb9525789c44bb1c1f

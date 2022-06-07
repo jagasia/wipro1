@@ -1,0 +1,29 @@
+package com.wipro.swiggy.model;
+
+import org.springframework.orm.hibernate5.HibernateTemplate;
+
+public class FoodDaoImpl {
+	private HibernateTemplate ht;
+	public FoodDaoImpl() {
+		
+	}
+	
+	public HibernateTemplate getHt() {
+		return ht;
+	}
+
+	public void setHt(HibernateTemplate ht) {
+		this.ht = ht;
+	}
+
+	public void create(Food food)
+	{
+		
+	}
+	
+	public void read() {}
+	public void read(Integer id) {}
+	public void update(Food) {}
+	public void delete(Integer id) {}
+	
+}

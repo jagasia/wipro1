@@ -1,0 +1,171 @@
+Servlets & JSP
+------------------
+
+Session Management
+--------------------------
+	Session
+		in a web app, we login and after sometime we logout.
+		between these period we can call it as a session.
+
+		But technically, we login or not, as soon as we access the web app itself the session begins.
+		and until we close the browser 
+
+		session is retained with the help of browser cookies.
+
+
+State management scopes
+----------------------
+	Server 
+	Application		hit counter		counts the number of users accessing the application
+	Session			within the same type of browser
+	Request			lowest scope.	the information is retained only for that request.
+	Page			within the page
+
+
+getAttribute			key
+setAttribute			key, value
+
+Compare session and application
+
+in Servlet terminology, a session is represented by
+	HttpSession
+
+an application is represented by
+	ServletContext
+
+Demo:
+--------
+Session:
+one
+two
+
+Application:
+	
+
+
+
+
+
+HttpSession session = request.getSession();			//it is false by default, means, do not create a new session. use existing session
+HttpSession session = request.getSession(true);		//true means, if a session already exists, replace it with a new session
+				
+in both cases, we obtain the reference to the session
+
+Task:
+-------
+create a login page in HTML/JSP
+on submitting the form, it is sent to a servlet (FirstServlet		alias name must be "first")
+
+the first servlet accept the 
+	username
+	password
+
+store them in session attributes
+
+Create SecondServlet	(alias: second)
+	that obtain the 
+		username
+		password
+	from the session attributes
+
+Display them in the browser	
+	hint:	use response object
+
+1) Create a dynamic project
+2) login.jsp
+3) FirstServlet	(first)
+4) SecondServlet	(second)
+5) in FirstServlet
+	doGet
+		get inputs	
+			request.getParameter
+6) Store them in session
+	HttpSession session=request.getSession();
+	session.setAttribute("username",username);
+7) in SecondServlet
+	getAttributes from the session 
+	and display them using response
+
+---------------------------------------------------------------
+Demo for Application
+------------------------------
+Lets create a dynamic web project
+	create one servlet 
+		this servlet displays how many times this website is accessed.		Hit Counter
+
+
+
+From this observation, we understand that application (ServletContext) is common across different sessions
+
+
+Task:
+------
+1) create a dynamic web  project
+2) create one servlet
+3) get reference to servlet context
+	request.getServletContext
+4) check if attribute "count" is already there
+	if already there, then get the value and increment it
+	if not there, then value is 1
+5) set the new value in the application context attribute
+6) Display the hit counter 
+7) Refresh the browser and check across different browsers
+----------------------------------------------------
+Filters
+-------
+	What is a filter?
+		something that stands between
+			request and 
+			servlet
+
+every request coming to my servlet,
+	should be intercepted by this filter
+
+example:
+	suppose, you want to measure the time taken by your servlet to produce the output.
+
+	How will you measure?
+
+
+TasK
+------
+You got complaint that your servlet takes more time than expected.
+So you create a filter and prove that your servlet takes only required time
+
+@WebFilter(urlPatterns = { "/calc" }, servletNames = { "CalculatorServlet" })
+public class MyFilter implements Filter {
+
+
+urlPatterns
+	use this to specify the url patterns that are intercepted by the filter
+	other urls are not disturbed by the filter
+
+
+-------------------------------------------------
+JSP for presentation/ view
+Servlet as a controller
+JDBC for model
+
+CRUD operation for Item
+
+
+
+JSTL
+	JSP Standard Tag Library
+
+has lot of libraries
+	core
+	html
+	sql
+	
+add a jar file
+	jstl 1.2			(1.1 / 1.2)
+
+
+while adding jar files to a project,
+	if it is java project, then add the jar files to the "Java Build path"
+	but for a dynamic web project, the jar files must be copied to the WEB-INF/lib folder only
+
+
+picture is byte []
+we should convert it into Base 64 string

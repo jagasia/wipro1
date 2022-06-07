@@ -1,0 +1,327 @@
+Form Validations
+Routing
+
+Validation
+	what is validation?
+		checking whether the given data input is valid or not
+		in the input text box, i am entering data, if the data is not
+			in given range
+			in given pattern
+			in given type
+			
+
+	form validation
+		<form>
+			<input type="text" />
+		</form>
+
+	the submit button should not be enabled if the form is invalid
+
+Reactive form has lot of properties
+	value property		object representation of the entire form
+
+	status property
+
+ng serve
+	to run the project
+ng build
+	compile the project
+		ts code -> js code
+	entire project is built as a 
+		html, css, js 
+		
+	bin folder is created with the output code
+
+
+
+if any of the form controls, is invalid,
+then the entire form is invalid
+
+
+1) create a component "airline"
+	ng g c airline
+2) create a service "airline"
+	ng g s airline
+3) app.module.ts
+	import the following:
+		ReactiveFormsModule
+		HttpClientModule
+4) in service,
+	inject HttpClient to the constructor
+		constructor(private http:HttpClient) { }
+5) functions to
+	get all airlines
+	add airline
+
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AirlineService {
+
+  constructor(private http:HttpClient) { }
+
+  fnAdd(airline:any)
+  {
+    return this.http.post('https://api.instantwebtools.net/v1/airlines',airline);
+  }
+
+  fnGetAllAirlines()
+  {
+    return this.http.get('https://api.instantwebtools.net/v1/airlines');
+  }
+
+  fnFindAirlineById(id:any)
+  {
+    return this.http.get('https://api.instantwebtools.net/v1/airlines/'+id);
+  }
+}
+
+
+
+
+6) add bootstrap cdn to <head> portion of index.html
+
+7) put the scaffolding in app component
+
+8) plug the airline component in the 2nd column of app
+
+9) inject the FormBuilder to the constructor of AirlineComponent class
+
+
+
+{"id":1,"name":"Quatar Airways","country":"Quatar","logo":"https://upload.wikimedia.org/wikipedia/en/thumb/9/9b/Qatar_Airways_Logo.svg/300px-Qatar_Airways_Logo.svg.png","slogan":"Going Places Together","head_quaters":"Qatar Airways Towers, Doha, Qatar","website":"www.qatarairways.com","established":"1994"}
+
+
+required
+	mandatory field		(not optional)
+
+id
+	shoud not be negative
+
+
+every control in the form, has a "valid" property
+similarly, the entire form also has a "valid" property.
+
+
+by default, when there is no validation rule is set,
+all the controls, and hence the form has the valid property, set to true
+
+But, once any of the controls, valid property is false,
+then the form valid property also becomes false
+
+
+
+TasK:
+-------
+	in the airline.component.ts
+
+	add some validation rules for some of the controls
+
+	Validators.required
+	min
+	max
+	maxLength		text type of input
+	minLength
+
+
+Hint:
+	 id:['',[Validators.required, Validators.min(100)]],
+
+
+in html:
+	</form>
+{{airlineForm.controls.id.valid}} <br>
+{{airlineForm.valid}}
+
+
+There can be multiple validation rules for a control.
+If the control valid property is false, we are supposed to show the error message
+
+
+in angular, html code,
+<div *ngIf="true">
+    Please check the value you have entered
+</div>
+
+
+ngIf makes the control, visible only if the expression is true
+
+<div class="alert-danger" *ngIf="!airlineForm.controls.id.valid">
+    Please check the value you have entered
+</div>
+
+
+
+bootstrap class
+	has-error
+
+
+
+How would you apply a class conditionally in angular?
+	ngClass
+
+id: <div [ngClass]="{'has-error':!airlineForm.controls.id.valid}">
+    <input type="number" name="" id="" formControlName="id" class="form-control">
+</div>
+<div class="alert-danger" *ngIf="!airlineForm.controls.id.valid">
+    Please check the value you have entered
+</div>
+
+
+
+
+Task:
+Implement the following validations in the angular form:
+	id
+		min: 1
+		max: 1000
+		
+	name
+		minLength: 5
+
+	established:
+		min: 1900
+		max: 2022
+
+	
+
+
+FOR BOOTSTRAP version 4:
+
+id: <input type="number" name="" id="" formControlName="id" 
+[ngClass]="{'form-control':true,'is-invalid':!airlineForm.controls.id.valid && airlineForm.controls.id.touched}">
+<div class="alert-danger" *ngIf="!airlineForm.controls.id.valid && airlineForm.controls.id.touched">
+    Please check the value you have entered
+</div>
+
+
+
+
+
+id: <input type="number" name="" id="" formControlName="id" [ngClass]="{'form-control':true,'is-invalid':!airlineForm.controls.id.valid && airlineForm.controls.id.touched}">
+<div class="alert-danger" *ngIf="!airlineForm.controls.id.valid && airlineForm.controls.id.touched && f.id.errors.required">
+    Id cannot be blank
+</div>
+<div class="alert-danger" *ngIf="!airlineForm.controls.id.valid && airlineForm.controls.id.touched && f.id.errors.min">
+    Id must be 100 or above
+</div>
+
+
+
+pattern validation
+	using regular expresssion
+
+custom validation
+	create a function and use that function in validation
+
+
+
+-------------------------------------------------------------------------------
+Routing
+	for links, hyper links to components
+
+	remember when we created the project
+	it asked if we need routing
+		we choose "yes"
+
+	something added to the project
+
+
+		app-routing.module.ts
+
+			this is where, we create routes
+
+	we creates routes in app-routing.module.ts
+
+
+
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { AirlineComponent } from './airline/airline.component';
+import { AppComponent } from './app.component';
+
+const routes: Routes = [
+  {path:'/',component:AppComponent},
+  {path:'airline',component:AirlineComponent}
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+
+
+
+in app component, we are going to 
+	display any component in a specific location
+
+that location is decided by <router-outlet></router-outlet>
+
+
+
+
+-----------------------------------------
+Task:
+	earlier you have plugged the "airline" component into the app component.
+	now, remove that selector
+
+	create a route called "airline" in app-routing.module.ts
+
+	place a <router-outlet> in the app component
+
+	in browser, type
+		http://localhost:4200/airline
+
+	and check if you airline component is displayed in the router outlet
+
+
+
+
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/','login']">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="signup">Sign Up</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="airline">Airline</a>
+      </li>
+
+
+
+
+Task:
+	create if not already, atleast 3 components, apart from app.
+	ex:
+		login
+		signup
+		airline
+
+	create routes for these components in app-routing.module.ts
+
+	in nav bar, create router links for these components
+
+	in app component, you have a router outlet
+
+	check in browser, when you click the navbar items, the corresponding components is displayed in the router-outlet
+
+
+
+
+
+
+
+find airline by id
+
+
+
+patchValue
+	is used to patch a JSON/ object directly into the form
+
+
+
+

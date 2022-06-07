@@ -1,0 +1,355 @@
+ng if switch for	*
+templates		*
+patchValue		*
+Login/Logout	*
+life cycle concepts	*
+
+----------------------------------------------
+
+airline rest api		(dummy)
+we will be creating such rest apis using spring boot rest 
+-----------------------------
+
+PatchValue
+	when i receive an object from rest api, how i can patch that object into the reactive form?
+
+
+TasK:
+--------
+already, you have the airline form
+and 
+you have the table that displays all the airlines
+
+give hyperlink to 'id'
+and on clicking that id, it should call a function
+
+that function gets the selected  id.
+
+call the service method to find airline by id
+
+once you get the response, patch that object into the form
+
+
+--------------------------------------------------------------------------
+
+in angular,
+	a template is html code
+
+@Component({
+  selector: 'app-airline',
+  templateUrl: './airline.component.html',
+  styleUrls: ['./airline.component.css']
+})
+
+templateUrl
+	instead of this templateUrl, we can use "template" alone
+
+		`this is not a single quote`
+	this symbol is found in keyboard left side of 1		and above tab
+
+
+
+----------------------------------------------------------------
+ng if switch for
+
+ngFor
+ngIf
+
+else part??????
+
+switch???????
+
+
+Task:
+
+
+1) in html
+	<div *ngIf="isLoggedIn;else loggedOut">
+    You have logged in!
+</div>
+
+<ng-template #loggedOut>
+    You have logged out
+</ng-template>
+
+2) in .ts file		declare the following variable
+
+	isLoggedIn:boolean=false;
+
+
+------------------
+
+<ng-container
+      *ngIf="isLoggedIn; then logIn; else logOut">
+    </ng-container>
+
+    <ng-template #logIn>
+        Hello, Admin
+    </ng-template>
+
+    <ng-template #logOut>
+        Please Signin
+    </ng-template>
+
+
+-----------------------
+
+<ul [ngSwitch]="superhero">
+  <li *ngSwitchCase="'Groot'">Groot</li>
+  <li *ngSwitchCase="'Ironman'">Ironman</li>
+  <li *ngSwitchCase="'Hulk'">Hulk</li>
+  <li *ngSwitchCase="'Thor'">Thor</li>
+  <li *ngSwitchCase="'Spiderman'">Spiderman</li>
+  <li *ngSwitchDefault>Batman</li>
+</ul>
+
+
+
+---------------------
+Life cycle
+
+implements OnInit
+	ngOnInit
+
+implements OnChanges
+	
+  ngOnChanges(changes: SimpleChanges): void {
+    throw new Error('Method not implemented.');
+  }
+
+
+implements DoCheck
+	  ngDoCheck(): void {
+    throw new Error('Method not implemented.');
+  }
+
+
+
+
+------------------------------
+Login
+Logout
+
+
+you have use a variable, whose value changes between
+	login and logout
+
+status:string='Login';
+
+{{status}}
+
+if the user login is success, we should change the status to "Logout"
+
+
+routes
+	login
+	logout
+
+so in output we can change this into title case
+
+{{status | titlecase}}
+
+---------------------------------------------------End Angular module-----------------------
+once we complete spring rest, we will come to angular again to access rest api from angular
+
+=============================================
+"Working with Spring Core, Spring MVC, Create RESTful APIs using Spring Stack, Implementing Data Persistence with Hibernate/JPA, IOC, AOP 
+Working with NoSQL - MongoDb Spring Boot and Microservices"
+
+1) Spring Core
+	we created web applications using servlets, jsp
+	servlets are not POJO classes
+		derived from a super class	HttpServlet 
+		doGet
+		doPost
+
+	EJB
+		Enterprise Java Beans
+	
+		containers provide
+			generic services
+				security
+				persistence
+				scalability	
+				transaction management
+				life cycle management
+
+		these are generic services that are common for any project
+
+		these services were taken care by EJB container. So programmer is allowed to focus only on the application specific services
+
+	What is a life cycle management?
+		imagine if you create a web application like "Facebook"
+		how many people access facebook at a point of time?
+		number is huge. so if for 1 user, 1 object is created, then for millions of users, millions of objects created.
+		Now, the server sometimes will not be able to create those many objects.
+
+		suppose, if there is an instance pool of size 100
+		100 objects 
+			100 users are accessing
+
+		when 101st user access our application
+		what happen?
+
+		life cycle management 
+			choses 1 of the most idle instance and
+			passivate that object
+				means, the instance state, is preserved in secondary storage and that object space if freed so that new user can get an object
+
+			when that idle user becomes active,
+			activate the object
+				means, again find an idle user, passivate that object, now, you got an object space, 
+				from secondary storage, the object state is obtained and new object is created and filled with the state
+
+		life cycle management includes
+			creation of object
+			passivation
+			activation
+			destroy
+
+these are done by the EJB container automatically.
+	that makes the application scalable.
+
+Those who learnt EJB, knows that it is complex
+	EJB is seen like a winter season
+
+	Spring framework is introduced like "Spring" season of EJB
+
+
+Spring framework modules:
+	Spring core
+	Spring AOP
+	Spring MVC
+	Spring REST
+	
+all these modules can be done in spring/ spring boot
+
+spring boot works above the spring framework
+
+object creation is the one important thing we observe in spring core
+
+A class can have objects of another class in itself. we call it as dependency
+
+class Car
+{
+	Engine engine=new Engine();	//in real world, engine is tightly coupled with the car. We cannot replace the engine
+	Audio audio;		//audio is loosely coupled. We can replace the audio
+	public Car(){}
+
+	public Car(Audio audio)
+	{
+		this.audio=audio;		//are you able to see a dependency injection here?
+	}
+
+	public void setAudio(Audio audio)
+	{
+		this.audio=audio;		//are you able to see a dependency injection here?
+	}
+}
+
+//technically, 
+	Engine is a class
+	Audio is an interface		//when Audio is an interface, i can initialize it with object of any class that implements Audio interface
+
+
+There are 2 ways, i can inject audio into the Car
+	i) using constructor	(with argument)
+	ii) using setter
+
+So Dependency injection is implemented in 2 ways
+	constructor based injection
+	setter based injection
+
+
+Autowiring
+	spring framework has IOC container that can automatically inject the dependencies
+
+
+IOC
+	Inversion of Control
+
+		When i manufacture the car,
+		i do not decide the audio.
+		I give that control to the user
+
+add spring jar files
+
+Lets create a "java project" and add the spring jar files
+
+1) we add spring jar files
+2) create a configuration file
+	bean.xml 
+	(or)
+	applicationContext.xml
+3) we will define a class as a bean
+4) we can get Bean instance from ioc container	
+	instead of creating object by ourselves		we wont use "new" operator to create object of bean
+
+	if you create object of bean by yourself, then you have to take care of life cyle management (like activation, passivation)
+
+
+
+---------------------------------
+henceforth, we will create maven projects only
+
+Maven
+	is a project build tool
+
+	instead of adding jar files to the project,
+	we will add dependencies
+
+maven has a centralized repository
+	https://mvnrepository.com/
+
+all the jar files are present there
+
+when we use dependencies, those jars are downloaded to
+	our local repository
+
+where is local repository?
+
+Lets install maven:
+-----------------------
+1) download apache maven
+	this is a zip file, unzip to a known location 
+https://dlcdn.apache.org/maven/maven-3/3.8.5/source/apache-maven-3.8.5-src.zip
+2) in environment variables
+	path
+		append the maven path		(REMEMBER, DO NOT ERASE THE PATH VARIABLE)
+
+
+	
+
+	
+----------------
+1) Lets create a maven project
+2) notice the pom.xml			Project Object Model
+	
+
+
+the bean scope is by default "Singleton"
+the bean scope can be 
+	singleton 	(or)
+	prototype
+
+
+Singleton means, 
+	there exists only one object for a class
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var jsondata = {
+    title: 'Top 5 JavaScript ES6 Features',
+    Details: {
+        date: {
+            created: '2017/09/19',
+            modified: '2017/09/20',
+        },
+        Category: 'JavaScript',
+    },
+    url: '/top-5-es6-features/'
+};
+    var {title,Details:{date:{created,modified},Category},url}=jsondata;
+    console.log(title);
+    console.log(url);
+    console.log(modified)
+    console.log(Category);
+    console.log(created);
+
+    </script>
+</body>
+</html>

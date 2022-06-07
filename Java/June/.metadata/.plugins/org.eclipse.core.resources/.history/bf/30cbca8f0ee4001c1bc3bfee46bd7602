@@ -1,0 +1,23 @@
+package com.wipro.swiggy;
+
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.wipro.swiggy.model.Food;
+import com.wipro.swiggy.model.FoodDaoImpl;
+
+public class App {
+
+	public static void main(String[] args) {
+		
+		Food food=new Food(null, "Fried rice", "Dinner", 150.0f);
+		
+		ClassPathXmlApplicationContext ctx=new ClassPathXmlApplicationContext("bean.xml");
+		FoodDaoImpl fdao=(FoodDaoImpl) ctx.getBean("fdao");
+		fdao.create(food);
+//		fdao.update(food);
+//		fdao.delete(57);
+		
+		System.out.println("Hello world");
+	}
+
+}

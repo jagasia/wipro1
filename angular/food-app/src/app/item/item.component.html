@@ -1,0 +1,15 @@
+<form [formGroup]="itemForm">
+    Id: <input type="number" name="" id="" formControlName="id" class="form-control">
+    Name: <input type="text" name="" id="" formControlName="name" class="form-control">
+    Price: <input type="number" name="" id="" formControlName="price" class="form-control">
+    <!-- Category: <input type="text" name="" id="" formControlName="category" class="form-control"> -->
+    Category: <select name="" id="" formControlName="category" class="form-control">
+        <option *ngFor="let c of categories" [value]="c">{{c}}</option>
+    </select>
+    Picture: <input type="file" name="" id="" formControlName="picture" class="form-control" (change)="onFileChanged($event)">
+    <br>
+    <input type="button" value="Add" class="btn btn-success" (click)="addItem()">&nbsp;
+    <input type="button" value="Update" class="btn btn-warning" (click)="updateItem()">&nbsp;
+    <input type="button" value="Delete" class="btn btn-danger" (click)="deleteItem()">    
+</form>
+<br>

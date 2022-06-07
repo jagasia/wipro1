@@ -1,0 +1,404 @@
+Spring modules
+	core
+	aop
+	mvc
+
+Spring MVC project
+-------------------------
+What is MVC?
+	Model View Controller 		pattern/ architecture
+
+Model
+	any code that defines data
+	any code that access data
+	entity classes in this package
+	If suppose, there is a table in db called "EMPLOYEE". Then there is a class called "Employee". We call it as ORM.
+	Employee class is inside model package.	it is a model class because it defines the data		Data Definition is rdbms
+	If suppose, there is a class called EmployeeDao, that contains, methods to add/modify/delete/retrieve data 
+	This is called as data access. And you will put EmployeeDao class inside model package.
+View
+	any code that accepts input
+	any code that displays output
+	in console applications, we write main method to get input using Scanner, to put output using System.out.println 
+	all these are views
+	in web applications, JSP/ HTML files are used to get input or display output. 
+	all these are view
+	web UI/ Front end
+Controller
+	Controller is used to allow views, to access model from anywhere using web
+	usually a controller is a web controller.
+	Controllers provide URL using which the views can access the controller from anywhere in the world
+	if controller is not there, then view and model still can access but only when they are in the same machine
+	
+	A controller allows views to access it by using URLs
+
+MVC architecture	Servlets were used even as view and also controllers
+MVC2 architecture	JSP is used for view and Servlet is used for controller
+
+MVC2 is now MVC
+
+What is spring boot mvc?
+--------------------------------
+	we will now move from spring to spring boot.
+
+Understand the difference between Spring and Spring Boot:
+-----------------------------------------------------------------------
+Spring boot is not a different framework. Spring boot works on the Spring framework. That means, whatever we learnt in spring framework, can be used in Spring boot framework also.
+
+you used bean.xml, 
+you used annotations,
+you used @ComponentScan
+so many things, like
+	JdbcTemplate
+	HibernateTempate
+all these are supported by Spring boot also.
+
+But most of them are not necessary because,
+	Spring boot suggests "Convention" over "Configuration"
+
+Convention means, guidelines/ advice/ suggestion
+if you follow those conventions, then you do not need to configure the same.
+
+For example:
+	Why do we use @ComponentScan annotation?
+		@ComponentScan(basePackage="com")
+
+	Because, we specify the package folder that contains the beans
+	But in spring boot, this annotation is not necessary. (means, we can use it, but not compulsory)
+		because, if you put all the beans/ components inside the base package, it is convention that we follow. So we dont need to configure
+	But if we create some beans/components, in entire different package/ location, then we must configure the base package using @ComponentScan
+
+application.properties
+	spring boot configurations are done easily in a text configuration file with key-value pair
+
+Spring boot provides starter dependencies
+	lot of dependencies are clubbed together as a single dependency
+
+Annotations are clubbed together for multi purpose. Semantic annotations
+	@Component
+	@Service
+		is a kind of @Component
+	@Repository
+		is a kind of @Component
+
+	@SpringBootApplication
+		is a kind of @SpringBootConfiguration
+			is a kind of @Configuration 		(and also many other annotations)
+
+In spring boot, we do not need eclipse/sts/intellij IDE to create a project
+	we can create a project from spring initializr
+		start.spring.io
+
+we can download, unzip, import the project into any IDE
+or even work without IDE and build the application using maven commands.
+
+Basically a spring boot application is a maven project			we can choose between maven/gradle
+
+1) go to start.spring.io
+2) choose "Maven" from the options (maven/gradle)
+3) Language:
+	java
+4) Spring boot version, (no need to change)
+5) enter the 	
+	group id		com.wipro.hrms
+	artifact id		may05-mvc-1
+6) packaging
+	war		(war = web archive. Choose this if your project has JSP/ HTML)
+7) java
+	8
+8) dependencies
+	spring web
+9) Click "Generate" Button
+
+TasK:
+	Create a spring boot project using spring initializr
+
+10) go to downloads folder
+	and unzip the downloaed zip file
+
+11) copy the folder to your workspace.
+	if you have forgotten where is your current workspace
+		just create a java project, there below type your project name, you can find the location
+12) File -> Import
+	existing maven projects
+		next
+			Root Directory....................... you can pase the location here or (click browse button and choose the unzipped project)
+13) you should see "pom.xml" directly
+	click finish
+
+NOW, the project is found in your eclipse/ sts
+
+go to pom.xml and understand that 
+	there are starter dependencies
+
+go to src/main/java folder
+	here, (if your project name is "demo", then DemoApplication.java will be there)
+
+You can see "main" method in this class
+
+A spring boot application is basically as java project that has main method.
+Even if we create web application, there is a main method
+
+inside main methid, put System.out.println("Hello world")
+
+ctrl+F11
+run as "Java Application"
+
+
+i am getting an error stating "Web server failed to start. Port 8080 was already in use."
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+
+how to identify the process that's listening on port 8080?
+	Go to cmd prompt and type:
+		netstat -aon
+
+	this will list all the processes running in your computer with port number and PID
+
+  TCP    0.0.0.0:8080           0.0.0.0:0              LISTENING       4872
+
+in my computer, 8080 port is used by a process, whose PID is 4872
+
+i have just created the project, and i run this project, why do i get error that 8080 is in use?
+we choose .war as packaging. Hence it is a web application. 
+Java web a pplication runs in 8080 port by default.
+
+Now, what if 8080 is used by some process, that we should not terminate?
+we can change the port number of our choice for our spring boot application.
+steps:
+	go to src/main/resources
+		application.properties
+			server.port=8081
+
+
+Now run the project
+	Tomcat started on port(s): 8081 (http) with context path ''
+
+
+-----------------------------------------
+So far we have created a spring boot application.
+Now, how to configure the application as a MVC project?
+
+Steps to create MVC project?
+
+1) create a spring boot application (choose war as packaging)
+	we have already completed this step.
+2) go to application.properties
+	spring.mvc.view.prefix=/WEB-INF/views/
+	spring.mvc.view.suffix=.jsp
+		------------------------------
+	this means, in a controller, if i say "hello", then it will be prefixed and suffixed as
+
+	/WEB-INF/views/hello.jsp
+
+	this is how it will be understood
+
+3) lets create the folders
+	find the "src" folder		(not the src/main/java)
+	under src/ main/ webapp
+		right click and create folder as "WEB-INF/views"
+
+4) inside "views" folder, create following jsp files		(if not found, go inside "others" and choose "JSP File" option only)
+	i) index
+	ii) login
+
+----------------------------------------------------------
+5) index.jsp		inside <body> tag
+	Welcome to my home  page		
+
+6) login.jsp			inside <body> tag
+	Login Page
+
+----------------------
+7) lets create the controller class
+	in any mvc project, there will be an invisible "Dispatcher Servlet". Spring framework provides this servlet. 
+	This servlet will receive all the requests coming and decide, which method of controller should be called.
+
+Right click the base package	(it is right under "src/main/java" folder)
+	create a new class
+		package name: DO NOT CHANGE
+		class name:		MyController
+
+8) annotate the class with @Controller annotation
+	do not type completely. Type only a portion and use ctrl+space	so that it will import the package automatically
+
+9) inside the class
+package com.example.demo;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+package com.example.demo;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class MyController {
+	
+	@GetMapping("/")
+	public String home()
+	{
+		return "index";
+	}
+	
+	@GetMapping("/login")
+	public String showLoginPage()
+	{
+		return "login";
+	}
+}
+
+
+10) Restart the project
+
+11) open a browser and type
+	http://localhost:8081
+
+you see an error in console as follows:
+	
+	"Path with "WEB-INF" or "META-INF": [WEB-INF/views/index.jsp]"
+
+solution:
+
+12) go to pom.xml
+	inside dependencies tag:
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+		</dependency>
+
+13) now restart the project
+	goto
+		http://localhost:8081
+
+			Welcome to my home page
+
+
+----------------------------------------------------------------------------------------------------
+Task:
+-------
+1) create a spring boot application names
+	may02-mvc-2
+2) in pom.xml
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+		</dependency>
+
+3) in application.properties
+
+server.port=8083
+
+spring.mvc.view.prefix=/WEB-INF/views/
+spring.mvc.view.suffix=.jsp
+
+4) create the folder under "webapp" folder
+	WEB-INF/views
+
+5) create couple of jsp files
+	ex:
+		index.jsp
+		login.jsp
+6) write something inside these jsp files
+
+7) create a controller class
+	right click the base package under src/main/java
+
+	@Controller annotation on the class
+8) create couple of methods
+	that return "index"
+	and "login"
+
+	use get mapping with different url
+
+9) run the project as "Java Application" or "spring boot app"
+
+10) check the browser using the url
+	localhost:8082/login
+
+----------------------------------------------------------
+JSP file
+---------
+	can contain complete HTML code. PLUS WE CAN ADD JAVA CODE also
+
+But it is not professional way to write java code in JSP, it is always good to use custom tags or JSTL tags
+
+Demo:
+	Login page should accept username and password.
+	If username and password are same, then "Login is successful" else "Failed"
+
+display the result in result.jsp
+
+---------------------------------------
+Task:
+You have already created a MVC project that has
+	index.jsp
+	login.jsp
+
+Now, create one more jsp file "result.jsp"
+
+in index.jsp,
+	put a hyperlink
+		Click here to login
+
+"here" should have the hyperlink to "/showLoginPage"		(ensure that the controller has "showLoginPage" getmapping
+
+that will show login page.
+
+the login page to have 
+	username
+	password
+
+and submit button
+
+form method = post and action should be "validateLogin"			(ensure that the controller has "validateLogin" post mapping
+
+the controller validateLogin should check if username and password are same. Then result is "success". Else, "failure".
+Store the status in a variable in model map and redirect to result.jsp
+
+The "result.jsp" should display the status
+
+
+<FORM METHOD="GET">
+or
+<FORM METHOD="POST">
+
+what is the difference?
+	GET is used for getting data from the server.
+	GET allows us to use the URL in browser address bar
+
+so, the home page is usually GET mapping
+		@GetMapping("/")
+	public String home(ModelMap model)
+	{
+		model.addAttribute("name", "Siva");
+		return "index";
+	}
+
+why it is getmapping?
+	if you use it as post mapping, then we cannot access this url from browser's address bar
+
+
+	@PostMapping("/validateLogin")
+	public String validateLogin(AuthRequest authRequest, ModelMap model)
+consider the above post mapping, if you type in browser's address bar, "/validateLogin", it is not allowed
+There was an unexpected error (type=Method Not Allowed, status=405).
+
+POST is secure.
+	in address bar of the browser, it will not show the data. User will not even see the change
+
+Try one thing.
+	change the form method to GET and also change PostMapping to GetMapping in controller
+
+http://localhost:8083/validateLogin?username=jag&password=jag
+
+the username and password are visible in browser's address bar. This is why GET mapping is not secure
+now change them back to post mapping and observe:
+
+
+
+

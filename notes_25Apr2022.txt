@@ -1,0 +1,230 @@
+Angular
+---------
+	going to learn Spring boot RESTful webservice (REST API/ microservices)
+
+	we should be able to integrate angular project with microservices
+
+	in that case, the front end part. ie, UI forms must be able to map to the java entity classes
+
+	when i submit a form in angular, html form, it should be sent to microservices as an object (JSON)
+
+To be able to do this seemlessly, we need to create forms that are easily converted into objects.
+
+PRODUCT table in db
+in java, 
+Product.java
+
+	class Product
+	{
+		id
+		name
+		price
+	}
+
+you know jdbc where a method accepts Product object and the code will store the record in the table in the db
+
+basically, we need to send an object of product from
+	the product form
+
+
+Id:........................
+Name:.......................
+Price:..........................
+
+buttons 	Add	Update	Delete
+
+
+earlier, we imported "FormsModule" in app.module.ts file.
+
+Now, i am going to import "ReactiveFormsModule" in app.module.ts
+	this will represent a form as an object (JSON)
+
+
+
+apr25-reactive-demo
+	is the project
+
+	cd apr25-reactive-demo
+
+	code .
+
+	ng serve -o
+
+	localhost:4200/
+
+
+
+Product
+	id
+	name
+	price
+
+
+lets create a new component "product"
+	ng g c product
+	ng generate component product
+
+
+
+whenever we work on reactive forms, we start from .ts
+
+	create a form group in .ts and then
+	create a html form in .html file
+
+
+TasK:
+-------
+	Create an employee component
+	plug the component into app component
+
+	an employee should have 
+		id
+		firstName
+		lastName
+		salary
+
+	create employeeForm as a form group and
+	map the members to the form controls
+
+	display the employee form as JSON below the form
+
+
+-----------------------------------------------------------
+there are fake rest apis available
+	dummy
+
+	https://api.instantwebtools.net/v1/airlines
+
+once we learn next modules like spring boot, we will be able to create rest apis like above
+
+HTTP methods
+	GET		retrieving records
+	POST		add record
+	PUT		update record
+	DELETE		delete records
+
+
+
+create a service
+	a class 
+	
+	ng g s airline
+	ng generate service airline
+
+
+in the constructor of service class, inject the http client
+
+	import "HttpClientModule" in the app.module.ts
+
+
+
+REST api
+	somebody has already completed the backend portion of the project
+	they allow us to 
+		add
+		update
+		delete
+		get all records
+		get record by id
+
+	all these operations they allow us to do using
+		URL
+
+
+at this moment, what you need to understand about REST API is?
+	i am creating a html form for getting input for adding an airline to the existing database (somewhere in server)
+	when i click add button, i am just going to use an url to store the data in their db. This is allowed by REST API
+
+
+
+lets create a airline component
+	ng g c airline
+
+
+when i click add button, a typescript function should be called
+
+
+
+1) airline.service.ts
+	in this service, we are going to access rest apis
+
+	for this, inject "httpClient" to the constructor	(already we have imported HttpClientModule in app.module.ts)
+
+2) in airline.component.ts
+	in constructor
+		inject the service
+
+
+
+---------------------------
+check this url
+https://api.instantwebtools.net/v1/airlines/98765432
+
+
+
+
+we are able to add an airline into the rest api
+	bcos they allowed us to do so
+
+	
+Task:
+-------
+	Create 
+		i) airline service
+		ii) airline component
+	
+	add button to click
+		and that should add an airline to the rest api
+
+
+
+
+velocity@rpsconsulting.in
+
+
+
+Now, that we are able to add an airline to the rest api.		CREATE
+we are going to retrieve all airlines from the rest api.		READ
+
+GET	https://api.instantwebtools.net/v1/airlines
+
+
+for adding, we used POST mapping
+
+for reading, we use GET mapping
+
+anything that access the rest api is in service
+	so we go to
+		airline.service.ts
+	and create one more method that will get 
+
+	when call this get emthod, i will get an array of airline objects
+	so, i need to capture the result in an array
+
+
+
+--------------------------------------
+Task:
+1) create grid component
+2) plug this component below the first row
+	create another row of divs		give more propotion of the column width to 2nd column
+3) in grid component ts,
+	declare an array 	"airlines"
+4) constructor injection of 
+	AirlineService
+5) in init method
+	use the airline service object to get all airlines and store it in array
+
+6) in grid html
+	create a table
+7) in <tr> use for each loop for array of airlines
+
+Display the table with
+	image for logo
+	website to have hyperlink
+
+
+
+
+
+

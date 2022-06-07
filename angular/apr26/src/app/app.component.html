@@ -1,0 +1,52 @@
+<div class="jumbotron text-center">
+  <h1>My First Bootstrap Page</h1>
+  <p>Resize this responsive page to see the effect!</p> 
+</div>
+<app-menu></app-menu>  
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      
+    </div>
+    <div class="col-sm-4">
+      <app-airline></app-airline>
+    </div>
+    <div class="col-sm-4">
+      
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-8">
+    <table class="table table-bordered table-striped table-hover">
+      <thead>
+          <tr>
+              <th>Id</th>
+              <th>Name</th>
+              <th>Country</th>
+              <th>Logo</th>
+              <th>Slogan</th>
+              <th>Head Quaters</th>
+              <th>Website</th>
+              <th>Established</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let a of airlines">
+              <td>{{a.id}}</td>
+              <td>{{a.name}}</td>
+              <td>{{a.country}}</td>
+              <!-- <td><img width="100" src="{{a.logo}}" alt=""></td> -->
+              <td><img width="100" [src]="a.logo" alt=""></td>
+              <td>{{a.slogan}}</td>
+              <td>{{a.head_quaters}}</td>
+              <!-- <td><a href="{{a.logo}}"> {{a.website}}</a></td> -->
+              <td><a [href]="a.logo"></a></td>
+              <td>{{a.established}}</td>
+          </tr>
+      </tbody>
+  </table>
+  </div>
+  <div class="col-sm-2"></div>
+</div>

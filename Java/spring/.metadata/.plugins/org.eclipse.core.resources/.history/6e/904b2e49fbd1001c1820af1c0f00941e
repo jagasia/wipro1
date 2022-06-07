@@ -1,0 +1,42 @@
+package com.wipro.hrms.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.wipro.hrms.api.ProductApi;
+import com.wipro.hrms.entity.Product;
+
+@Controller
+public class ProductController {
+	@Autowired
+	private ProductApi api;
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/show")
+	public String showProductPage(@ModelAttribute("product") Product product)
+	{
+		return "product";
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "dmlProduct", params = "add")
+	public String addProduct(@ModelAttribute("product") Product product)
+	{
+		api.addProduct(product);
+		return showProductPage(product);
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "dmlProduct", params = "update")
+	public String updateProduct(@ModelAttribute("product") Product product)
+	{
+		api.updateProduct(product);
+		return showProductPage(product);
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "dmlProduct", params = "delete")
+	public void deleteProduct(@ModelAttribute("product") Product product)
+	{
+		api.deleteProduct(product.getId());
+	}
+}

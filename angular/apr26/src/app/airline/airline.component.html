@@ -1,0 +1,39 @@
+        <form [formGroup]="airlineForm">
+            <!-- id: <div [ngClass]="{'has-error':!airlineForm.controls.id.valid && airlineForm.controls.id.touched}">
+                <input type="number" name="" id="" formControlName="id" class="form-control has-error">
+            </div> -->
+            id: <input type="number" name="" id="" formControlName="id" [ngClass]="{'form-control':true,'is-invalid':!airlineForm.controls.id.valid && airlineForm.controls.id.touched}">
+            <div class="alert-danger" *ngIf="!airlineForm.controls.id.valid && airlineForm.controls.id.touched && f.id.errors.required">
+                Id cannot be blank
+            </div>
+            <div class="alert-danger" *ngIf="!airlineForm.controls.id.valid && airlineForm.controls.id.touched && f.id.errors.min">
+                Id must be 100 or above
+            </div>
+            
+            name: <input type="text" name="" id="" formControlName="name" [ngClass]="{'form-control':true,'is-invalid':!f.name.valid && f.name.touched}">
+            <div class="alert-danger" *ngIf="!f.name.valid && f.name.touched && f.name.errors.required">
+                Name cannot be blank
+            </div>
+            <div class="alert-danger" *ngIf="!f.name.valid && f.name.touched && f.name.errors.minlength">
+                Name must be atleast 5 characters
+            </div>
+            country: <input type="text" name="" id="" formControlName="country" class="form-control">
+            logo: <input type="text" name="" id="" formControlName="logo" class="form-control">
+            slogan: <input type="text" name="" id="" formControlName="slogan" class="form-control">
+            head_quaters: <input type="text" name="" id="" formControlName="head_quaters" class="form-control"> 
+            website: <input type="text" name="" id="" formControlName="website" class="form-control">
+            established: <input type="number" name="" id="" formControlName="established" [ngClass]="{'form-control':true,'is-invalid':!f.established.valid && f.established.touched}">
+            <div class="alert alert-danger" *ngIf="f.established.errors.required && f.established.touched">
+                Established cannot be blank
+            </div>
+            <div class="alert alert-danger" *ngIf="f.established.errors.min && f.established.touched">
+                Established can be between 1900 and 2022 only
+            </div>
+            
+            <br>
+            <input type="submit" value="Add" class="btn btn-success">
+            </form>
+            {{airlineForm.controls.id.valid}} <br>
+            {{airlineForm.valid}}
+            <br><br><br><br><br><br><br>
+    

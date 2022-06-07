@@ -1,0 +1,267 @@
+Servlets & JSP
+----------
+
+Reminder: to discuss
+JSP basics
+drop down list	
+radio button
+checkbox
+AJAX
+------------------
+
+JSP
+	scriplet
+		is any java code directly embedded into a JSP file
+
+		<% 		%>
+
+<form method="POST">
+
+because, GET does not support sending files
+and for sending files, we need multipart configuration
+
+
+<form method="POST" action="item" enctype="multipart/form-data">
+
+the form sends the file as multipart.
+
+request.getPart();
+
+i am using mobile data. There is a power cut. Power will resume i believe.
+
+
+
+every option to check if it is matching with the session "category"
+
+<option selected>
+
+
+Task:
+------
+let me upload this project in a separate git repository.
+You download and run the project
+
+Create the table
+	Item
+		id		int primary key
+		category		varchar(50)
+		name		varchar(50)
+		price		double
+		picture		longblob
+		
+Run the project, add couple of food menu items and share your screen and show me
+
+
+This week, you have only MCQ
+
+HTML
+CSS
+Javascript
+JQuery
+Servlet
+
+
+in servlet, to obtain a value from session
+	session.getAttribute
+
+yesterday, we changed some property to see
+	output in browser as a plain text
+
+then changed it to html
+
+contentType
+
+in servlet
+	response.setContentType("text/html");
+
+if we change it, to xls or doc
+
+then it will download as xls file or word file
+
+There are listeners that can notify		HttpSessionAttributeListener
+when
+	session attribute is created
+	session attribute is removed
+	session attribute is replaced
+
+
+SessionListener		sessionCreated	sessionDestroyed
+HttpSessionAttributeListener
+ServletContextListener
+ServletContextAttributeListener
+
+
+
+web.xml	is called as Deployment Descriptor file
+
+
+jsp
+	include and forward
+
+if you stay in current jsp file and pull another jsp content,
+	include
+
+if you redirect to another jsp, 
+	forward
+
+How do you define a Filter?
+	Filter intercepts the folow of request and response between the Servlets
+
+Session management technique
+	server side
+		session
+		application
+
+	client side
+		cookies
+		url rewriting / query string			?key=value
+		hidden fields
+
+
+A class that extends HttpServlet and annotated with WebServlet
+A servlet can be configured using web.xml or annotation
+A servlet can have multiple url mappings
+
+
+
+
+
+destroy method is called only once in the life cycle of a servlet
+
+
+
+<servlet>
+	<servlet-name></servlet-name>
+	<servlet-class></servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name></servlet-name>
+	<url-pattern></url-pattern>
+</servlet-mapping>
+
+
+
+
+
+Filter
+	doFilter(request, response, filterChain)
+
+
+a servlet context listener
+	contextInitialized, contextDestroyed
+
+
+
+ServletFilter
+
+
+who maintains the life cycle of a servlet
+	create
+	destroy
+
+Container
+----------------------------------
+
+JSP
+	a jsp file is translated into a servlet at run time.	JSP is a convenient way of writing servlets
+
+Scriplet		<%	%>		we can write any java code here
+Declaration	<%!	%>		it will declare the variable at servlet class level
+Directives		<%@	%>		page, taglib, include			(only 3 directives)
+Comment		<%-- 	--%>
+Expression		<%=	%>		displays the output		out.print()
+
+
+<%=20; %>		out.print(20;);	DO NOT USE SEMICOLON IN EXPRESSION
+
+
+Action tags
+
+<jsp:forward
+
+<jsp:include
+
+<jsp:useBean
+
+
+
+drop downlist
+<select name="category">
+	request.getParameter("category");
+
+similar to a text box
+
+
+<select>
+	<option value="a">A</option>
+
+if value is not mentioned, whatever displayed is considered
+
+
+Radio button
+
+	how can we capture the radio button value?
+
+
+<form action="my">
+Gender: 
+<input type="radio" id="rdoFemale" name="gender" value="Female" > <label for="rdoFemale">Female</label>
+<input type="radio" id="rdoMale" name="gender" value="Male" > <label for="rdoMale" >Male</label>
+<input type="radio" id="rdoOther" name="gender" value="Other" > <label for="rdoOther" >Other</label>
+<input type="submit" value="Submit" />
+</form>
+
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String gender=request.getParameter("gender");
+		response.getWriter().print(gender);
+	}
+
+
+
+How to work with checkboxes?
+Check boxes allow us to do multi select
+
+so, we should get an array of values in the servlet
+
+Task:
+
+Create a JSP file with 
+	radio button and check box
+
+The servlet should be able to display the values
+	selected in the radio and the check boxes
+
+
+again due to power cut, i am in mobile data, so 
+voice will  break.
+
+AJAX
+--------
+	Asynchronous Javascript And Xml
+
+2007
+
+the ability of a Javascript code to call a server side script, asynchronously
+
+basically, 
+	the servlet is called only when i submit the form.
+
+	but if i select an option is dropdownlist?
+	when type something?
+	when focus is received,
+	when blur (focus lost)
+
+all these events, are client side events.
+
+These events can call a javascript function only.
+
+so, in jsp, form, when i select a dropdownlist, 
+can we call servlet????????
+	with AJAX, yes!
+
+
+
+
+
+

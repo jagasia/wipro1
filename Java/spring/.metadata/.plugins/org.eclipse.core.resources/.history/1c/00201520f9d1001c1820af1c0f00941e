@@ -1,0 +1,8 @@
+package com.wipro.hrms.api;
+
+import org.springframework.cloud.openfeign.FeignClient;
+
+@FeignClient(name = "productApi",url = "http://localhost:8383/product")
+public interface ProductApi {
+
+}

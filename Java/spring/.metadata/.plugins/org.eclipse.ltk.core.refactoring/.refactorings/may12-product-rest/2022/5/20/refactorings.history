@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;Product.java&apos; to &apos;may12-product-mvc/src/main/java/com.wipro.hrms&apos;&#x0D;&#x0A;- Original project: &apos;may12-product-rest&apos;&#x0D;&#x0A;- Destination element: &apos;may12-product-mvc/src/main/java/com.wipro.hrms&apos;&#x0D;&#x0A;- Original element: &apos;com.wipro.hrms.entity.Product.java&apos;" description="Copy compilation unit" destination="=may12-product-mvc/src\/main\/java&lt;com.wipro.hrms" element1="/src\/main\/java&lt;com.wipro.hrms.entity{Product.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1652362861823" units="1" version="1.0"/>
+</session>

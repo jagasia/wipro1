@@ -1,0 +1,20 @@
+package com.wipro.swiggy;
+
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.wipro.swiggy.model.Food;
+
+public class App {
+
+	public static void main(String[] args) {
+		
+		Food food=new Food(null, "Paratta", "Dinner", 15.0f);
+		
+		ClassPathXmlApplicationContext ctx=new ClassPathXmlApplicationContext("bean.xml");
+		
+		
+		
+		System.out.println("Hello world");
+	}
+
+}

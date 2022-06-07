@@ -1,0 +1,258 @@
+Spring core
+Spring aop
+yesterday, we learnt JdbcTemplate
+today, we learn to use HibernateTemplate
+
+Hibernate
+	is ORM framework
+	data definition
+	data access
+
+Spring framework provides 
+	HibernateTemplate
+
+for this, we have to add couple of dependencies in pom.xml file.
+	Spring ORM
+	Hibernate
+
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-orm</artifactId>
+	<version>5.2.7.RELEASE</version>
+</dependency>
+
+<dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-core</artifactId>
+    <version>5.2.2.Final</version>
+</dependency>
+
+
+Hibernate allow us to define entity classes
+	what is an entity class?
+		a class that is mapped to a table in the database.		
+		ORM	Object Relational Mapping
+
+	in xml configuration, we can define an entity (or)
+	in annotation, we can define an entity		@Entity
+
+	Hibernate is capable of creating the tables based on the entity classes.	it will write SQL CREATE statement to create table
+	Hibernate is capable of insert, update, deleting the records in the table.	it will write SQL DML statements to manipulate the records
+
+
+HibernateTemplate
+	is a class. We mark it as a bean in our configuration file
+
+	there is a dependency called SessionFactory
+	
+SessionFactory
+	provides the details required by hibernate to access the database.
+	When hibernate is going to write the queries, which SQL will it use?
+		because, there are different SQL languages available.		MySql, Oracle SQL, MS SQL, IBM DB2
+
+	we need to specify the "Dialect"
+	we need to specify many other properties like
+			show sql
+			format sql
+
+	session factory, has a dependency	called "DataSource"
+
+DataSource
+	this is where we specify the
+		driverClassName
+		url
+		username
+		password
+
+
+all these must be defined as "Bean"
+
+How can we use HibernateTemplate?
+	we an autowire ( inject ) it into a Dao class/ Dao Impl class
+
+Demo:
+--------
+	lets create a new database "wipro3"
+
+	so new database, does not have any table 
+
+when i run my project, this hibernate is going to create the tables
+	how do you specify that hibernate should/ should not create the table
+		ddl auto property is used to specify that.		Specify that in session factory
+
+
+create database wipro3;
+use wipro3;
+
+
+lets create a maven project "apr29-hibernate-1"
+
+in bean.xml
+	DataSource		(DriverManagerDataSource)
+	SessionFactory
+		define Branch as a annotated class
+	HibernateTemplate
+	BranchDao
+	
+
+@Entity				//marks that this class is an entity class and going to be a table in the database
+public class Branch
+
+what will be the name of the table?
+	BRANCH will be the name of the table.
+
+If i want a different name for the table?
+
+@Entity
+@Table(name="BRANCHES")
+public class Branch
+
+
+what are the columns that will be created?
+	if 	bid, bname, bcity are the properties in the class, then they will become the columns also.
+
+Hibernate / JPA repository, definitely needs an ID
+	id means, primary key
+	unique identifier
+
+@Entity
+@Table(name="BRANCHES")
+public class Branch
+{
+	@Id			//use this on primary key
+	private String bid;
+	private String bname;
+	@Column(name="branch_city")		//use @Column annotation if you want a different column name 
+	private String bcity;
+}
+
+
+
+1) 
+	     <dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-context</artifactId>
+    <version>5.2.7.RELEASE</version>
+</dependency>
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-context-support</artifactId>
+    <version>5.2.7.RELEASE</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>5.1.47</version>
+</dependency>
+      <dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>5.2.7.RELEASE</version>
+		</dependency>
+
+<dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-core</artifactId>
+    <version>5.2.2.Final</version>
+</dependency>
+
+
+2) create an entity class
+	Branch.java
+
+package com.wipro.hrms.model;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class Branch {
+	@Id
+	private String bid;
+	private String bname;
+	private String bcity;
+
+	public Branch() {
+	}
+
+	public Branch(String bid, String bname, String bcity) {
+		super();
+		this.bid = bid;
+		this.bname = bname;
+		this.bcity = bcity;
+	}
+
+	public String getBid() {
+		return bid;
+	}
+
+	public void setBid(String bid) {
+		this.bid = bid;
+	}
+
+	public String getBname() {
+		return bname;
+	}
+
+	public void setBname(String bname) {
+		this.bname = bname;
+	}
+
+	public String getBcity() {
+		return bcity;
+	}
+
+	public void setBcity(String bcity) {
+		this.bcity = bcity;
+	}
+
+	@Override
+	public String toString() {
+		return "Branch [bid=" + bid + ", bname=" + bname + ", bcity=" + bcity + "]";
+	}
+
+}
+
+
+----------------------------------
+i will  push this project to git
+download  the project
+run this first
+	it will create the BRANCH table in your wipro3 database
+
+Task:
+	create one more entity to the project
+		i have created an entity class "Branch"
+		you will create an entity class "Employee"
+			id
+			firstName
+			lastName
+			salary
+
+	define this Employee in bean.xml under "annotatedClasses"
+	create an EmployeeDao class
+	and define this in bean.xml as a bean with ht as a dependency
+
+
+
+
+wipro1\Java\spring\apr29-hibernate-11
+
+remember the "spring" folder
+
+
+what is the difference between 
+	persist and save methods?
+
+persist is used when we give a detached entity that does not id. (when id is autogenerated)
+if we supply and object with id (new id) for persist, it will get error saying "detached entity"
+ detached entity passed to persist: com.wipro.hrms.model.Employee
+persist is a void method
+save returns the id that is generated automatically
+
+save is used when we add an entity, save returns the newly generated id value		Serializable
+	when someone places order. The order id is auto generated. But they need to be informed that "Your order is placed, kindly note the order id"
+
+

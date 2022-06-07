@@ -1,0 +1,13 @@
+package com.wipro.hrms;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class May12ProductMvcApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(May12ProductMvcApplication.class, args);
+	}
+
+}
