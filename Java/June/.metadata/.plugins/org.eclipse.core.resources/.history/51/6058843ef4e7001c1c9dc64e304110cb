@@ -1,0 +1,5 @@
+package com.wipro.ecom.config;
+
+public class MyConfiguration {
+
+}

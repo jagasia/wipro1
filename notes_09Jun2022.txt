@@ -1,0 +1,31 @@
+Yesterday we created a spring mvc project
+	lets continue from there
+
+Signup form when submitted, it should redirect to OTP page
+
+if you want to send email from a java program,
+	then gmail should allow "Less secure app access"
+	this is normally OFF
+	we have to turn it on.
+
+login to gmail 
+
+manage my account
+	search:	less secure app access
+
+
+1) xml
+2) annotation
+
+annotation is your choice
+
+<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.47</version>
+		</dependency>
+<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>5.2.7.RELEASE</version>
+		</dependency>

@@ -1,0 +1,85 @@
+package com.wipro.ecom.controller;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.wipro.ecom.entity.User;
+
+@Controller
+public class MyController {
+	@RequestMapping("/")
+	public String home()
+	{
+		return "index";
+	}
+	
+	@RequestMapping("/signup")
+	public String signup()
+	{
+		return "signup";
+	}
+	
+	@RequestMapping("/home")
+	public String home1()
+	{
+		return "index";
+	}
+	
+	@RequestMapping("/login")
+	public String showLoginPage()
+	{
+		return "login";
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "/two")
+	public String two(User user, HttpServletResponse response, ModelMap model)
+	{
+		System.out.println(user);
+		
+		return "otp";
+	}
+	
+	
+	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+}

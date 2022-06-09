@@ -28,7 +28,7 @@
     	Confirm Password:<input type="password" class="form-control" name="cpassword" />
     	Email:<input type="email" class="form-control" name="email" />
     	First Name:<input type="text" class="form-control" name="firstName" />
-    	Last Name:<input type="text" class="form-control" name="lastName" /><br/>
+    	Last Name:<input type="text" class="form-control" name="lastName" /><br/>    	
     	<input type="submit" value="Sign Up" class="btn btn-success" />&nbsp;<input type="reset" value="Reset" class="btn btn-warning" />
     </form>
     </div>

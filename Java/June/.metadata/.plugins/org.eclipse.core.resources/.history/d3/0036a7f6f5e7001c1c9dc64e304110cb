@@ -1,0 +1,20 @@
+package com.wipro.ecom.model;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
+
+@Component
+public class UserDaoImpl {
+	@Autowired
+	private JdbcTemplate jt;
+	
+
+	public void create() {}
+	public void read() {}
+	public void read() {}
+	public void update() {}
+	public void delete() {}
+	
+	
+}
