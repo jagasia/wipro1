@@ -2,15 +2,27 @@ package com.wipro.ecom.model;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
 
-@Component
+
 public class UserDaoImpl {
-	@Autowired
 	private JdbcTemplate jt;
 	
+	public UserDaoImpl() {}
+	
+	
+
+	public JdbcTemplate getJt() {
+		return jt;
+	}
+
+
+
+	public void setJt(JdbcTemplate jt) {
+		this.jt = jt;
+	}
+
+
 
 	public int create(User user) {
 		return jt.update("INSERT INTO user_master VALUES(?,?,?,?,?",user.getUsername(), user.getPassword(), user.getEmail(), user.getFirstName(), user.getLastName());

@@ -1,0 +1,374 @@
+Spring boot
+----------------
+Yesterday we learnt to create a spring boot application
+and run it in command prompt
+
+[ERROR] No compiler is provided in this environment. Perhaps you are running on a JRE rather than a JDK?
+
+
+Solution:
+	In eclipse/sts
+		window
+			preferences
+				java 
+					installed JREs
+						if JRE is found there, add the JDK
+							Standard JVM
+								choose directory where JDK is present
+---------------------------------------------------------------------------------------------------------------------------
+Spring boot
+	MVC
+	REST
+	Security	JWT
+
+
+MVC
+	complete project
+		FRONT END	(view)
+		BUSINESS	(controller)
+		BACKEND	(data)
+
+
+we have seen the mvc project in spring already
+spring boot mvc
+	minimal steps and configuration
+
+web.xml
+	dispatcher servlet
+	url pattern		/
+spring-servlet.xml	(if the name of the dispatcher servlet is "spring")
+	view resolver
+		prefix and suffix
+	component scan
+		base package
+
+In spring boot
+	just configure prefix and suffix in 
+		application.properties
+
+	create the folders		WEB-INF/views
+
+	create the controller
+		if you create controller in the 
+			base package or its sub package
+		you dont need to configure the 
+			component scan
+	
+
+
+Spring boot MVC
+1) create a project using spring initializr
+	spring web
+2) application.properties		(src/main/resources)
+	spring.mvc.view.prefix=/WEB-INF/views/
+	spring.mvc.view.suffix=.jsp
+3) since we have specified the prefix, we need to create these folders
+	and inside WEB-INF/views folder, create the jsp files
+4) create the controller class
+	in spring boot, we can create any bean
+		directly insisde the base package
+		(or)
+		inside sub package of base package
+
+	what is base package?
+		the package that contains Application class
+
+Error:
+	"Path with "WEB-INF" or "META-INF": [WEB-INF/views/index.jsp]"
+
+	add the following dependency:
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+		</dependency>
+5) http://localhost:8080/
+
+	you will see the output
+
+
+
+Task:
+	Create a spring boot MVC project
+	and run a hello world message
+
+
+ModelAndView
+ModelMap
+
+
+We are using a controller
+	the controller is a POJO class	(there is no super class or implementing any interface)
+	but there is a servlet in the background
+		Dispatcher Servlet
+
+	So, if controller has a method
+		and that method has a paramter
+		who is going to pass the value to that parameter?
+			Dispatcher servlet is going to do that
+
+	There can be parameters of type
+		HttpServletRequest
+		HttpServletResponse
+		HttpSession
+		ServletContext	(application)
+
+		ModelMap
+		ModelAndView
+
+	(all the above parameters must be pushed to the end of the argument list)
+
+ModelMap
+	this represent the model 
+	map means, key-value pair
+
+	if we store some entry in model map,
+	it can be used by the JSP file
+
+	@GetMapping("/")
+	public String home(ModelMap model)
+	{
+		model.addAttribute("name", "Raja..");
+		return "index";		//it is automatically translated into /WEB-INF/views/index.jsp
+	}
+
+
+
+
+ModelAndView
+	is an object that encapsulates both model and view
+
+	Model means data
+	View means, page		(jsp page/ html page)
+
+
+@GetMapping("/")
+	public ModelAndView home(ModelAndView mv)
+	{
+		mv.addObject("name", "Raja Sivakumar..");		//this is model
+		mv.setViewName("index"); 			//this is view
+//		return "index";		//it is automatically translated into /WEB-INF/views/index.jsp
+		return mv;
+	}
+
+
+
+	@GetMapping("/")
+	public ModelAndView home()
+	{		
+		ModelAndView mv=new ModelAndView();
+		mv.addObject("name", "Raja Sivakumar..");		//this is model
+		mv.setViewName("index"); 			//this is view
+//		return "index";		//it is automatically translated into /WEB-INF/views/index.jsp
+		return mv;
+	}
+
+
+
+
+@RequestParam("id")
+	request.getParameter("id");
+
+ex:
+	in the index.jsp
+		we shall have a form
+
+		Number 1: 
+		Number 2: 
+
+
+
+
+
+
+
+	@GetMapping("/add")
+	@ResponseBody			//why do we use @ResponseBody annotation?
+	public String add()
+	{
+		return "Adding"; 		//there should be "Adding.jsp" file But i am going to print "Adding" as a content
+	}
+
+
+If a method uses @ResponseBody annotation, then
+	the method returns the "content" that will displayed in browser, instead of returning the "view"name
+
+@Controller
+	in a controller, every method returns "view" name only.
+	but when we use @ResponseBody annotation, the method returns the content that will be displayed in browser
+
+-------------------------------------------
+Task:
+
+create a spring boot mvc project
+login.jsp
+	User Name:
+	Password:
+
+on submit, the output should be 
+
+You have entered <<username>> and <<password>>
+
+hint:
+	the controller method can use 
+		@RequestParam("username") String username, @RequestParam("password") String password
+
+
+
+
+So far we have used the following annotations:
+
+@Controller
+@GetMapping
+@PostMapping
+@ResponseBody
+@RequestParam
+
+ModelAndView
+ModelMap
+
+
+
+@GetMapping
+	is similar to
+		@RequestMapping(method=RequestMethod.GET)
+
+----------------------------------------------------------
+	@GetMapping("/showLogin")
+	public String showLogin()
+	{
+		return "login";
+	}
+
+the above is equivalent to
+
+	@RequestMapping(method = RequestMethod.GET, value = "/showLogin")
+	public String showLogin()
+	{
+		return "login";
+	}
+
+
+---------------------
+In MVC project,
+	@RequestMapping is very useful
+
+1) especially when we use multiple submit buttons
+2) in any type of controller,
+	@RequestMapping is useful for base URL mapping
+
+
+
+To understand mutliple submit buttons,
+Task:
+
+Number 1:
+Number 2:
+	Add	Subtract		Multiply
+
+have multiple submit buttons and do the
+respective operations on submit
+
+Display the result in the same page
+
+----------------------------------------
+in case of servlets:
+
+<form action="calculate">
+	<input type="number" name="no1" /><br/>
+	<input type="number" name="no2" /><br/>
+	<input type="submit" value="Add" name="btn" />
+	<input type="submit" value="Subtract" name="btn" />
+	<input type="submit" value="Multiply" name="btn" />
+</form>
+
+
+
+request.getParameter("no1");		
+request.getParameter("no2");	
+request.getParametr("btn");	//returns "Add" or "Subtract" or "Multiply"	based on which button we clicked
+THe above is ok for servlet. But not for controller
+
+------------------------------------
+
+
+<form action="calculate">
+	<input type="number" name="no1" /><br/>
+	<input type="number" name="no2" /><br/>
+	<input type="submit" value="Add" name="add" />
+	<input type="submit" value="Subtract" name="subtract" />
+	<input type="submit" value="Multiply" name="multiply" />
+</form>
+
+
+-----------------------------------------------------------------------
+in a table there are lot of firstname
+
+firstname
+-------------
+Raja
+Siva
+Kumar
+Ravi
+Sundar
+Jag
+
+
+how will you display all the firstname that ends with 'a'
+query:
+	SELECT firstname FROM Employee WHERE firstname LIKE '%a'
+
+		Raja
+		Siva
+			
+
+
+in hibernate, which configuration file will contain
+all database information?
+
+	hibernate.cfg.xml		database information
+	student.hbm.xml		this contains only mapping information about student table and student class
+
+
+
+DAO stands for what?
+
+in spring configuration
+
+<bean id="" class="" scope="prototype">
+
+what is the default scope of bean is "singleton"
+
+
+what are the classes you will use while working with hibernate
+
+SessionFactory
+Session
+Transaction
+
+open a session in hibernate
+
+config.buildSessionFactory().openSession()
+
+none
+
+
+How will you write transaction
+
+Transaction tx=session.beginTransaction();
+
+session has lot of methods
+
+session.persist()
+session.save();
+session.load();
+session.remove()
+
+
+
+which join discards unmatched objects of either side
+	
+
+What is HttpServlet?
+	abstract class
+	interface
+	concrete class

@@ -1,0 +1,6 @@
+INDEX VERSION 1.131+D:\Jag\wipro\wipro1\wipro1\Java\springboot\.metadata\.plugins\org.eclipse.jdt.core
+2887922835.index
+464807178.index
+985368829.index
+1814808278.index
+2512486342.index
