@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy package &apos;com.wirpo.hrms.entity&apos; to &apos;jun14-security-jpa-demo-1/src/main/java/com.wirpo.hrms&apos;&#x0D;&#x0A;- Original project: &apos;jun13-jpa-finder-1&apos;&#x0D;&#x0A;- Destination element: &apos;jun14-security-jpa-demo-1/src/main/java/com.wirpo.hrms&apos;&#x0D;&#x0A;- Original element: &apos;jun13-jpa-finder-1/src/main/java/com.wirpo.hrms.entity&apos;" description="Copy package" destination="=jun14-security-jpa-demo-1/src\/main\/java&lt;com.wirpo.hrms" element1="/src\/main\/java&lt;com.wirpo.hrms.entity" flags="589830" fragments="1" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyPackages" stamp="1655216701983" version="1.0"/>
+</session>

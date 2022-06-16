@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://ws.hrms.wipro.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://ws.hrms.wipro.com" xmlns:intf="http://ws.hrms.wipro.com" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+
+   <wsdl:message name="sumRequest">
+
+      <wsdl:part name="i" type="xsd:int">
+
+      </wsdl:part>
+
+      <wsdl:part name="j" type="xsd:int">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="sumResponse">
+
+      <wsdl:part name="sumReturn" type="xsd:int">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="differenceResponse">
+
+      <wsdl:part name="differenceReturn" type="xsd:int">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="productRequest">
+
+      <wsdl:part name="i" type="xsd:int">
+
+      </wsdl:part>
+
+      <wsdl:part name="j" type="xsd:int">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="differenceRequest">
+
+      <wsdl:part name="i" type="xsd:int">
+
+      </wsdl:part>
+
+      <wsdl:part name="j" type="xsd:int">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="productResponse">
+
+      <wsdl:part name="productReturn" type="xsd:int">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="CalculatorImpl">
+
+      <wsdl:operation name="sum" parameterOrder="i j">
+
+         <wsdl:input message="impl:sumRequest" name="sumRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:sumResponse" name="sumResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="difference" parameterOrder="i j">
+
+         <wsdl:input message="impl:differenceRequest" name="differenceRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:differenceResponse" name="differenceResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="product" parameterOrder="i j">
+
+         <wsdl:input message="impl:productRequest" name="productRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:productResponse" name="productResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="CalculatorImplSoapBinding" type="impl:CalculatorImpl">
+
+      <wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="sum">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="sumRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.hrms.wipro.com" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="sumResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.hrms.wipro.com" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="difference">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="differenceRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.hrms.wipro.com" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="differenceResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.hrms.wipro.com" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="product">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="productRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.hrms.wipro.com" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="productResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.hrms.wipro.com" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="CalculatorImplService">
+
+      <wsdl:port binding="impl:CalculatorImplSoapBinding" name="CalculatorImpl">
+
+         <wsdlsoap:address location="http://localhost:8080/jun16-soap-1/services/CalculatorImpl"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

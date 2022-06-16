@@ -2,6 +2,8 @@
 <section name="Workbench">
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="D:\Softwares\Spring\Spring_Security\fb-demo-1"/>
+			<item value="D:\Softwares\Spring\Spring_Security\GCP\jag-demo-1"/>
 			<item value="D:\Jag\wipro\wipro1\wipro1\Java\springboot\jun09-boot-1"/>
 		</list>
 		<list key="projectNameTemplate">
@@ -12,5 +14,9 @@
 			<item value="[groupId].[artifactId]-[version]"/>
 			<item value="[name]"/>
 		</list>
+	</section>
+	<section name="org.eclipse.m2e.core.pom.overview">
+	</section>
+	<section name="org.eclipse.m2e.core.pom.dependencies">
 	</section>
 </section>

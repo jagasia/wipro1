@@ -1,0 +1,162 @@
+Spring Framework
+-----------------------
+1) custom finder methods
+2) find by multiple fields
+
+Spring data JPA
+
+
+Customer
+	id
+	password
+	firstName
+	lastName
+	dateOfBirth
+	email
+	contact
+
+
+jpa repository
+@Repository
+public interface CustomerRepository extends JpaRepository<Customer, String>
+{
+
+}
+
+
+without defining any methods inside this repository,
+	we have finder method
+		findById	(it works with any primary key. 		sometimes, username is the key. then findById means finding by username)
+			in our example, primary key is "id"	so findById		works for id	(coincidence)
+what about finding customers by other properties
+	findByFirstName
+	findByLastName
+	findByDateOfBirth
+
+
+findBy
+	is common
+
+-------------------------------------------
+When i add new methods to CustomerRepository,
+how do i test those methods?
+
+Normally, in a java project, 
+	i can create object of any class and call the methods and test them.
+
+now, in spring, 
+	we don't create objects, we getBean from the IOC Container
+
+we get bean using
+	xml configuration or
+	annotation configuration
+
+but in spring boot, it is complex.
+
+Proper way of testing the beans in spring boot:
+	use junit testing
+
+
+go to 
+	src/test/java
+
+
+
+
+findBy
+	any of the properties of the entity class is possible.
+-----------------------------------------
+Task:
+	1) Create a spring boot application
+		spring web
+		spring data jpa
+		mysql driver
+	2) Entity class
+		have atleast 5 properites
+	3) Repository interface extends JpaRepository
+	4) go to src/test/java
+		create the test for 
+			findById
+			findByX
+				X can be any of the properties of entity class
+
+
+------------------------
+2) find by multiple fields
+	findByFirstNameAndLastName
+
+And
+Or
+Not
+	are keywords
+
+firstName 
+lastName
+	are fields
+
+in java methods, every word first letter is capitalized
+
+
+only for unusual requirements, we should use query.
+
+
+@Query
+	in jpa,
+		we are querying the entities (not the tables)
+
+
+from Customer
+	is a query that returns all entities as a List<Customer
+
+from Customer c where c.firstName LIKE '%a';
+
+	all the customers first name that ends with a
+
+
+
+Task:
+	find by multiple fields
+
+		in repository,
+			create finder methods that search based on multiple fields
+			use:	And / Or
+
+
+
+MVC
+	everything
+		model, view, controller
+
+REST api
+	model and controller		(no view ie., not front end, UI, screens)
+
+
+To dynamically change the UI in jsp,
+we need to use JSTL core tag library
+
+<c:if>
+	some part are displayed conditionally
+
+
+ModelMap
+	model is scoped only for that request and response.
+
+	if you move to some other url, that is a new request. Model is expired.
+
+	I want to remember the user in every page. So the scope should be "session"
+
+HttpSession
+
+
+"Welcome" should be visible only if "customer" object is found in the session.	(mean, only when logged in)
+
+TasK
+---------
+In mvc project,
+	once the user has logged in successfully, the "customer" object must be stored in session.
+	if session attribute "customer" is not null, then "Welcome <<firstName>>!" must be displayed in the header.
+	else, welcome message entirely is removed
+
+	Login (or) Logout option should be displayed based on the login status.
+
+

@@ -1,0 +1,249 @@
+Webservices
+	SOAP
+	RESTful
+
+What is a web service?
+	type of api
+
+api
+	application programming interface
+		always stands between 2
+		client & web component
+
+	if we want to create a web component, then Servlets & JSP are web components
+
+	how do web service differs from web component?
+
+When there is Servlet, JSP, then why do we need Web service?
+
+	web component runs in the server
+
+Before 2001
+----------------
+There were lot of applications developed using different programming languages
+But they were not interoperable.
+
+Today, we are developing a REST api in java spring boot.
+And from Angular, we are able to access the REST api.
+
+Today, we are able to develop a REST api in DotNet
+and from react/ angular, we are able to access the rest api.
+
+In fact, from spring boot mvc project, i am able to access a rest api (that was created in dotnet).
+
+This is TODAY.
+
+But before 2001,
+	interoperability was not there.
+
+Applications developed in different languages,
+	running in different platforms,
+	cannot interact with other applications, developed in different languages, running in different platforms
+
+So, the problem was the applications were developed in such a way, they are converted into binary and the binary is different for java/ dotnet etc
+
+Why we need interoperability?
+	There are lot of code been developed by
+	different enterprises.
+	The enterprises are integrated and hence
+		enterpise applications need to be integrated
+		EAI	Enterprise Application Integration
+
+	ICICI bank ATM card used in SBI ATM machine	(integrated)
+
+VISA
+Master card
+
+Example for EAI
+
+	BookMyShow app allows payment using
+		Credit cards
+		Debit cards
+		Net banking
+		UPI
+	
+
+
+Interoperability
+	is the ability to allow other applications to
+	access our web component
+
+problem is 
+	our web component is developed in java
+	then applications developed other than java
+	could not be able to access them
+
+to be frank,
+	there is a method in our web component
+	from dotnet program, a method should call our method.	THIS IS THE REQUIREMENT
+
+not possible because of the difference in platform and language.
+
+To be able to achieve this,
+	the data transfer from and to must be in a standard format
+
+
+that standard was decided to be XML standard
+by World Wide Web Consortium	(w3c)
+
+XML was introduced in 1999
+
+in 2001, w3c recommended xml as a standard for web
+
+web services are introduced
+	amazingly, web services created in one language, running in a platform, CAN BE ACCESSED FROM any program running in any platform.
+this is interoperability
+
+2001	SOAP webservices
+
+What is SOAP
+	Simple Object Access Protocol
+		the message sent from client to the web service
+		and
+		the message received from webservice to the client
+
+		both are in SOAP format
+
+soap message
+	envelope
+		header	(optional)
+		body
+
+
+XSD
+	XML Schema Definition
+
+WSDL
+	Web Services Description Language
+
+once a webservice is created, a documentation is automatically created.
+WSDL is the documentation
+
+if you got the webservice URL,then	append ?WSDL		you will get the DOCUMENTATION
+http://localhost:8080/abcd?WSDL
+
+SOAP webservice standards:
+	HTTP
+	XML
+	SOAP
+	UDDI
+		Universal Description, Discovery and Integration
+			registry to register the webservices. And clients can discover the webservices from the registry
+
+
+
+
+SOAP means xml formatter
+	the data is sent and received in xml format
+
+in rest api,
+	default is 	text/json
+	but rest api, supports many type of formatters
+
+How to create a soap webservice?
+using eclipse/ sts.
+
+There are 2 approaches.
+	Bottom Up Approach
+		we have the code.
+		from the code, we need to generate web service
+
+	Top Down Approach
+		we have WSDL 
+		from that we need to generate the webservice
+
+
+Bottom Up Approach:
+---------------------------
+1) we create a dynamic web project.
+2) create a java class that has business methods
+	example:
+		CalculatorImpl
+			add
+			subtract
+			multiply
+
+3) extract an interface for this impl class
+		Calculator 
+4) right click the project
+	add -> new -> web service
+5) choose approach
+	bottom up 
+6) choose the interface "Calculator"
+
+---------------------------
+Use eclipse for SOAP webservice demo:
+Task:
+1) create a dynamic web project
+2) create a impl class
+3) extract interface from the impl class
+4) RIGHT click project
+	create -> new -> web service
+	bottom up approach
+		select the impl class
+5) next -> finish
+	if prompted, "Start server"
+6) go to the client project generated
+	open the service locator class
+7) copy the  address and paste in brower
+	http://localhost:8080/jun16-soap-2/services/CalculatorImpl?WSDL
+
+8) APPEND 
+	?WSDL to the url
+
+
+--------------------------------------------
+http://localhost:8080/jun16-soap-2/services/CalculatorImpl?WSDL
+
+Let the web service be running.
+DO NOT STOP that
+
+We can create one more project
+	JAVA Project
+
+a web service can be called from any type of project
+
+To call a webservice,
+	first obtain a proxy of the webservice
+	How?
+
+Right click the project
+	add -> new -> web service client
+
+--------------------------------------
+Task:
+
+For the web service we have created,
+lets create a java project
+that acts as a client
+
+right click project
+	create new web service client
+		use the WSDL url
+	use the proxy to call the web service methods
+
+
+SOAP webservice
+	methods
+		parameter
+			datatypes
+
+
+Those data types must be compliant to the W3C specifications
+
+
+
+Employee
+	int
+	String
+	float
+Student
+Product
+
+webservice is created in one language
+is accessed from many other languages
+
+JAX-RPC 1.1 specification
+
+json
+json array

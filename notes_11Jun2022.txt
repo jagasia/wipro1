@@ -1,0 +1,430 @@
+Spring Boot
+---------------
+Spring mvc project
+
+since we have hibernate in our syllabus, we are supposed to use that also in our MVC projects
+
+pure hibernate
+	hibernate.cfg.xml
+	hibernate mapping	
+		entity.hbm.xml
+	or
+		annotations
+			@Entity
+			@Id
+			@Table
+			@Column
+
+In Spring framework, the support of hibernate
+	HibernateTemplate
+	
+
+
+@RequestBody		mostly used in REST		when we send information to controller not by URL
+			in post man we send the JSON in the body
+@ResponseBody
+@RequestParam
+@PathVariable		sent in URL		http://localhost:8080/employee/1		{id}
+@ModelAttribute		to map the form to an object of a class
+			patch an object to the form
+@Valid			form validation
+@RequestMapping
+		@GetMapping
+		@PostMapping
+		@PutMapping
+		@DeleteMapping
+
+Validations
+
+Throughout the entire project, the URLs must be unique
+
+@Controller
+@RequestMapping("/one")
+public class One
+{
+	@GetMapping
+	public String home()
+	{
+		return "index";
+	}
+}
+
+@Controller
+@RequestMapping("/two")
+public class Two
+{
+	@GetMapping		//not allowed
+	public String home()
+	{
+		return "index";
+	}
+}
+
+
+http://localhost:8080/one/
+http://localhost:8080/two/
+
+
+
+
+@RequestMapping(method = RequestMethod.GET, value = "/calculate", params = "add")
+	public String add(@RequestParam("no1") Integer no1, @RequestParam("no2") Integer no2, ModelMap model)
+	{
+		int result=no1+no2;
+		model.addAttribute("no1",no1);
+		model.addAttribute("no2",no2);
+		model.addAttribute("result",result);
+		return "index";
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/calculate", params = "subtract")
+	public String subtract(@RequestParam("no1") Integer no1, @RequestParam("no2") Integer no2, ModelMap model)
+	{
+		int result=no1-no2;
+		model.addAttribute("no1",no1);
+		model.addAttribute("no2",no2);
+		model.addAttribute("result",result);
+		return "index";
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/calculate", params = "multiply")
+	public String multiply(@RequestParam("no1") Integer no1, @RequestParam("no2") Integer no2, ModelMap model)
+	{
+		int result=no1*no2;
+		model.addAttribute("no1",no1);
+		model.addAttribute("no2",no2);
+		model.addAttribute("result",result);
+		return "index";
+	}
+
+HOW IS IT POSSIBLE FOR 3 Methods to have the same URL?
+	possible because, their "params" is different
+
+
+
+@Controller
+@RequestMapping("/employee")
+public class EmployeeController
+{
+	@GetMapping
+	public....
+
+
+	@PostMapping
+	public ........
+
+	@PutMapping
+	....................
+}
+
+How is it possible for 3 methods to have same URL?
+	possible because, their http mapping is different.
+		one is GetMapping
+		next is PostMapping
+		next is PutMapping
+
+
+url is same but http method is different. OK
+
+-------------------------
+
+@Controller
+@RequestMapping("/employee")
+public class EmployeeController
+{
+	@GetMapping
+	public....
+
+	@GetMapping("/{id}")
+	public ......
+
+}
+
+
+both are get mapping. But URL is different
+	there is a path variable		{id}
+
+
+
+Demo:
+-----------
+Lets create a Spring boot MVC project that covers
+	Customer		adding a new row to this table is called as sign up		
+	Login		to validate the username and password and remember the user till logout
+	Product		admin can add product
+	Order		customers place order
+
+
+Customer
+	id	
+	password
+	firstName
+	lastName
+	dateOfBirth
+	email
+	contact		String			+91-9488029292
+
+		if you use mobile number as int, then it will not allow first digit as 9
+
+Have we ever used H2 database???????'
+	we will use now.
+		What is the advantage of using H2 database?
+			it is in memory database.
+
+When we complete the project. we will deploy it to AWS
+	project can be deployed.
+	but what about the database?
+		we have to create db separately in AWS	(RDS		Relational Database Service)
+		once the db is create din AWS, the URL, username, password
+		all needs to be updated in our project		application.properties
+			it was localhost:3306 earlier, now it will be replaced by AWS url
+
+	but in case of H2, the db is a part of our .jar file itself
+
+
+so if we deploye the project, then it is enough.
+
+But the drawback of in-memory database is
+	it is volatile. When the server is restarted, the data is LOST.
+	it is in-memory that means it is in memory. So no suitable for large volume of transactions.
+
+This demo is to create a spring boot MVC project using H2 database
+
+
+Hibernate framework
+HibernateTemplate	(spring)
+JpaRespository	(spring boot)
+		CrudRepository
+		PagingAndSortingRepository
+
+Demo:
+	jun11-mvc-jpa-h2-1
+		spring web
+		spring data jpa
+		h2
+		devTools
+
+
+
+whenever we add the "spring data jpa" dependency, 
+	without configuring the database information, we cannot run the project
+	but now, since the database chosen in H2, it runs. How, because of autoconfiguration
+
+H2 can be
+	in-memory db
+	(or)
+	file system db		(this is permanent. the records exist across server restarts. the file will be present in your project folder)
+
+
+
+TasK:
+--------
+1) Create a spring boot app
+	jun11-mvc-h2-1
+		choose the dependencies
+			spring web
+			spring data jpa
+			h2
+			devTools
+2) in application.properites:
+
+server.port=5000
+spring.datasource.url=jdbc:h2:mem:jag
+#spring.datasource.url=jdbc:h2:file:./data/sampledata
+spring.datasource.driverClassName=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=password
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+
+
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+
+
+
+3) Run the project
+
+4) go to 
+	localhost:5000/h2
+
+5) Login using the 
+	URL
+	username	
+	password
+		as per application.properties
+-----------------------------------------
+entity
+	Customer
+		id
+		password
+		firstName
+		lastName
+		dateOfBirth
+		email
+		contact
+repository
+service
+controller
+	rest api controller
+	is different from
+	mvc controller
+
+in mvc controller
+	the methods return "view"
+in rest contoller
+	the methods return "content"
+
+this project is an mvc project:
+	1) application.properties
+		spring.mvc.view.prefix=/WEB-INF/views/
+		spring.mvc.view.suffix=.jsp
+
+create the folders 
+	webapp/WEB-INF/views
+error:
+	"Path with "WEB-INF" or "META-INF": [WEB-INF/views/index.jsp]"
+
+Solution1:
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+		</dependency>
+
+or
+Solution2:
+	right click project
+		properties
+			targeted runtimes
+				choose apache tomcat server
+
+
+ApplicationContext
+	what are the implementations of ApplicationContext?
+		FileSystemXmlApplicationContext, ClassPathXmlApplicationContext, WebXmlApplicationContext
+
+
+XML Based configuration file.	Annotation based configuration.	Java based configuration.
+
+
+class Person
+{
+}
+
+class Doctor extends Person
+{
+}
+
+@Bean
+public Person doctor()
+{
+	return new Person();
+}
+
+
+HttpServlet
+	abstract class
+
+
+-----------------------------------------
+Spring MVC form validation
+----------------------------------
+in entity class:
+	we use the annotations to specify the validation rules
+	@NotNull
+	@NotBlank
+	@NotEmpty
+	@Size
+	@Min
+	@Max
+	
+these are also called as hibernate validations
+
+in controller,
+	before the model attribute, 
+	use @Valid annotation
+		only then the validation happens
+
+	the controller method should have BindingResult as argument
+
+	this binding result encapsulates the error information
+
+		hasErrors()
+
+	it is also possible for us to check and add additional error messages also
+
+how do we display the error messages?
+
+for that we have to use Spring forms!
+
+What is spring form?
+	JSP tag lib that is provided by spring framework.
+
+<form method="post" action="addCustomer">
+	Id:<input type="text" class="form-control" name="id" required="required" /> 
+	Password:<input type="password" class="form-control" name="password" required />
+	Confirm Password:<input type="password" class="form-control" name="cpassword" /> 
+	FirstName:<input type="text" class="form-control" name="firstName" />
+	LastName:<input type="text" class="form-control" name="lastName" />
+	DateOfBirth:<input type="date" class="form-control" name="dateOfBirth" />
+	Email:<input type="email" class="form-control" name="email" />
+	Contact:<input type="text" class="form-control" name="contact" /><br/>
+	<input type="submit" value="Sign Up" class="btn btn-success" />&nbsp;&nbsp;<input type="reset" class="btn btn-warning" />
+</form>
+
+
+we are going to modify this form to spring form
+
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>  
+
+1) we have to use model attribute
+2) the controller that shows this page, should have a model attribute in the same name
+	else we get error "Plain or target object missing"
+Neither BindingResult nor plain target object for bean name 'command' available as request attribute
+java.lang.IllegalStateException: Neither BindingResult nor plain target object for bean name 'command' available as request attribute
+
+reason: whenever you use spring form, model attribute is required
+
+solution: in controller, add an empty object to the model before return
+
+@NotBlank vs @NotEmpty vs @NotNull
+
+
+1) in the entity class
+	add validation annotations
+2) in controller method
+	before entity object, put @Valid
+3) in jsp
+	spring form
+	add errors part
+4) the controller method last argument should be BindingResult br
+
+
+Task:
+--------
+Signup form is modified to validate the form data entry.
+Error messages are displayed
+
+Now, In login form, do the following validations:
+	1) username must be 5 - 10 characters
+	2) password must be atleast 8 characters
+
+
+Difference:
+@NotBlank vs @NotEmpty vs @NotNull
+
+create an entity class for Login also
+
+
+
+class Login			
+{
+	String username;
+	String password;
+}
+
+
+""		this is not empty	but this is blank
+null is different from ""

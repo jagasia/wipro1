@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;jun11-mvc-hibernate-1&apos;" deleteContents="true" description="Delete resource &apos;jun11-mvc-hibernate-1&apos;" element1="/jun11-mvc-hibernate-1" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1654941910950"/>
+</session>

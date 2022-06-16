@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from CalculatorImplService WSDL service -->
+
+  <service name="CalculatorImpl" provider="java:RPC" style="rpc" use="encoded">
+      <parameter name="wsdlTargetNamespace" value="http://ws.hrms.wipro.com"/>
+      <parameter name="wsdlServiceElement" value="CalculatorImplService"/>
+      <parameter name="wsdlServicePort" value="CalculatorImpl"/>
+      <parameter name="className" value="com.wipro.hrms.ws.CalculatorImpl"/>
+      <parameter name="wsdlPortType" value="CalculatorImpl"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://ws.hrms.wipro.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="sum" qname="operNS:sum" returnQName="sumReturn" returnType="rtns:int" soapAction="">
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="i" type="tns:int"/>
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="j" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://ws.hrms.wipro.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="difference" qname="operNS:difference" returnQName="differenceReturn" returnType="rtns:int" soapAction="">
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="i" type="tns:int"/>
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="j" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://ws.hrms.wipro.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="product" qname="operNS:product" returnQName="productReturn" returnType="rtns:int" soapAction="">
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="i" type="tns:int"/>
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="j" type="tns:int"/>
+      </operation>
+      <parameter name="allowedMethods" value="product difference sum"/>
+
+  </service>
+</deployment>
