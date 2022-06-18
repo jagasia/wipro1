@@ -1,0 +1,31 @@
+package com.wipro.swiggy.model;
+
+import org.springframework.orm.hibernate5.HibernateTemplate;
+import org.springframework.transaction.annotation.Transactional;
+
+public class FoodDaoImpl {
+	private HibernateTemplate ht;
+	public FoodDaoImpl() {
+		
+	}
+	
+	public HibernateTemplate getHt() {
+		return ht;
+	}
+
+	public void setHt(HibernateTemplate ht) {
+		this.ht = ht;
+	}
+
+	@Transactional
+	public void create(Food food)
+	{
+		ht.save(food);
+	}
+	
+	public void read() {}
+	public void read(Integer id) {}
+	public void update(Food food) {}
+	public void delete(Integer id) {}
+	
+}

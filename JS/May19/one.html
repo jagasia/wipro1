@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            
+            //write all the query code here
+            //When?     click
+            //on what?  button
+            //what to do? 
+            $("#btnSum").click(function(){
+                //add no1 and no2
+            
+                // var x=document.getElementById("no1").value;
+                // var y=document.getElementById("no2").value;
+                
+                // var result=x+y;
+                // document.getElementById("result").innerHTML=result;
+
+                // in query
+                var x=parseInt($("#no1").val());
+                var y=parseInt($("#no2").val());
+
+                var result=x+y;
+
+                $("#result").html(result);
+            });
+        });
+    </script>
+</head>
+<body>
+    Number 1: <input type="number" name="" id="no1"><br>
+    Number 2: <input type="number" name="" id="no2"><br>
+    <input type="button" value="Sum" id="btnSum">
+    <p id="result"></p>
+</body>
+</html>

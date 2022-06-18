@@ -1,0 +1,390 @@
+Spring MVC (not spring boot)
+-------------------
+Yesterday we started discussing about Spring MVC 
+
+maven webapp archetype, the module is very old version ie., <3.0
+we need 4.0 so
+we create a dynamic web project and then 
+convert it into a maven project
+
+a web app
+	can have deployment descriptor
+	web.xml
+
+this is where we define/ configure our servlets.
+
+Though we started using Annotations @WebServlet
+when we already have some classes in our spring framework	(dependencies)
+how can we mark that class as a servlet?
+	we cannot modify their source code, so we cannot use annotation.
+	That is why we mark that class as a servlet in web.xml
+
+in web.xml
+ <servlet>
+    <description></description>
+    <display-name>One</display-name>
+    <servlet-name>One</servlet-name>
+    <servlet-class>controller.One</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>One</servlet-name>
+    <url-pattern>/One</url-pattern>
+    <url-pattern>/one</url-pattern>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+
+Any class in a project does not become servlet
+until it is configured as a servlet in
+	web.xml	(or)
+	annotation		@WebServlet
+
+Look at the url-pattern
+
+    <url-pattern>/</url-pattern>
+	this pattern means, any url
+	that means, any url will reach this servlet only.
+
+Spring framework provides us with a class called
+	DispatcherServlet
+
+we will configure our application in such a way,
+	this dispatcher servlet will receive every request
+	that comes to our application
+
+this servlet will call the Controller methods based
+	on the url and the mapping
+
+
+
+<form>
+	Add
+	Update
+	Delete
+</form>
+
+
+
+for all these submit buttons, we have only 1 servlet.
+that servlet is not a POJO class.
+
+since it is not a POJO class,
+	i miss one important convenience
+
+addEmployee()
+updateEmployee()
+deleteEmployee()
+
+this kind of POJO implementation is missing in servlet
+
+servlet has only service method
+	doGet
+	doPost
+
+that does not provide a convenient environment for programmers
+
+how you create a DaoImpl
+
+	methods
+	methods
+	
+you can test those methods easily
+
+servlet cannot be tested independently
+because it is not a POJO class.
+
+Spring MVC provides 
+	Controller, which is a POJO class.
+
+each method can have URL and mapping
+that is used by the dispatcher servlet 
+
+1) configure the DispatcherServlet in web.xml
+2) configure the View Resolver
+	InternalViewResolver
+		
+	bean.xml
+		<context.component-scan basePackage
+
+
+there are 2 configuration files
+	web.xml
+	spring-servlet.xml				this is similar to bean.xml
+		if "spring" is the name of DispatcherServlet
+
+3) prefix and suffix
+	/WEB-INF/views/
+	.jsp
+
+4) create the folder structure for JSP files
+
+5) inside the base package, we need to create the 
+	Controller classes
+		they can be directly inside the base package or its sub package
+
+
+
+for web.xml
+	right click the project
+		java EE tools
+			generate deployment descriptor stub 
+
+Demo:
+--------
+1) Create a dynamic web project
+	jun08-mvc-1
+
+	while creating, click next->next->
+		tick web.xml
+
+2) convert the project into a maven project
+	right click project
+		configure
+			convert to maven project
+
+3) in pom.xml
+			<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>4.3.9.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>4.3.9.RELEASE</version>
+		</dependency>
+		<!-- Servlet -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+4) web.xml
+	configure the dispatcher servlet
+<servlet>
+  	<servlet-name>spring</servlet-name>
+  	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  	<load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>spring</servlet-name>
+  	<url-pattern>/</url-pattern>
+  </servlet-mapping>
+
+5) create the view resolver
+
+	spring-serlvet.xml
+
+
+
+TasK:
+-------
+1) create a dynamic web project
+2) right click project 
+	configure
+		convert to maven project
+3) in pom.xml
+	create <dependencies> above <build>
+and paste the dependencies
+	(my third chat message)
+4) open the web.xml
+	if "web.xml" is not found under WEB-INF
+	then right click 
+		java EE tools
+			Generate deployment descriptor stub
+
+inside web.xml
+	configure dispatcher
+	(1st chat message)
+
+5) create spring-servlet.xml
+	if your dispatcher servlet name is "spring"
+	then the file names is "spring-servlet.xml"
+
+	configure internal view resolver
+		prefix
+		suffix
+	component scan base package
+		only base package name is enough
+		not the complete path
+
+6) create a class inside a package that is sub package of base package
+	@Controller
+
+	create some get mappings
+
+	method returns "index" means, 
+		there should be index.jsp inside	WEB-INF/views	(create the "views" folder inside WEB-INF)
+
+
+-----------------------------------------------------
+1) maven "webapp" archetype project
+	(or)
+   dynamic web project and converted into maven project
+
+2) in pom.xml
+	add the dependencies
+
+3) web.xml
+	configure the dispatcher servlet
+
+4) spring-servlet.xml
+	view resolver	(prefix, suffix)
+	component scan base package
+	annotation driver
+
+5) as per prefix, 
+	create the folders	
+		WEB-INF/views
+
+6) as per component scan base package
+	create the controller classes
+
+
+----------------
+
+Demo:
+	Signup/ Registration
+
+	what is a signup?
+		a new user is being created
+
+	There is a USER table
+	if a row is added, then it is called as signup
+
+	What is a login?
+		based on username and password, if we find a row, then login is successful, 
+		store the user object in model	(session) so that in every page, we visit, it will show a welcome user!
+
+	when we select a product and buy,
+		the user who buy, is automatically understood based on login
+	
+
+
+
+A project "Shopping"
+-----------------------------
+User
+	id
+	firstName
+	lastName
+	emailId
+	phone
+	address
+
+User
+	Customer
+	Seller
+
+Product
+	id
+	name
+	sellerId
+Order
+	id
+	orderDate
+	customerId
+	productId
+
+
+
+A home page
+	show menu options
+			Login	(if already logged in, it should show Logout option and vice versa)
+	when i choose Product menu,
+		product page should come for admin to manage product
+
+
+
+update & delete is called as manipulation
+
+Lux soap
+
+id	name		price	validity	
+1	Lux soap		10	false		10 is replace by 30	is a crime
+2	Lux soap		30	true
+
+when somebody do shopping
+	show  products whose validity is true only
+
+
+
+
+today, the price is 30 rs
+
+
+Orders
+
+08-Jun-2012	1212	1
+
+30 rs
+
+I go to bank and request them to update my current address
+
+will they update.
+	UPDATE CUSTOMER set address='new address';		//NEVER
+
+add a new row in the address table
+
+every time, we generate account statement, 
+the address comes from address table, where customerid=121212
+and latest updated date is considered as current address
+
+
+date 	address
+date	address
+
+servlet & jsp
+
+spring mvc
+-----------------
+CRUD for User
+
+signup 
+login
+
+
+1) created a dynamic web project
+	jun08-mvc-2
+2) added a web.xml
+3) convert the project into a maven project
+4) in pom.xml
+5) in web.xml
+	configure the dispatcher servlet
+		servlet name is "dispatcher"
+6) dispatcher-servlet.xml
+	configure the internal resource view resolver
+		prefix & suffix
+	<mvc:annotation-driven />
+	<context:component-scan base-package="com.wipro" />
+7) create the folder for jsp files as per prefix
+8) create the jsp files inside that folder
+9) create the controller classes in the package as per base package
+10) run the project as "Run on server"
+
+
+
+How to send email OTP from a java program?
+1) create a gmail account for this program purpose.
+2) enable gmail to send email from java program
+	"Less secure access" should be enabled.
+3) program to send email
+	from email address & email password
+	to email address can be obtained from user
+4) generate a random number of required digit
+	Math.random()		returns a number between 0 and 1		means  	0.9986515165
+	* 6 means, you will a 6 digit number
+5) send the OTP to email and store the same in cookie
+6) when user submits otp, we can check the same from cookie

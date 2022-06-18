@@ -1,0 +1,99 @@
+Codelysis
+	120 minutes practical test
+	All are from core java.		(totally 4 questions. 25 marks each. Total=100 marks)
+Remember, when we learnt core java, we used to solve lot of problems
+	all the questions are in that pattern.
+		a problem statement
+		sample inputs
+		sample outputs
+
+	there will be hidden inputs and outputs	(test cases). You code should pass all those test cases.
+
+---------------------------------------
+Spring security
+------------------
+	spring boot mvc project
+	spring boot rest api
+
+what is the major threat you find?
+
+i remember, during angular, one of you asked me "Whoever has the URL, can add an airline to the REST api?"
+----------------------------------------------------------
+the rest api allows anybody to access.
+	Security is introduced to restrict, who can access and who cannot access.
+
+Security is defined in terms of 
+	Authentication
+	Authorization
+
+What is the difference between authentication and authorization?
+	Authentication
+		is the process of validating the identity of the user
+		are you an user or not?
+
+	Authorization	
+		is the process of checking if the user has permission to do or not.
+		Access Control List
+		which are the users, allowed to do what are the activities
+		the user is a valid user, but admin? or user?	or supervisor?	what is his role????	based on role, permissions are different
+
+		
+
+Authentication
+	if you claim that you are suresh. unless you enter the username/password or pin number or OTP, you are not Suresh.
+	authentication is passed, then the system can obtain the identity of the user
+	that identity can also have role
+
+USER_MASTER	table in the database
+	username
+	password
+	firstname
+	lastname
+	role
+	status		
+
+in java, 
+	User class
+
+
+Demo:
+--------
+1)	i will create a spring boot app
+2)		dependencies:
+			spring web
+			spring security
+
+3) 	create a rest controller
+4) 	simple method to display hello world
+package com.wipro.hrms;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class MyController {
+	
+	@GetMapping("/")
+	public String home()
+	{
+		return "Hello world";
+	}
+}
+
+
+5) right click the project -> Run As -> Spring boot app
+
+all are per minute. all are dollars
+local = 0.25
+STD = 1
+ISD = 10
+
+{100,100,100}
+1200
+
+
+
+{100,100,200}
+1200
+
+

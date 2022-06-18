@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("input[type='text']").focus(function(){
+                //to reference the same object, we use this
+                $(this).css("background-color","yellow");
+            });
+
+            $("input[type='text']").blur(function(){
+                $(this).css("background-color","white");
+            });
+        });
+    </script>
+</head>
+<body>
+    <input type="text" name="" id=""><br>
+    <input type="text" name="" id=""><br>
+    <input type="text" name="" id=""><br>
+    <input type="text" name="" id=""><br>
+    <input type="text" name="" id=""><br>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function fnValidate()
+        {
+            alert('validating')
+            //how will i get the value entered by the user in a text box???? use DOM
+            // document.getElementById("username")     //this represents the textbox as an object
+            var username=document.getElementById("username").value;
+            var password=document.getElementById("password").value;
+            if(username==password)
+                alert("Login  failed")
+            else
+                alert("Login successful")
+        }
+    </script>
+</head>
+<body>
+    <form>
+        User Name: <input type="text" name="" id="username"><br>
+        Password: <input type="password" name="" id="password">
+        <br>
+        <input type="button" value="Login" onclick="fnValidate()"> &nbsp;
+        <input type="reset" value="Reset">
+    </form>
+</body>
+</html>

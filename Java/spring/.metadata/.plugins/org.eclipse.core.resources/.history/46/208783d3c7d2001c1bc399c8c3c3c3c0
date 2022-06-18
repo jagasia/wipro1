@@ -1,0 +1,25 @@
+package tower;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class App {
+
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		
+		int cityLength=sc.nextInt();
+		int city[][]=new int[cityLength][cityLength];
+		int noOfTowers=sc.nextInt();
+		int tower[][]=new int[noOfTowers][2];
+		for(int i=0;i<noOfTowers;i++)
+		{
+			tower[i][0]=sc.nextInt();
+			tower[i][1]=sc.nextInt();
+		}
+		
+		System.out.println(Arrays.deepToString(city));
+		sc.close();
+	}
+
+}

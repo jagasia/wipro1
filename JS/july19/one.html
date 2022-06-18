@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="file" name="" id="f1"><br>
+    <input type="button" value="Click me" id="btn1">
+    <script>
+        document.getElementById('f1').addEventListener("change",(x)=>{   alert("the file is selected");
+        // console.log(x.target.files[0]);
+        console.log(x);
+        console.log(x.target.files[0].name);
+    });
+        // document.getElementById("btn1").addEventListener("click",(a)=>
+        // {  alert('you clicked the button');
+        //     console.log(a);
+        // });
+        // document.getElementById("btn1").addEventListener("click",function(){   alert('Yes this is anonymous function')  });
+    </script>
+</body>
+</html>

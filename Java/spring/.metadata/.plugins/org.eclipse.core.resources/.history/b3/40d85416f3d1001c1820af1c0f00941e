@@ -1,0 +1,5 @@
+package com.wipro.hrms.service;
+
+public class ProductService {
+
+}

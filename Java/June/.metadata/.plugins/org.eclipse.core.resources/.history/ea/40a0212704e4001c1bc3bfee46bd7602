@@ -1,0 +1,14 @@
+package com.wipro.swiggy.model;
+
+import org.hibernate.cfg.Configuration;
+import org.springframework.stereotype.Component;
+
+@Component
+public class FoodDaoImpl {
+	public void retrieveSession()
+	{
+		Configuration config=new Configuration();
+		config.configure("hibernate.cfg.xml");
+		
+	}
+}

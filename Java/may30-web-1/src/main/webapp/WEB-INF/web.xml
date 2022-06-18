@@ -1,0 +1,35 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+  	<servlet-name>AddStudentServlet</servlet-name>
+  	<display-name>AddStudentServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.wipro.abcd.controller.AddStudentServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>HomeServlet</servlet-name>
+  	<display-name>HomeServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.wipro.abcd.view.HomeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>AddStudentServlet</servlet-name>
+  	<url-pattern>/AddStudentServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>AddStudentServlet</servlet-name>
+  	<url-pattern>/add</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>HomeServlet</servlet-name>
+  	<url-pattern>/HomeServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>HomeServlet</servlet-name>
+  	<url-pattern>/home</url-pattern>
+  </servlet-mapping>
+</web-app>

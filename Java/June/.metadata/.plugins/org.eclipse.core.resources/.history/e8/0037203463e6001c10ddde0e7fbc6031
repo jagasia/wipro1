@@ -1,0 +1,40 @@
+package com.wipro.hrms.model;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
+
+@Component("sdao")
+public class StudentDaoImpl {
+	@Autowired
+	private JdbcTemplate jt;
+	
+	public StudentDaoImpl() {}
+
+	public JdbcTemplate getJt() {
+		return jt;
+	}
+
+	public void setJt(JdbcTemplate jt) {
+		this.jt = jt;
+	}
+	
+	public int create(Student student) {
+		String sql="INSERT INTO Student VALUES(?,?,?,?)";
+		return jt.update(sql,student.getId(), student.getName(), student.getDateOfBirth(), student.getPicture());
+	}
+	public void read() {
+		String sql="SELECT * FROM Student";
+		return jt.query(sql, new StudentRowMapper());
+	}
+	public void read(Integer id) {
+		String sql="SELECT * FROM Student WHERE id=?";
+	}
+	public void update(Student student) {
+		String sql="UPDATE Student SET name=?, dateOfBirth=?, picture=? WHERE id=?";
+	}
+	public void delete(Integer id) {
+		String sql="DELETE FROM Student WHERE id=?";
+	}
+	
+}

@@ -1,0 +1,182 @@
+Spring Framework	(not spring boot)
+----------------------
+	Spring core
+	Spring AOP
+	Spring JDBC
+
+yesterday, we learnt Spring Jdbc
+	JdbcTemplate
+		DataSource		(implementation:	DriverManagerDataSource)
+	we used xml configuration yesterday
+
+Today, we can do this using Annotations	(without using xml)
+
+
+In spring framework, how do we define beans?
+	in xml 
+		<bean>
+	in annotations
+		i) @Component
+		ii) @Bean 
+
+we cannot use @Component for JdbcTemplate and DriverManagerDataSource
+	Why?
+		because, they are already present. So we do not write those classes. So we cannot use @Component
+		only on the class, we can use @Component annotation.
+
+	We should use @Bean annotation for those classes which are already available, and we have not created those classes.
+	use @Bean above the method that returns an instance of those classes.
+	The name of the method is the name of the bean
+
+
+@Component("edao")		//edao is the name of the bean
+
+@Bean
+public JdbcTemplate jt()	//jt is the name of the bean
+{
+}
+
+Demo:
+---------
+Lets create Student CRUD application, ie., a web application
+since we have already seen xml based jdbc template,
+we will use annotations now.
+
+1) Student		(entity)
+	id	
+	name
+	dateOfBirth
+	photo
+2) StudentDaoImpl	(dao)
+3) MyConfiguration	(config)
+	define the beans here
+		DriverManagerDataSource
+		JdbcTemplate
+4) JSP & servlets
+
+this will be the last demo for servlets and JSP and also jdbc template
+Because, we will learn Spring MVC next	
+	(not spring boot)
+
+
+
+Task:
+-------
+Download the template project
+	https://github.com/jagasia/jun07-jt-annotations
+and import to eclipse/sts
+run the project 
+(before that ALTER the student table and add a column "picture" of type "longblob")
+Run the program to test
+	CRUD
+
+
+----------------------------------
+We have created the model part now.
+model
+
+servlet & jsp		controller & view
+
+i need JSTL tag library so that i can use
+	if
+	for
+etc
+to display tabular format of all students
+
+in jsp, if we need to display image from byte []
+we have to use apache commons
+
+Task:
+	Download the template
+		https://github.com/jagasia/jun07-jt-annotations
+	import and run
+	From previous template, you should be able to achieve the CRUD jsp servlet
+	and use the dependencies from the pom.xml
+
+
+If you notice, 
+	we have a HomeServlet that reads all student objects and store it in a session
+	and redirects to the student.jsp	(note)
+
+	when we select a student in the table, the id is sent to a servlet and the corresponding student object is found and redirected to the student.jsp
+	(note)
+
+	When we add/update/delete a student, the request is sent to a servlet. And then the servlet redirectes back to the student.jsp
+	(note)
+
+You will understand the need for Controller
+JSP serves the purpose of a View
+
+Now, you understand the purpose of a controller.
+In this project, a big drawback happens when we directly run the jsp
+
+-------------------------------------------------------------------
+Lets start Spring MVC		(not spring boot)
+
+1) pom.xml
+	add the dependencies
+2) web.xml
+	any java web application will have this "Deployment Descriptor"	this is web.xml
+	before java 1.5 version, and before web module 3.0, there was no annotations.
+	only web.xml was used for configuration
+
+	now in web module 3.0 or java 1.5
+	we define a servlet using annotation
+		@WebServlet({ "/HomeServlet", "/home" })
+
+	but in old versions, we used
+	web.xml
+		<servlet>
+			<servlet-name>
+			<servlet-class>
+		</servlet>
+				url-mapping
+
+	for spring mvc, we will use web.xml
+
+	if web.xml is not present in your project
+		you can add web.xml to your project
+		by right click project
+			Java EE tools
+				Generate Deployment Descriptor stub
+
+
+why should i use web.xml?????
+	because, the spring framework has a Dispatcher Servlet. It is already there, we need to configure this servlet so that any request comes, will be accepted by this servlet by default.
+
+
+ <servlet>
+    <description></description>
+    <display-name>One</display-name>
+    <servlet-name>One</servlet-name>
+    <servlet-class>controller.One</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>One</servlet-name>
+    <url-pattern>/One</url-pattern>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+
+
+
+    <url-pattern>/</url-pattern>
+	means, any request comes to my server, is received by only 1 servlet called Dispatcher Servlet (this is already there in spring mvc framework)
+	This servlet receives the request
+		and based on the url, it will call a particular method of the POJO class
+
+	in spring mvc, the controller is a POJO class		Plain Old Java Object	(means, a class that do not have super class or does not implement any interface, means no liability or it is independent)
+
+	
+1) web.xml
+	configure the dispatcher servlet that can receive every request coming to our server	servlet-name = spring	(any name is allowed)
+2) spring-servlet.xml
+	first portion is "spring" means, the name of the dispatcher servlet is defined as "spring" in web.xml
+
+	prefix
+	suffix
+
+	base package name
+
+	this is similar to bean.xml file
+
+

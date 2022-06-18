@@ -1,0 +1,148 @@
+Last session,
+	we created a spring boot app with dependencies
+		spring web
+		security
+
+what happened when we add this "spring boot starter security" dependency?
+Using generated security password: b893c750-8619-4414-ae27-2c051094804f
+			0c47a308-54d3-42c0-9866-35c50f6b9904
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+a password is generated. This password is valid only till this app is running.
+If i restart the project/ if i restart the server, then we get a new password.
+
+
+the user name was user and we pasted the generated password to login
+-------------
+
+in application.properties
+	spring.security.user.name=jag
+	spring.security.user.password=raja
+
+now, when you restart the app, you do not see a password being generated.
+You are able to login using the credentials we mentioned in the properties.
+
+-------------------------------------------------------
+Demo:
+	a spring boot app with 
+		spring web
+		spring data jpa
+		mysql driver
+		spring security
+
+
+we need to configure the security. Why? because, we need to help spring framework to understand when is the login success and when it is failure.
+
+better, we create a separate class for that.	for configuration
+	i) a class that implements WebSecurityConfigurer interface
+	or
+	ii) a class that extends WebSecurityConfigurerAdapter
+
+TasK:
+-------
+1) create a spring boot app "may09-security-1"
+2) while creating the project, add the following dependencies
+	spring web
+	spring security
+	spring data jpa
+	mysql driver
+3) create a controller "MyController" class
+	i) annotate the class with @RestController
+	ii) create a get mapping method to display hello world
+4) you cannot run this until you configure
+	data source
+	security
+5) application.properties		
+
+server.port=8383
+
+spring.datasource.url=jdbc:mysql://localhost:3306/wipro3
+spring.datasource.username=root
+spring.datasource.password=
+
+spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL8Dialect
+spring.jpa.hibernate.ddl-auto=update
+
+6) to configure the security, 
+	i) create a class "MyConfiguration" and annotate with @Configuration
+		extends WebSecurityConfigurerAdapter
+	@Autowired
+	private MyUserDetailsService userDetailsService;
+
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(userDetailsService);
+	}
+	
+	@Bean
+	public PasswordEncoder passwordEncoder()
+	{
+		return NoOpPasswordEncoder.getInstance();
+	}	
+
+7) create a class "MyUserDetailsService" and implement UserDetailsService
+	annotate the class as @Service
+	and
+		@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		return new User("binny", "binny", new ArrayList<>());
+	}
+
+8) run the project and check the browser, login using the user name and password specified in the MyUserDetailsService
+
+
+findById(username)
+	returns the entire user object, that contains the password also
+
+-------------------------
+In the previous demo, we have used fixed username and password for logging in.
+Now, that we are supposed to allow any user, who enters valid username and password to login
+
+create table user_master
+(
+username varchar(20) primary key,
+password varchar(20) not null
+);
+
+insert into user_master values
+('jag','jag'),
+('siva','kumar'),
+('abdul','raheem'),
+('john','kennedy');
+
+-------------------
+In the project, we have a service class, we can autowire the repository.
+1) entity class
+	User		mapped to user_master
+2) repository interface
+3) service class to autowire the repository
+
+
+
+Task:
+	use jpa repository to access the user_master table and find user by username
+	use this in service by autowiring the repository.
+
+------------------
+CRUD
+	add user
+	modify user
+	delete user
+	find user by username
+	get all users
+
+
+
+
+CSRF
+	Cross-site request forgery 
+
+---------------------------------
+Suppose, if the spring boot rest api is accessed from Angular, how will we deal this?
+because, the login page is provided by angular.
+
+So, we will be using JWT 
+
+JWT
+	JSON Web Toker

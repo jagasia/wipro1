@@ -1,0 +1,15 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+   ">
+
+	<bean id="emp" class="com.wipro.hrms.entity.Employee">
+		<property name="id" value="100" />
+		<property name="firstName" value="Raja" />
+		<property name="lastName" value="Sivakumar" />
+		<property name="salary" value="123456.5" />
+	</bean>
+
+</beans>

@@ -1,0 +1,189 @@
+Hibernate
+Yesterday we use @OneToMany annotation and obtain the department json from servlet and that department contains array of employees
+
+there was a problem that circular reference causes a stack overflow
+because, employee has a department object and
+	department object has employees list
+
+In spring framework we solve this issue very easily using
+	@JsonIgnore annotation
+
+	when the json string is formed, that particular member of the class will be ignored
+
+But it was not working in gson.
+
+we created json from a java object manually using reflection
+Reflection means, reading metadata.
+	in java we can write code to read all the annotations
+
+	we can also get all methods, (using getters, we can understand the properties)
+
+after some time, google offered a jar file called gson	that is google for json
+
+we are now using this. But in modern spring rest apis, if a method returns an object, it is automatically converted into json
+
+we can sort out the reflection stack overflow issue now using a technique.
+
+@Expose annotation
+	we can put this annotation on every field
+	that should be the part of json
+
+any field we want to ignore in json, we do not use @Expose annotation
+
+we created gson object yesterday.
+Now we create it using GsonBuilder	create method
+
+before we created, we can specify the options to ignore
+all the fields that do not have @Expose annotation
+
+		Gson gs=new GsonBuilder()
+				.excludeFieldsWithoutExposeAnnotation()
+				.create();
+
+
+the above is equivalent to:
+
+GsonBuilder gb=new GsonBuilder();
+gb.excludeFieldsWithoutExposeAnnotation();
+Gson gs=gb.create();
+
+{"id":46,"name":"EEE","employees":[{"id":53,"firstName":"Suresh","lastName":"Peters"},{"id":54,"firstName":"Jagadees","lastName":"waran"}]}
+
+
+if it is an object it will look like:
+	{id:46,name:"EEE"}
+if it is a json string:
+	{"id":46,"name":"EEE"}
+
+
+Task:
+	download https://github.com/jagasia/jun01-hibernate-1
+	and import and run the project
+
+--------------------
+Hibernate
+pagination
+
+		q.setFirstResult(1);
+		q.setMaxResults(10);
+		q.list();				
+These method of query, will allow us to use pagination
+
+What is pagination?
+	when you search for some results,
+	have you ever seen the results come in pages
+
+	If i get lot of records, i can show them in multiple pages
+
+If you fix the page size, for example is 10
+if there are 58 rows, tell me how many pages?
+
+once we get the number of rows
+noOfPages=	noOfRows/pageSize
+
+in jsp, we just display the page numbers only
+each page number has hyperlink to servlet
+that servlet retrieves records only for that range
+
+1) dao should have a method that 
+	accepts start index, count
+	retrun only the result for that range
+
+====================
+1) Create a maven project	jun02-paging-1
+2) archetype "webapp"
+3) add the following dependencies to the pom.xml
+<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.30</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.jboss.logging/jboss-logging -->
+		<dependency>
+			<groupId>org.jboss.logging</groupId>
+			<artifactId>jboss-logging</artifactId>
+			<version>3.4.1.Final</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.30</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.2.17.Final</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.47</version>
+		</dependency>
+	hibernate core
+	mysql connector
+4) hibernate.cfg.xml
+5) Branch.java
+	bid
+	bname
+	bcity
+
+
+
+Task:
+	download the project from 
+		https://github.com/jagasia/jun02-paging-1
+	and implement pagination
+
+The aim of this project is to practice pagination
+
+For paging, we will create a method in dao
+	that method accepts,
+		start index
+		page size
+	and returns the list of branches only in that range
+
+
+in jsp, we will only display the page numbers
+on clicking the page number only, the request is
+sent to obtain the result of that page range
+
+that means, in dao, we should get page numbers also
+
+If page size is 5,
+first page should show from index 0 to 4
+what should be the range of second page?		5 to 9
+what should be the range of 8th page?		35 to 39
+
+0-4
+5-9
+10-14
+15-19
+
+
+tell me the formula to find the startIndex based on page number!
+
+	pageNumber-1 * pageSize		
+
+page 1
+	(1-1)*5		=	0
+
+page 2
+	(2-1)*5		=	5
+
+page 3
+	(3-1)*5		=	10
+
+

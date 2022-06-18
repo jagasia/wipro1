@@ -1,0 +1,17 @@
+<div *ngIf="isLoggedIn;else loggedOut">
+    You have logged in!
+</div>
+
+<ng-template #loggedOut>
+    You have logged out
+</ng-template>
+<hr>
+<ul [ngSwitch]="superhero">
+    <li *ngSwitchCase="'Groot'">Groot</li>
+    <li *ngSwitchCase="'Ironman'">Ironman</li>
+    <li *ngSwitchCase="'Hulk'">Hulk</li>
+    <li *ngSwitchCase="'Thor'">Thor</li>
+    <li *ngSwitchCase="'Spiderman'">Spiderman</li>
+    <li *ngSwitchDefault>Batman</li>
+  </ul>
+  

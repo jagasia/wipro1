@@ -1,0 +1,191 @@
+REST API
+---------------
+Yesterday we saw SOAP webservices
+2001 onwards, web services became trend.
+
+The biggest advantage of web services, is interoperability.
+Means, create it in any lanugage/ platform, and access the webservice from any program (any language/ any platform)
+
+Why we need this kind of interoperability?
+	Because, we need enterprise integration
+	different enterprises, do business between each other.
+
+buying food
+	swiggy	(enterprise)
+		inside swiggy, you order food from different restaurants. They are also enterprises.
+
+		same restaurant, supports different food apps	(swiggy, zomato)
+
+	movie ticking booking
+		same theatre	(INOX)
+		inox itself has a database. it has website. it has mobile app.
+		bookmyshow, ticketnow, these apps need to access the inox db.
+
+		if they have different dbs, then the data will not be real time.
+
+	backend is same.
+	but frontend is developed by many people.
+
+this gives you an idea, that
+	there is a backend project,	
+		that needs to be accessed from many frontends developed by many enterprises.
+		those different enterprises, may use any tool or technology 	(java / dotnet/ angular/ reactjs)
+
+Webservices
+	i) SOAP
+	ii) REST
+
+
+Task:
+	Identify the difference between SOAP and REST
+	Share in chat window
+
+
+
+
+
+
+Bottom up approach
+	we have java class and interface.
+	From that we generated the WSDL
+
+----------------------------
+REST
+	RESTful webservices
+
+		REpresentational
+		State
+		Transfer
+
+Before spring framework,
+	Jersey framework for creating RESTful web services
+
+
+Lets create our first restful webservice using jersey
+
+it is basically a dynamic web project
+	you learnt servlets and jsp. So you know dynamic web project.
+	web.xml
+		before java web module 3, 
+		all servlets were configured in web.xml
+	
+		from module 3 onwards,
+		annotations introduced
+			@WebServlet
+
+	but still we can use web.xml now also
+
+if you remember MVC projects,
+	we configured Dispatcher Servlet
+		that servlet should recieve all the requests coming to our application.
+		
+	same technique will be used in jersey RESTful webservices also.
+
+
+Demo:		
+---------
+1) create a dynamic web project
+	jun17-jersey-rest-1
+		generate web.xml deployment descriptor in the 3rst step and finish.
+2) convert the project into a maven project
+	right click, configure-> convert to maven project
+3) choose the 
+	group id		com.wipro.hrms
+	artifact id		same as project name
+4) in pom.xml
+	add the following dependencies
+		<dependency>
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<artifactId>jersey-container-servlet</artifactId>
+			<version>2.29.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.glassfish.jersey.inject</groupId>
+			<artifactId>jersey-hk2</artifactId>
+			<version>2.29.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-json-jackson</artifactId>
+			<version>2.29.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>asm</groupId>
+			<artifactId>asm</artifactId>
+			<version>3.1</version>
+		</dependency>
+
+5) right click project
+	maven	
+		update project
+
+6) go to web.xml file
+  <servlet>
+  	<servlet-name>Jersey REST Service</servlet-name>
+  	<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+  	<init-param>
+  		<param-name>jersey.config.server.provider.packages</param-name>
+  		<param-value>com.wipro.hrms.controller</param-value>
+  	</init-param>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Jersey REST Service</servlet-name>
+  	<url-pattern>/rest/*</url-pattern>
+  </servlet-mapping>
+
+7) create a class in the 
+	com.wipro.hrms.controller package
+
+package com.wipro.hrms.controller;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
+
+@Path("/")
+public class MyController {
+	
+	@GET
+	@Produces("text/json")
+	public Response home()
+	{
+		return Response.status(200).entity("<p>Hi welcome to our rest api</p>").build();
+	}
+}
+
+8) run the project as
+	run on server
+9) in browser
+	http://localhost:8080/<<project-name>>/rest
+
+------------------------------------------
+How we accessed a RESTful webservice?
+	from URL in the browser.
+	It is not always that we access a restful webservice from browser.
+	we can call a webservice from any type of project
+		java project	(console app)
+		gui		swing/ applet
+		web app		servlet/jsp
+
+Lets see how to call a webservice from a core java project	(Java Project)
+
+
+http://localhost:8081/jun17-jersey-rest-1/rest
+
+
+
+in our restful webservice, the text formatter is "text/json"
+AND in our client program, same formatter is used. Then only it works.
+If you don't know the format, it doesn't work.
+
+But in modern spring boot rest apis,
+	the format is detected automatically
+		Content Negotiation
+
+
+
+

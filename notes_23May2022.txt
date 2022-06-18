@@ -1,0 +1,452 @@
+1) Bridge topics
+2) Weekly assessment plan
+
+this week assessment:
+	Batch 03	28-May	Saturday	
+	Assessment - Coding based	
+		HTML,CSS, JavaScript, Jquery, Servlets
+
+SQL and Servlet, JSP
+
+SELECT
+-----------
+
+IN JDBC
+	select query
+	dml
+		insert
+		update
+		delete
+	ddl
+		truncate
+		CREATE 
+		ALTER
+		DROP
+		
+
+
+SQL
+	SQL stands for
+		Structured Query Language
+
+SQL is used by most of the RDBMS products like
+	Oracle
+	MS Sql Server
+	MySql
+	IBM DB2
+
+
+There are different dialects of SQL 
+	Oracle	isql
+	MS Sql 	transact sql
+
+that means, each SQL variant has slightly some different functions or even syntax
+
+ex:
+	theta join	is not supported by Microsoft SQL server
+
+
+SQL can be learnt using any of the above products
+
+But PLSQL is supported by Oracle, MSsql
+
+mysql
+	we dont learn plsql	(check)
+
+
+ms sql (microsoft sql server) is different from mysql
+
+now MySQL is owned by Oracle
+
+compare mysql and oracle.
+	Oracle is known for more
+		secure
+		powerful to handle concurrent transactions
+			
+
+
+mysql for simple apps where concurrent transaction is minimal
+
+mysql is free
+
+Oracle Expression Edition is free
+	
+Oracle Enterprise Edition (license)
+	database administration	(dba)
+
+DBMS
+RDBMS
+
+Relational DataBase Management System
+	is based on Relational Theory by Dr. E.F. Codd
+
+in 1970s he defines 12 rules for a RDBMS
+
+every information stored in db must be stored in tabular format
+
+terminologies for RDBMS
+	Table	
+	Row/ Record/ Tuple
+	Field/ Column
+	Data
+	Null
+	
+Key
+	Primary Key
+	Foreign Key
+
+Candidate Key
+Alternate Key
+Super Key
+Composite Key
+
+Task:
+Identify the meaning for the above mentioned keys.
+
+
+
+
+
+Before we create a table, we will have the list of
+	Entities
+	Relationships
+	Attributes
+
+Entity becomes table
+the attribute becomes column in the table
+
+Relationship can be represented in many ways
+
+1 - Many relationship, then 1 will join many
+ex:
+	1 Department has Many Employees
+
+	deptId will become a column in Employee table
+
+Many - Many relationship
+	the relationship will become a new table
+
+
+Candidate Key
+-----------------
+A candidate key is an attribute or set of attributes that can uniquely identify a tuple.
+
+Any column in a table, which is eligible to be a primary key, is a candidate key.
+
+Primary Key
+	the column does not allow duplicate values
+	the column does not allow null
+
+ex:
+	EmployeeId
+		if you add a row in Employee table
+		then employee id is compulsory
+
+		it cannot be null
+		it cannot be duplicate	(if the value already exists)
+
+
+A primary key is a candidate key
+
+A table may have many candidate keys.
+But only 1 primary key is allowed in a table
+
+candidate key/ primary key, can be composite.
+What is composite?
+	a combination of columns that identify a row uniquely
+
+
+
+
+install oracle express edition
+	11g 
+
+during installation, it will as for system/sys password
+	password as password or remember what your entered (you are creating the password then only)
+
+
+oracle express edition has 
+	HR schema
+lot of tables
+	EMPLOYEES
+	DEPARTMENTS
+
+employee_id
+	is the only candidate key
+
+
+candidate key can be composite
+	first_name and last_name together produces a row uniquely	(but it is also coincidence)
+
+email id is a candidate	(provided, if our system does not allow 2 employees to have same email id)
+
+zoho payroll
+	an employee resigned.	His email id is abc@efg.com
+	the same employee joined again. Zoho Payroll does not allow us to add new employee, whose email id is abc@efg.com
+	means, in their records, every row has different email id only. 
+
+email id is a candidate key here.
+
+every column or columns can be a candidate key.
+Only a candidate key can be a primary key
+
+primary key
+	we designate the column(s) as primary key
+
+it is in the syntax
+
+CREATE TABLE STUDENT
+(
+	SID INT PRIMARY KEY,
+	SNAME VARCHAR2(20) NOT NULL,
+	DOB DATE
+)
+
+we can define a column or columns as primary key.
+But we cannot define anything as candidate key.
+
+Candidate key is an idea. But not in syntax
+similarly
+
+Super key,
+Alternate key
+composite key
+	these are ideas. not syntax
+
+Primary key,
+Foreign key
+	only these are available in syntax
+
+
+Key
+	Primary Key	(only 1 per table)
+	Foreign Key
+
+Candidate Key
+Alternate Key
+Super Key
+Composite Key
+
+
+
+
+only 1 primary key
+i didnt say, only 1 column is allowed to be primary key	WRONG
+
+Multiple columns together can be a primary key.		ie., composite primary key
+
+
+in oracle, whenever we create table or any object, the metadata about that object is maintained in a dictionary table(s)
+
+USER_TABLES	(all the tables that are created by this current user)
+ALL_TABLES	(all the tables that are accessible to the current user)
+DBA_TABLES	(only dba can use)
+
+
+PRIMARY KEY:
+--------------------
+we can add primary key when
+	we create the table
+		in column level (or)
+		table level
+	or
+	after creating the table, we can alter the table and add primary key
+
+
+
+1) create primary key in column level
+
+CREATE TABLE STUDENT
+(
+SID INT PRIMARY KEY,
+SNAME VARCHAR2(20)
+);
+
+
+DROP TABLE STUDENT;
+
+
+2) create primary key in table level
+
+CREATE TABLE STUDENT
+(
+SID INT,
+SNAME VARCHAR2(20),
+PRIMARY KEY(SID)
+)
+
+
+TABLE LEVEL IS VERY USEFUL because, 
+composite primary keys can be created easily
+
+
+3) composite primary key:
+
+CREATE TABLE STUDENT
+(
+SID INT,
+SNAME VARCHAR2(20),
+EMAIL VARCHAR2(20),
+PRIMARY KEY(SID,SNAME)
+)
+
+
+A very good example for composite primary key:
+
+ex:
+	Departmental store bill
+
+1 bill contains multiple items/products
+
+tell me how to represeent this bill in a table?
+
+bill table
+
+billNo	itemId	billDate
+
+
+billNo & ItemId
+	together is primary key
+
+
+search by billNo,
+	you will get several rows
+
+
+
+a table has 4 candidate keys
+	means, i can choose any of them as a primary key
+	i have chosen 1 of them as primary key
+	the remaining keys are alternate key
+
+some times, when we search records based on primary key,
+we get result after long time. 
+When many users use primary key to search,
+if we use some other key to search, then our query
+will not be delayed by their queries
+
+we can search based on some other column (alternate key)
+
+
+Primary:
+	unique
+	not null
+	can be composite
+
+
+
+PRODUCTS					master table
+	PID		primary key
+	PNAME
+
+
+SALES						details table
+	SID
+	PID		foreign key 
+	CID
+
+
+
+PRODUCTS
+	1	PENCIL
+	2	PEN
+	3	SHARPNER
+	4	SCALE
+	5	ERASER
+
+SALES
+	INSERT INTO SALES VALUES (111, 10, ....
+
+	The above will not be allowed beacuse, PID=10 is not valid. Because, in PRODUCTS table, PID is there between 1 to 5 only. So 10 is invalid
+
+
+
+product_master
+sales_details
+
+
+--------------------------------------------------------------
+apart from keys, 
+there are constraints
+
+constraints means, restriction/ condition
+
+PRIMARY KEY CONSTRAINT
+FOREIGN KEY CONSTRAINT
+NOT NULL CONSTRAINT		it doesn't bother about duplicates. But value is mandatory. "required"
+UNIQUE CONSTRAINT		it can be null. but if you enter a value, it must be unique. 	How many null is allowed? Any number of null
+CHECK CONSTRAINT		can be used to give a condition
+
+
+
+NULL means, missing information. It cannot be a value
+
+
+CHECK marks between 0 AND 100	
+
+
+BETWEEN is inclusive	0 and 100 
+
+Foreign key
+------------
+	can a foreign key allow null?		allows null
+	can a foreign key allow duplicates?	yes it allows duplicate
+
+
+
+PRODUCTS
+	1	PENCIL
+	2	PEN
+	3	SHARPNER
+	4	SCALE
+	5	ERASER
+
+SALES						details table
+	SID
+	PID		foreign key 
+	CID
+
+
+
+
+
+after selling PENCIL for several times,
+
+what happens if i delete the pencil row in products table
+
+DELETE FROM PRODUCTS WHERE PID=1;
+	
+BASICALLY, the above delete operation is not allowed.
+
+While creating a foreign key, if we did not mention this, it choose "RESTRICTED" option
+
+ON DELETE RESTRICT			--DEFAULT option
+ON DELETE CASCADE
+ON DELETE SET NULL
+
+
+----------------------
+All of you open work bend (mysql)
+and run the script for bank
+
+bank schema has lot of tables
+	Branch
+	Customer
+	Account
+	tran_details
+
+insert lot of records ( i will give you the script )
+
+Run the script and inform
+
+
+Write a query to display account number, customer’s number, customer’s firstname,lastname,account opening date.
+
+acnumber, custid are present in account table
+fname, ltname are present in customer table
+
+How to retrieve columns from multiple tables????
+	using JOIN
+
+
+

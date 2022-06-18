@@ -1,0 +1,6 @@
+INDEX VERSION 1.131+D:\Jag\wipro\wipro1\wipro1\Java\Webinar\.metadata\.plugins\org.eclipse.jdt.core
+3904398542.index
+3874885233.index
+1500258413.index
+2479653834.index
+1598931497.index

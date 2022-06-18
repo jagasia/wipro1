@@ -1,0 +1,15 @@
+package com.wipro.hrms;
+
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import com.wipro.hrms.config.MyConfiguration;
+
+public class App {
+
+	public static void main(String[] args) {
+		AnnotationConfigApplicationContext ctx=new AnnotationConfigApplicationContext(MyConfiguration.class);
+		System.out.println("Hello world");
+		
+	}
+
+}

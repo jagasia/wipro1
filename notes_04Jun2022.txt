@@ -1,0 +1,583 @@
+Spring framework
+-----------------------
+What is Dependency Injection?
+	It is related to Aggregation or Composition. An object has a 
+		"part of" relationship or
+		"has" relationship
+	Spring framework provides lot of services, one of the important service is dependency injection.
+	When we define beans and their relationships, the dependency is injected either using constructor or setter
+		Constructor based injection
+		Setter based injection
+
+	What is loosely coupling?
+		If the dependency is an interface instead of a class, then it is possible to inject any implementation of that interface
+		Hence it is loosely coupled
+What is Autowiring?
+	Is the ability of the IOC container to automatically find the correct implementation and inject.
+
+Demo for autowiring:
+--------------------------
+	Employee - Department
+	Student - Address
+	
+	Car	-	Player	(can be audio / video player)
+
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+
+
+We will  create 2 beans
+	Car
+	AudioPlayer
+---------------------------------------------------
+package com.wipro.hrms.model;
+
+public class AudioPlayer {
+	public void play()
+	{
+		System.out.println("The audio player plays good sound...");
+	}
+}
+
+-----------------------------------------
+package com.wipro.hrms.model;
+
+public class Car {
+	private AudioPlayer ap;
+
+	public void setAp(AudioPlayer ap) {
+		this.ap = ap;
+	}
+	
+	
+}
+
+--------------------------------------------
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+<bean name="ap1" class="com.wipro.hrms.model.AudioPlayer">
+</bean>
+
+<bean name="car" class="com.wipro.hrms.model.Car" autowire="byType">
+
+</bean>
+
+   </beans>
+
+
+In the above xml configuration, notice that we do "Autowiring" by type.
+By type means, the bean name does not matter.
+	ap1 is the name of the AudioPlayer bean.
+	in Car, the AudioPlayer object name is "ap".
+
+	But since we use "Autowiring by type", the audio player is injected automatically, even when the bean name is different.
+
+
+In this project, so far, what are the beans we have?
+	Car
+	AudioPlayer
+
+
+now, lets introduce, VideoPlayer
+	
+now, we have
+	Car
+	AudioPlayer
+	VideoPlayer
+
+but car is tightly coupled with Audio player.
+To make it loosely coupled, we introduce an interface
+
+interface Player
+{
+	void play();
+}
+
+Now, both 
+	AudioPlayer and VideoPlayer classes will implement the interface Player
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+<bean name="player" class="com.wipro.hrms.model.VideoPlayer">
+</bean>
+
+<bean name="x" class="com.wipro.hrms.model.AudioPlayer">
+</bean>
+
+<bean name="car" class="com.wipro.hrms.model.Car" autowire="byName">
+
+</bean>
+
+   </beans>
+
+In the above configuration, the Car has autowire by name. 
+As per Car class, the dependency name is "player".
+
+So, any bean whose name is "player", will be injected Because, autowire by name
+
+Task:
+	download 
+		https://github.com/jagasia/spring-autowire-byname-xml
+	and run
+
+	Now, create a new project and demonstrate
+		autowire by name
+		autowire by type
+	for entities, 
+		Student
+		Address
+
+Observation:
+	1) byName, it gives more clarity of which bean should be injected as dependency
+	2) byType, is better when only 1 bean is available that can be injected.
+		When multiple beans are available, byType leads to ambiguity.
+
+------------------------
+So far, we used xml based configuration of beans. 
+The same can be done with the help of Annotations.
+	we dont use bean.xml file
+
+in xml configuration, how did we define beans?
+	using <bean> tag
+
+but in annotations, how do we define bean?
+	using
+		@Component
+		@Bean
+
+@Component
+	can be used on the class only
+@Bean
+	can be used on a method that returns bean instance
+		new operator can be used. But that is only implication but the instance will be returned by the IOC container only.
+
+Demo:
+---------
+	Same example
+		Car
+		Player
+			AudioPlayer
+			VideoPlayer
+
+	can be done using annotations instead of xml configuration file.
+
+1) Create a maven quickstart archetype project
+2) in pom.xml
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-context</artifactId>
+    <version>5.2.22.RELEASE</version>
+</dependency>
+
+3) Audio.java
+	public interface Audio
+	{
+		void play();
+	}
+
+
+
+Task:
+	download the project
+		https://github.com/jagasia/jun04-spring-autowiring-annotations-1
+
+	and use it as a template
+	Create a new maven project and create following beans and use autowired annotation
+		Student
+		Address
+	use @Component annotation for beans
+
+
+Demo:
+	i have introduced one more bean to the project
+		VideoPlayer that implements Player
+		and use @Component
+	now, Car has a Player dependency but there are 2 eligible beans that can be injected.
+	So autowiring found an ambiguity. ERROR
+
+	Solution:
+		use @Qualifier
+	@Component
+public class Car {
+	@Autowired
+	@Qualifier("audio")
+	private Player player;
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+	
+	
+}
+
+
+
+
+@Component("audio")
+public class AudioPlayer implements Player
+{
+
+	@Override
+	public void play() {
+		System.out.println("Audio player makes good sound!");
+	}
+
+}
+
+
+So far, we have not created a configuration class.
+We created configuration file, which is a xml file.
+But how to create a configuration class?
+	whenever we use annotation configuration, we can use a config class for that
+	in that case, 	
+		ctx.scan("com");
+		ctx.refresh();
+	these lines are not necessary.
+
+
+
+@Configuration
+@ComponentScan(basePackages = {"com","com.wipro"})
+public class MyConfiguration {
+
+}
+
+
+
+
+public class App {
+	public static void main(String[] args) {
+		AnnotationConfigApplicationContext ctx=new AnnotationConfigApplicationContext(MyConfiguration.class);
+		//specify the base package and refresh
+//		ctx.scan("com");	//not required now
+//		ctx.refresh();	//not required now
+		Car car=ctx.getBean(Car.class);
+		car.getPlayer().play();
+			System.out.println("Hi");
+	}
+}
+
+
+
+
+
+adding the below code in configuration class
+
+	@Bean
+	public VideoPlayer video()
+	{
+		return new VideoPlayer();
+	}
+
+IS EQUIVALENT TO 
+
+@Component("video")
+public class VideoPlayer
+{
+
+
+
+Task:
+
+Instead of @Component,
+use @Bean annotation
+
+	@Bean should be defined in the configuration class.
+
+
+--------------------
+Coming back to xml configuration,
+if the dependency is
+	List
+	Set
+	Map
+
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:p="http://www.springframework.org/schema/p"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+  <bean name="emp1" class="com.wipro.hrms.model.Employee" scope="prototype" p:id="123" p:name="Raja">
+  	<!-- <property name="id" value="123" /> -->
+  <!-	<property name="firstName" value="Raja" />		-->
+  	<property name="lastName" value="Sivakumar" />
+  	<property name="salary" value="123456.5" />
+  	<property name="department" ref="dept1" />
+  </bean>
+
+Download 
+	https://github.com/jagasia/spring-xml-config-notes
+and 
+
+-----------------------------------------
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:p="http://www.springframework.org/schema/p"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean name="student" class="com.wipro.hrms.model.Student">
+		<property name="id" value="1" />
+		<property name="name" value="Raja" />
+		<property name="marks">
+			<list>
+				<value>97.5</value>
+				<value>88</value>
+				<value>89.95</value>
+				<value>56.5</value>
+			</list>
+		</property>
+	</bean>
+
+   </beans>
+
+
+public class App 
+{
+    public static void main( String[] args )
+    {
+    	ClassPathXmlApplicationContext ctx=new ClassPathXmlApplicationContext("bean.xml");
+        Student student=(Student) ctx.getBean("student");
+        System.out.println(student);
+    }
+}
+
+
+Student [id=1, name=Raja, marks=[97.5, 88.0, 89.95, 56.5]]
+
+
+------------------------------------------------------------------
+
+Example for Set:
+------------------------
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:p="http://www.springframework.org/schema/p"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean name="student" class="com.wipro.hrms.model.Student">
+		<property name="id" value="1" />
+		<property name="name" value="Raja" />
+		<property name="marks">
+			<list>
+				<value>97.5</value>
+				<value>88</value>
+				<value>89.95</value>
+				<value>56.5</value>
+			</list>
+		</property>
+		<property name="addresses">
+			<set>
+				<ref bean="a1" />
+				<ref bean="a2" />
+			</set>
+		</property>
+	</bean>
+
+	<bean name="a1" class="com.wipro.hrms.model.Address">
+		<property name="dno" value="124A" />
+		<property name="street" value="Main road" />
+		<property name="city" value="Chennai" />
+	</bean>
+		<bean name="a2" class="com.wipro.hrms.model.Address">
+		<property name="dno" value="A451" />
+		<property name="street" value="Raja Street" />
+		<property name="city" value="Coimbatore" />
+	</bean>
+   </beans>
+
+Task:
+	download the template
+		https://github.com/jagasia/jun04-spring-collections-1
+
+	Create Department bean that contains list of Employees
+	
+
+-----------------------------------------------------------
+1) Hibernate
+2) Servlets & JSP	(web application)
+3) Spring core
+
+combine all these and create an application
+CRUD operations
+	suggest me an entity for which we can create CRUD operations?
+		Food
+			id
+			name
+			category
+			price
+
+1) We will create a maven project of "webapp" archetype
+2) hibernate, spring	dependencies to be added to the pom.xml
+3) entity
+	Food
+4) Dao
+	FoodDaoImpl
+
+
+
+
+how do you get a session?
+hibernate cfg xml
+
+What is the difference between hibernate and hibernate template?
+HibernateTemplate is designed for spring framework, because, 
+	if you see "Hibernate", the connection information is in xml only	hibernate.cfg.xml	only.  NOT using java bean
+
+	But if you see "HibernateTemplate", the connection information is obtained either in xml or java bean
+	
+
+
+Exception in thread "main" org.springframework.dao.InvalidDataAccessApiUsageException: Write operations are not allowed in read-only mode (FlushMode.MANUAL): Turn your Session into FlushMode.COMMIT/AUTO or remove 'readOnly' marker from transaction definition.
+
+Solution:
+	use @Transactional annotation on all DML methods
+
+
+Task:
+	download the  template
+		https://github.com/jagasia/jun04-food-1
+
+	complete the 
+		read
+		read(id)
+		update
+		delete
+	using hibernate template
+
+-----------------------------------------------
+Spring AOP
+--------------
+AOP stands for
+	Aspect Oriented Programming
+
+Suppose, if one enterprise creates an application (service)
+	that is used by another enterprise.
+	Then, the owner of the service, may advise the user to follow some order of invocation of methods
+
+For ex:
+	withdraw() method of ATM
+	there are some pre and post conditions
+
+before withdraw, what to do?
+after withdraw, what to do?
+
+Even if we advise, they may follow or may not.
+
+example:
+	ICICI bank account holder uses ATM card
+	in SBI ATM machine.
+
+ICICI can advice sbi to check something before granting cash
+but they may not follow
+
+So ICICI will all SBI to call withdraw method
+	but icici itself have cross cutting services
+	that will automatically be called 
+		before
+		after
+
+Spring has lot of modules,
+	Spring AOP
+
+
+TasK:
+	Identify what are the following terms (related to Spring AOP)
+Advice
+Aspect
+JoinPoint
+Pointcut expression
+
+Main component
+	in our example, we call the withdraw method of Bank class
+
+	Aspect contains advices
+		advice can be
+			before
+			after
+			through	during the call
+
+The expression used to choose which are all the methods to be adviced
+	point cut expression
+
+Join Point is the point in which our component and aspect meets
+
+
+Point cut expression is a spel 
+	Spring Expression Language
+
+
+1) create a maven project
+2) in pom.xml
+	spring context
+	spring context support
+	aop
+	aspectj
+	aspectjweaver
+
+    <dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-context</artifactId>
+    <version>5.2.7.RELEASE</version>
+</dependency>
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-context-support</artifactId>
+    <version>5.2.7.RELEASE</version>
+</dependency>
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-aop</artifactId>
+    <version>5.2.7.RELEASE</version>
+</dependency>
+<dependency>
+    <groupId>org.aspectj</groupId>
+    <artifactId>aspectjrt</artifactId>
+    <version>1.9.5</version>
+</dependency>
+<dependency>
+    <groupId>org.aspectj</groupId>
+    <artifactId>aspectjweaver</artifactId>
+    <version>1.9.5</version>
+</dependency>
+
+
+3) Create the bean / component
+	Bank
+		withdraw
+4) Create the Aspect class
+	that contains
+		beforeAdvice	(method name can be anything)
+		afterAdvice
+5) it can be xml configuration or annotation
+	first example we will be using xml configuration
+

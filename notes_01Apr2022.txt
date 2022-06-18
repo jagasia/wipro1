@@ -1,0 +1,351 @@
+so far
+data types
+programming constructs
+	if
+	switch
+	while
+	do while
+	for
+	for each
+	break
+	continue
+
+Arrays
+	single dimensional array
+	multi dimensional array
+
+
+OOPS
+	Class
+	Objects
+	OOP features
+		Inheritance
+		Encapsulation
+		Abstraction
+		Polymporphism
+
+
+Need for class:
+	those who learn C language, there is no class. You have Structures to create our own data types.
+	but C++ introduced classes
+
+
+lot of variable declared globally or inside functions
+	functions/ methods
+	variable/ data members
+
+
+A very good approach should be 
+	wrap/ cover these 
+		variables 
+		methods
+	inside a box called "Class"
+
+
+
+class wraps the data members and methods as a single reusable unit.
+class is the blueprint for creating objects
+
+	identity
+	behavior
+
+Rules for creating a class:
+
+1) class name must be a noun
+2) class name must begin with captial letter. Every first letter of the words in capital
+	ArrayIndexOutOfBoundsException
+3) a class can have non public data members			(we need to discuss Access specifiers)
+	a public variable allows unconditional access.
+	public int age;
+		now, age is vulnerable. 
+		age=-10;			//
+
+
+	private int age;
+	public void setAge(int age)
+	{		
+		if(age<0 || age>100)
+			throw new InvalidAgeException("Age must be between 0 and 100 (inclusive) only");
+		this.age=age;
+	}
+
+4) class can have properties:
+	what is property of a class????
+		any non-public data member of a class that has getter or setter or both, is called as property
+
+	in previous point, "age" is a property.
+		age only have setter (no getter), so this is a write-only property
+	if a variable has only getter, then it is read-only property
+
+	if both getter and setter are there, it is read-write property
+	if both getter and setter are not there, it is not a property
+
+5) recommended to have the class inside a package
+
+	package can be compared with a folder/ directory, when a class is like a file
+
+6) class name should be meaningful
+
+
+
+Objects:
+--------
+	Object is the instance of the class
+
+For example, Employee is a class.
+
+the object can be created in 2 steps:
+	declaration
+		Employee abdul;				//abdul is a reference variable. 		"abdul" is not an object here.
+	instantiation
+		abdul=new Employee();			//new Employee() 		this is how we create an object of Employee		(in heap)		abdul is an object of Employee
+
+i can do this in single step also:
+	Employee abdul=new Employee();
+
+why we are using "new"
+	new is an operator that will create an object in heap.
+
+it is possible to create an object without reference variable
+		new Employee();
+
+import java.util.Scanner;
+
+public class App1 {
+
+	public static void main(String[] args) {
+		String name="";
+		name=new Scanner(System.in).nextLine();
+		System.out.println(name);
+	}
+
+}
+
+
+
+	Employee abdul=new Employee();
+
+	Employee suresh=abdul;				//suresh is not a "new" object. It hold the reference to an existing object same as "abdul"
+
+
+
+
+Object Oriented Programming
+	Encapsulation				
+			
+		wrapping	the data and methods inside a class 
+		protecting
+		hiding
+		binding
+		single unit
+
+
+
+it does not mean that everything put inside a class is encapsulation.	NO
+
+class Student
+{
+	public int rollNo;			//this is not encapsulation
+}
+
+so, i am changing the above code:
+
+class Student
+{
+	private int rollNo;
+	
+	public void setRollNo(int rollNo)
+	{
+		this.rollNo=rollNo;
+	}
+	public void getRollNo()
+	{
+		return this.rollNo;
+	}
+}
+
+
+the above code can be an example for encapsulation
+
+
+Abstraction
+	do not get confused with "abstract"
+	Abstraction means, focus on essential characteristics of the object
+
+Inheritance
+	extend	the existing code
+
+	is the ability to create new classes from existing classes
+	Deriving a class from existing class
+
+	Super class				Base class
+	Sub class				Derived class
+
+
+when will a class become a super class
+	when any class inherit this class, then this class is called as a super class
+
+
+
+constructor????????????
+	if you want some code to execute whenever an object of the class is created
+	constructor is a special method in a class that is automatically called whenever we create an object of the class
+
+	constructors have same name as the class name
+	constructors do not have return type
+		class Employee
+		{
+			public Employee()
+			{
+			}
+		}
+
+
+	constructor is invoked when an object is created
+
+	suppose, when an object is created, i need to pass some values to the id, firstName, lastName, salary???? 
+	how can i pass?
+	usually, whenever i call a method, i may pass values to the method if the method has arguments.
+	similarly, a constructor also can take arguments
+
+
+
+variables declared in class level (global to the class. Means outside any method) are called instance variables.
+
+
+
+
+
+public class App2 {
+
+	public static void main(String[] args) {
+		Employee raja = new Employee();
+		Employee siva=new Employee(1, "Ram", "Kumar", 123456.0);
+		
+		//raja is also an object that does not have the values yet
+		
+		raja.setId(2);
+		raja.setFirstName("Raja");
+		raja.setLastName("Siva kumar");
+		raja.setSalary(939393.9);
+		
+		System.out.println(raja);
+		System.out.println(raja.toString()); 
+	}
+
+}
+
+
+
+		System.out.println(raja);		//is same as below			System.out.println automatically calls the toString method
+		System.out.println(raja.toString()); 
+
+
+
+how to compare 2 objects
+
+Inheritance
+
+
+public class Employee {
+	private Integer id;
+	private String firstName;
+	private String lastName;
+	private Double salary;
+	
+	public Employee() {
+		System.out.println("Hi, employee object is being created");
+	}
+
+	public Employee(Integer id, String firstName, String lastName, Double salary) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.salary = salary;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		int x;			//x is always local variable. But when i say id, there are 2 ids.
+		this.id = id;				//there are 2 "id" variables found. but in a method, id is local and 
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public Double getSalary() {
+		return salary;
+	}
+
+	public void setSalary(Double salary) {
+		this.salary = salary;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", salary=" + salary
+				+ "]";
+	}
+	
+	
+}
+
+
+
+	public class ContractEmployee extends Employee
+	{
+
+	}
+
+
+
+main
+	ContractEmployee ce=new ContractEmployee();
+	ce.setId(20);				//how is this possible?
+	ce.setFirstName("Raja");
+	ce.setLastName("Siva kumar");
+	ce.setSalary(122222.2);
+
+	System.out.println(ce);
+
+
+
+
+
+class Triangle
+{
+	String name;
+	String color;
+	calculateArea()					0.5*b*h
+}
+
+class Rectangle
+{
+	String name;
+	String color;
+	calculateArea()					l*b
+}
+
+class Circle
+{
+	String name;
+	String color;
+	calculateArea()					22/7*r*r
+}

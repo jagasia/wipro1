@@ -1,0 +1,12 @@
+package com.wipro.hrms.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.wipro.hrms.model.EmployeeDao;
+
+@RestController
+public class EmployeeController {
+	@Autowired
+	private EmployeeDao edao;
+}

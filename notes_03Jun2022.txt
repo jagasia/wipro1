@@ -1,0 +1,383 @@
+Hibernate framework
+Spring Framework
+modules:
+	Spring Core
+	Spring AOP
+	Spring MVC
+	Spring REST
+
+Now, we will learn to use hibernate in spring.
+	we have used Hibernate Framework separately in 
+		java project
+		dynamic web project
+		maven project
+			quickstart		(java project)
+			webapp		
+
+	all these demos used hibernate framework.
+
+But when it comes to Spring framework, spring module itself supports "Hibernate Template"
+when it comes to spring boot, it will be JpaRepository
+
+Spring Core
+	Dependency Injection
+	Autowiring
+
+	JdbcTemplate
+	HibernateTemplate
+
+	
+Spring framework
+	Why spring framework?
+
+Java 
+	Standard Edition
+	Enterprise Edition
+	Mobile/Micro Edition
+
+Java EE
+	included enterprise java beans
+
+EJB
+	provided whatever the hibernate and spring now a days provides
+	EJB was very complex for the programmers to implement.
+
+So, they were feeling like winter (means, difficult to live) working with EJB
+They were looking for a framework(s) that will simplify the EJB framework
+
+That is when a framework was introduced called Spring framework.
+
+Spring =  spring season
+
+Spring framework was aimed to provide simplified EJB
+
+Enterprise Java Beans
+first of all what is a java bean?
+	Java Bean is any java code that is reusable
+	Ideally a java class, ie., a pojo class 
+	that is designed in such a way, it can be plugged in any project
+
+	Java bean is a java program that is reusable
+
+	Component	was a very popular term used in many languages, which is close to java bean
+
+bean = component
+	@Bean
+	@Component
+
+
+
+Enterprise Java Bean 	=	Java Bean + services
+
+what services?
+	life cycle management
+	persistence
+	transaction management
+	scalability
+	security
+
+These services were provided by EJB
+	These are called as "generic" services.
+
+When the programmer is focusing only on
+	application specific services
+
+
+In EJB, the generic services were provided by EJB container
+
+Now, in spring framework, the generic services are provided by IOC Container.
+
+What is IOC?
+	Inversion of Control
+		means, we are providing the convenience for the user to choose the best implementation of an interface by themselves
+
+class Sony
+{
+{
+
+class Car
+{
+	Sony sony;
+}
+
+The above class Car has a "tightly coupled" audio system called Sony. The car is rigid that always comes with sony player.
+Why it is called as tightly coupled?
+	it is declared as a Sony class object. That is fixed and not changeable.
+
+consider the solution:
+
+interface Audio
+{
+}
+
+class Sony implements Audio
+{}
+
+class Jbl implements Audio
+{}
+
+
+class Car
+{
+	Audio audio;	//here, audio is loosely coupled. Because, we can inject either Sony / Jbl here
+}
+
+This car company, provides "Inversion of control" to the customer.
+I am not deciding which audio system to be injected to the car. You decide. 
+
+whatever example, we have seen above, are already there in java.
+
+interface, and its implementing class are already there in core java. Why we call them as spring framework IOC?
+
+
+Spring comes here in a role called "Dependency Injection"
+
+here, audio is the dependency for the Car
+to inject the dependency, we can use
+	setter (or)
+	constructor
+
+Setter based Injection
+Constructor based Injection
+
+
+Aggregation or Composition relationship
+
+aggregation
+	means, 2 objects can exist independently and also they can be related 
+
+Product exist independently
+Customer exist independently
+
+Sales
+	customer
+	product
+
+they are related now but they exist independently
+
+But Composition means,
+	A has B but B cannot exist independently
+
+Customer
+	Address
+
+Address cannot exist independently
+This is Composition
+
+An object contols the life cycle of the child object
+
+in aggregation / composition relationship
+
+An object has a child object
+
+now, in Spring framework,
+	the life cycle of the object (bean) is controlled by framework
+
+Hence, the child object also will be constructed or destroyed by the framework only
+
+I define beans (either in xml configuration or annotation)
+i will be defining the beans.
+i will be able to define the relationship of the beans also
+
+<bean>
+	<property>
+</bean>
+	the above configuration defines setter based injection
+
+
+<bean>
+	<constructor-arg>
+</bean>
+	the above configuration defines constructor based injection
+
+
+<bean	name=""	class=""	autowire="byType" >
+	the above configuration defines autowiring
+
+notice that in the above, we will not be defining the
+	dependencies using <property> or <constructor-arg>
+
+From the java class, the setter/ cons based injection is chosen automatically
+
+Why we define the beans, 
+	because, we want the spring framework to 
+		take care of life cycle of the bean
+
+construct
+passivate
+activate
+destroy
+
+
+scalability is the ability to handle growing/ reducing needs
+
+life cycle management of the bean is possible only
+	if we obtain the bean instance from IOC container
+		getBean method
+
+if we create an object of the bean class, it is not possible container to scale.
+
+Demo:
+--------
+We can create a core java project and add spring jar files
+	and create xml configuration
+	and define beans there
+	and get bean from context
+
+but it is very difficult to manage .jar files
+the size of the project increases by the jar files
+every project will have their own set of jar files leading to disk space
+
+Hence we will use maven project
+
+Only 1 demo, i will show you using .jar files (instead of maven)
+
+1) create a java project
+2) name it as jun03-spring-jars-demo
+3) add spring jar files to the project
+	right click -> properties -> java build path
+	or
+	right click -> build path -> configure build path
+
+	add external jars
+		select the jar files
+
+4) create the bean classe(s)
+	Employee.java
+		id
+		firstName
+		lastName
+		salary
+
+
+5) create a configuration file	xml file
+	spring.xml
+	bean.xml
+	applicationContext.xml
+
+	any of the above names is fine
+
+6) App.java
+	main method
+		ClassPathXmlApplicationContext ctx=new ClassPathXmlApplicationContext("bean.xml");
+		//Employee employee = ctx.getBean(Employee.class);
+		Employee employee=(Employee) ctx.getBean("emp");
+		System.out.println(employee);
+
+
+
+TasK:
+Create a java project and add the hibernate jars to the build path.
+Create a java bean "Student" that have id, name, address, phone
+create a bean.xml file and configure a bean named as student
+in App.java
+	get bean from context 
+	and display the bean
+
+
+
+
+
+
+1) copy the jar files to your project foler
+	bin folder
+
+2) right click project
+	properties
+		build path
+			add external jar
+
+	
+Look at the observation:
+
+		ClassPathXmlApplicationContext ctx=new ClassPathXmlApplicationContext("bean.xml");
+//		Employee employee = ctx.getBean(Employee.class);
+		Employee e1=(Employee) ctx.getBean("emp");
+		Employee e2=(Employee) ctx.getBean("emp");
+		e1.setFirstName("A");
+		e2.setFirstName("B");
+		System.out.println(e1);
+		System.out.println(e2);
+
+
+The output is:
+Employee [id=123, firstName=B, lastName=Sivakumar, salary=123456.5]
+Employee [id=123, firstName=B, lastName=Sivakumar, salary=123456.5]
+
+
+Why both the firstName of e1 and e2 are same?	B
+
+The problem is 
+	e1 and e2 refers to same memory. Both are same objects
+	Both are reference variables for same object only
+
+This problem occurs because, the bean is By default a "Singleton" bean
+
+You get any number of instance (object) for a particular bean, 
+you get the same instance only. 
+
+What is Singleton?
+	a class that has only one object only. 
+
+A bean is by default, a singleton bean. To change that to "prototype", we should 
+  <bean name="emp" class="com.wipro.hrms.model.Employee" scope="prototype">
+
+There are some interview questions on Spring core:
+1) What are the different scopes of bean
+	singleton		(by default)
+	prototype
+
+2) What are the types of dependency injection:
+	setter based injection		<property>
+	constructor based injection	<constructor-arg>
+
+3) What are the types of autowiring:
+	byName
+	byType
+
+
+
+
+
+
+Task:
+	Download the project
+		https://github.com/jagasia/jun03-spring-1
+	and follow same method to solve the below problem:
+
+	Student bean
+		id
+		name
+		address	(refers to Address bean)
+
+	Address bean
+		dno
+		street
+		city
+
+
+xml configuration
+
+value
+ref
+
+what is p schema
+
+property
+constructor-arg
+
+what to do if the dependency is a collection?
+	class Department
+	{
+		private Integer id;
+		private String name;
+		private List<Employee> employees;	
+	}
+
+
+how would you represent the List<Employee> in xml configuration?
+	List
+	Set
+	Map
+
+how to do that???????

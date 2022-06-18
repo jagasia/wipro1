@@ -1,0 +1,30 @@
+package com.wipro.hrms;
+
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.jdbc.core.JdbcTemplate;
+
+/**
+ * Hello world!
+ *
+ */
+public class App 
+{
+    public static void main( String[] args )
+    {
+//    	DriverManagerDataSource dataSource=new DriverManagerDataSource();
+//    	dataSource.setUrl("jdbc:mysql://localhost:3306/wipro3");
+//    	dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+//    	dataSource.setUsername("root");
+//    	dataSource.setPassword("");
+//    	
+//        JdbcTemplate jt=new JdbcTemplate();
+//        jt.setDataSource(dataSource);
+//
+    	ClassPathXmlApplicationContext ctx=new ClassPathXmlApplicationContext("bean.xml");
+    	JdbcTemplate jt=(JdbcTemplate) ctx.getBean("jt");
+    	
+    	
+        int no = jt.update("INSERT INTO Branch VALUES(5,'Navi Mumbai','Mahape branch')");
+        System.out.println(no+" row(s) affected");
+    }
+}

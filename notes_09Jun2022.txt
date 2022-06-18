@@ -1,0 +1,165 @@
+Yesterday we created a spring mvc project
+	lets continue from there
+
+Signup form when submitted, it should redirect to OTP page
+
+if you want to send email from a java program,
+	then gmail should allow "Less secure app access"
+	this is normally OFF
+	we have to turn it on.
+
+login to gmail 
+
+manage my account
+	search:	less secure app access
+
+
+1) xml
+2) annotation
+
+annotation is your choice
+
+<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.47</version>
+		</dependency>
+<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>5.2.7.RELEASE</version>
+		</dependency>
+
+
+Task
+	convert all the configuration from class to xml
+	<bean>
+	
+
+Spring boot
+---------------
+
+What is spring boot
+	spring boot framework is on the top of spring framework. It is not entirely different from spring at all.
+	boot means bootstrap (not bootstrap we learnt in UI), some provision is ready, just need to bootstrap.
+
+advantages:
+	1) we can create a spring application without a need for IDE like eclipse / sts/ intellij
+	we can obtain a project from spring initializr
+		https://start.spring.io/
+
+	this is a website and also there is a web service (that can accessed from spring tool suite)
+		in sts, File -> New -> Spring starter project	(we are using spring initializr web service)
+
+	2) we can run the project without a need for eclipse or sts
+		normally how do we run a dynamic web project?
+			right click project -> run as -> Run on server
+		what happens if we do not have eclipse in a computer. How do we run a web application?
+			A spring boot application can be run in cmd prompt also. Because, there is a main method that can be run
+			that main method can start apache tomcat and deploy your project also
+
+	3) built - in Apache tomcat server
+		we run a java project main method, that will start apache server and deploy application
+	
+	4) Spring boot promotes 
+		Convention over Configuration
+			that means, we dont need to do much configuration when we follow convention
+			convention means, guidelines
+		ex:	
+			if you put your classes inside the base package or its sub package, we do not need to define
+				@ComponentScan(basePackage=
+			what is base package?
+				the package that conatins our Application file that has main method, that is the base package
+			while creating the project, we mention the group id
+
+	5) zero xml configuration model
+	
+	6) Opinionated POM
+		you will see the pom.xml dependencies very meaningful or understandable
+			starter dependencies	(combined dependencies)
+
+	7) no need of war file for web applications
+		in spring boot, the web applications are also created as stand alone applications.
+		when we run main method, it will start server
+	
+	8) Auto configuration
+		
+
+	9) built in support for JSON
+		REST api methods return java objects, then they are converted automatically into JSON
+		we were doing that using GSON in spring. But in spring boot, it is automatic
+
+
+
+Task:
+	Identify the advantages of Spring boot framework.
+
+
+Demo:
+	First demo in spring boot should be:
+		Create a spring boot application
+		and run
+
+
+	A spring boot application can be created from
+
+	1)	start.spring.io
+
+			this is called as spring initializr
+	
+	2) If we have spring tool suite, we can also use 
+		File -> New -> Spring starter project
+	
+	
+In this demo, we use spring initializr
+	start.spring.io
+
+Project:		Maven Project
+Language:		Java
+Spring boot:	2.7.0
+Group:		com.wipro.hrms
+Artifact:		jun09-boot-1
+Name:		<<auto populated>>	skip this
+Description:	anything
+Package name:	same as group id
+Java:		8
+
+Click the Generate button
+
+the project will be downloaded as zip file to downloads folder.
+
+
+Task:
+-------
+	create your first spring boot application now using spring initializr
+
+jun09-my-project
+	in main method, print hello world and run
+
+
+Run the project in cmd prompt
+
+without using eclipse/ any ide,
+run the project
+
+------------------------
+Steps for demo2:
+
+1) go to spring initializr
+	start.spring.io
+2) create a spring boot application
+
+3) unzip the project that is downloaded
+
+4) go inside the folder where pom.xml is present
+
+5) go cmd
+
+6) mvn clean install
+	this will create a .jar file in target folder
+7) go inside the target folder
+	cd target
+
+8) java -jar jun09-demo-2-0.0.1-SNAPSHOT.jar
+
+The spring boot app now, runs

@@ -1,0 +1,5 @@
+package com.wirpo.hrms.controller;
+
+public class FoodController {
+
+}

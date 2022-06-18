@@ -1,0 +1,19 @@
+package com.wipro.hrms.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+
+import com.wipro.hrms.api.ProductApi;
+import com.wipro.hrms.entity.Product;
+
+@Controller
+public class ProductControll {
+	@Autowired
+	private ProductApi pa;
+	
+	public void showProductPage(@ModelAttribute("product") Product product)
+	{
+		
+	}
+}

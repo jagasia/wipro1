@@ -1,0 +1,26 @@
+<form action="">
+    User Name: <input type="text" name="username" id="" class="form-control" [(ngModel)]="username">
+    Password: <input type="password" name="password" id="" class="form-control" [(ngModel)]="password"><br>
+    <input type="button" value="Login" class="btn btn-success" (click)="fnLogin()">
+    &nbsp;
+    <input type="reset" value="Reset" class="btn btn-warning">
+</form>
+{{str}}
+<br>
+{{str| reverse}}
+<br>
+{{username}}
+<br>
+{{username | reverse}} 
+<br>
+{{username | uppercase}}
+
+{{username | titlecase}}
+
+{{f | number:'3.0-2'}}
+<br>
+{{arr | slice:-2}}
+<br>
+{{ today | date:'dd-MMM-yyyy'}}
+<br>
+<!-- {{ 'abcd' | length}} -->

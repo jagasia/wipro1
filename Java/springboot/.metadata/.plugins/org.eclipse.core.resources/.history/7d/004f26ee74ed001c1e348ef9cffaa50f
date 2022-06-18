@@ -1,0 +1,18 @@
+package com.wipro.hrms.ws;
+
+public class CalculatorImpl {
+	public int sum(int i, int j)
+	{
+		return i+j;
+	}
+	
+	public int difference(int i, int j)
+	{
+		return i-j;
+	}
+	
+	public int product(int i, int j)
+	{
+		return i*j;
+	}
+}

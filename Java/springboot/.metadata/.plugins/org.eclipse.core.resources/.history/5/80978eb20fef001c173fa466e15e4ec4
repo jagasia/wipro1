@@ -1,0 +1,5 @@
+package com.wirpo.hrms.entity;
+
+public class Food {
+
+}

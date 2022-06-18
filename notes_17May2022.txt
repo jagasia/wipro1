@@ -1,0 +1,310 @@
+Source code management in Git
+
+What should we download and install for git?
+	All of you check in your pc, in cmd prompt
+		git --version
+
+if you find that git is not yet installed in your system,
+
+download git 
+	https://git-scm.com/download
+
+install git
+
+then check in cmd
+	git --version
+
+------------------------------------------------
+Create an account in GitHub.com
+	if account is not there already, you need to signup
+
+	email id is the username
+
+complete this process of creating a git hub account
+---------------------------------
+
+After creating account in github, put your git hub email id in chat
+
+emails:
+
+diptopravajana@gmail.com
+spandanayeturi199@gmail.com
+devaralakavya@gmail.com
+binnymaloth369@gmail.com
+nalajalakarthik22@gmail.com
+188r1a1206@gmail.com
+tejaswinicheruku59@gmail.com
+
+
+I am going to create a git repository
+and add the above email ids as collaborators
+
+They can also push content to my repository
+we can see lot of branches
+
+means, each of these collaborators will push source code to this repository
+
+How is git different from google drive/ onedrive/ dropbox?
+
+Suppose, you want to share some files with other. What is your favorite method to share files with others?
+	google drive/ onedrive/ dropbox
+
+How is git different from them?
+
+The above tools allow us to share the files.
+But they do not allow us to collaborate.
+
+What is collaboration?
+	Multiple users are able to push content into same repository/folder.
+	Like a Shared path.
+		in n/w, a shared path is used by multiple users across multiple computers.
+
+	But in internet? 
+		Git allows us to work like the same
+
+But more than that, we can trace the changes
+	what is added newly
+	what is removed
+	what is updated
+
+green color denotes, newly added content
+red color denotes, removed content
+
+i can see my version of content	(my branch)
+i can see your version of content	(your branch)
+
+	git config --list --show-origin
+
+set up global variable
+	git config --global user.name "yourGitUserName"
+	git config --global user.email "yourGitEmail"
+
+	(check c:\users\yourname\.gitconfig 		(or)
+
+	git config --list --show-origin
+
+
+
+Task:
+set global variables
+	name
+	username
+
+check if it is configured properly
+
+	git config --list --show-origin
+
+
+Repository
+--------------
+	Remote repository
+	Local repository
+
+
+
+1) A folder in our system is a local repository
+2) A folder in git hub.com is a remote repository
+
+now, we can sync local and remote repositories
+	what is synchronization?
+		we know what is upload
+		we know what is download
+
+		sync is both
+
+	but done separately using
+		pull
+		push
+
+tell me what is push?
+	local -> remote
+
+what is pull?
+	remote -> local
+
+sync state means,
+	whatever i have in my local repository is matching with the remote repository
+
+
+Task:
+------
+Create a folder in your computer
+1) i have created a folder 
+	D:\Jag\May17
+2) Create a repository in github.com	(after logging in using your credentials)
+	github.com/jagasia/may17
+3) Notice the quick setup commands generated
+
+https://github.com/jagasia/may17.git
+-----------------------------------------------
+echo "# may17" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/jagasia/may17.git
+git push -u origin main
+----------------------------------------
+git remote add origin https://github.com/jagasia/may17.git
+git branch -M main
+git push -u origin main
+
+
+
+
+git init
+	this command creates a .git folder (invisible folder)
+	this acts as a config file that will note down all your activities
+		we add 
+		we commit
+		we create branch
+		we add remote origin
+		we push
+		we pull
+
+			everything is recorded in the .git folder
+		so the time when you commit is noted. i can commit at 6:56 pm and push at 7 pm. but in remote repo, you will  see 6:57 pm because that is the commit time.
+
+
+
+Task:
+	create a folder in your system
+	create a repository in git hub
+	in folder, you can create a text file and type something
+
+	push the content to remote repository
+
+
+Task:
+------
+	Now, do some changes in the text file and push it to the same repository
+
+	1) git add .
+	2) git commit -m "second commit"
+	3) git push -u origin jag
+
+	Now, refresh remote repository
+	open the file
+		click on the latest commit
+
+		see the newly added content in green color
+
+	Removed contents are found in red color.
+
+Are you able to witness "Source code" versioning
+
+
+So far, all of this are done by same author.
+Same branch.
+
+One user, can also push multiple branches
+
+Task:
+	Create another file and push it as a different branch
+
+in cmd:
+	git switch jag
+	dir
+
+see the files available
+	only 1 file
+
+	git switch jag2
+	dir
+
+seet the files available
+	there are 2 files
+
+
+
+Task:
+	git switch jag2
+	git checkout jag
+
+Identify the difference between "git swtich" and "git checkout".
+
+git checkout can restore changes to certain commit
+
+
+
+
+Now, we have multiple branches
+we need to merge these branches
+
+
+POD
+	Point Of Delivery
+
+A project team has 5 members
+	each are called as POD members
+	1 member is called as POD leader
+
+This POD leader, creates an empty project 
+	ex:
+		Spring starter project
+		React project
+
+this empty project is pushed into the git repository
+and the link is shared with the team
+
+Each pod member, works in the pulled project in their computer.
+They will push the changes in their branch.
+
+so as a pod leader, 
+	i can pull the changes to my computer.
+	I will see 5 branches
+
+---------------------------------------------------------
+Collaboration
+----------------
+
+git init		(do this only once.		Only if you want to erase some added/committed thing before push, do reinit using git init/ delete .git 				folder and git init)
+
+git add .
+git commit -m "your message"
+git remote add origin https://github.com/jagasia/may171.git
+git branch -M <<your branch name>>
+git push -u origin <<your branch name>>
+
+
+
+
+
+binny:
+	create Binny.java class in the project
+
+karthik:
+	create Karthik.java
+
+each collaborator to create their own java file in the base package
+
+push using your branch name
+
+
+
+1) decide a folder/ create a folder (empty folder)
+	create one empty folder. Ensure that this folder is not a part of any parent which is push to git
+	git is very smart and identify if the parent is sync with a git.
+	So create an entirely new folder
+2) pull my repo to this folder
+	git clone https://github.com/jagasia/may171.git
+3) now you got that empty project in this folder
+	Open in eclipse/sts
+	How?
+		the containing folder should be the "workspace"
+		If already sts is open in someother workspace, then use File -> Switch Workspace
+4) create the .java file
+5) cmd:
+
+git init
+git add .
+git commit -m "your message"
+git remote add origin https://github.com/jagasia/may171.git
+git branch -M <<your branch name>>
+git push -u origin <<your branch name>>
+
+
+git commit -m "first commit"
+git remote add origin https://github.com/jagasia/may171.git
+git branch -M jana
+git push -u origin jana

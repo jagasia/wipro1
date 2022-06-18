@@ -1,0 +1,516 @@
+Reading and Writing data from files:
+--------------------------------------------
+IO		
+	Input Output
+
+	not only means for files.
+
+	Inputs can be obtained from various sources
+		file
+		keyboard		System.in
+		network
+		buffer
+
+	Ouput can be sent to
+		file
+		monitor		System.out
+		network
+		buffer
+
+java.io	package
+
+IO Streams
+the inputs and outputs can be 2 types
+	character/	text
+	binary/	byte
+
+Character based Input operations, we use
+	Readers
+Character based Output operation, we use
+	Writers
+
+Binary input operations,
+	InputStream
+Binary output operations,
+	OutputStream
+
+java.io package has several classes for different purposes:
+	every class is different.
+
+
+
+FileInputStream
+	what is this class?
+		to read bytes from a File
+
+BufferedInputStream
+		to read bytes from buffer
+
+FileReader
+		to read characters from file
+
+ObjectInputStream
+		to read objects from a stream (NOT VERY CLEAR, from where it is going to read from)
+
+There are some streams which are called as NODE stream
+	they point to a definite node.
+		ex:
+			FileInputStream
+			FileReader
+			FileOutputStream
+			FileWriter
+			System.in
+
+There are some stream which are called as FILTER stream
+	they work on other streams
+		ex:
+			ObjectInputStream		reads data as objects, but from where/????? from another stream
+			DataInputStream		reads data as primitive data types 
+			BufferedInputStream		read bytes with a buffer size
+			BufferedReader		read characters from another stream
+
+	ObjectInputStream ois=new ObjectInputStream(new FileInputStream(f));		//object input stream works on another stream
+
+
+File
+	what is a file?
+		stored  data	i store data in arrays. or variables. How does file differs from a variable?
+		collection of data	i know collections like ArrayList. How does file differs from array list?
+
+		what is the difference between memory and storage?
+		memory is temporary, volatile
+			when program stops, or when power is gone, memory is erased
+			All variables, objects, arrays, collections, we create are volatile.
+		storage is permanent. 
+			Files are stored in secondary storage devices	(hard disk, pen drive)
+		
+
+	tell me some file types:
+		pdf
+		jpg
+		gif
+		png
+		xls
+		doc
+		txt
+		
+	in my opinion, there are only 2 categories of files
+		text file
+		binary file
+
+	except .txt file, everything else is binary file.
+
+
+	i create a file using Excel software, 
+	i should open the file later, using Excel software
+
+	if i open the file using notepad, how it will be?????	
+		blunder. That is not going to help
+
+	Similarly, if i create a file using java program,
+	i access the file using java program only.
+	BUT text files can be opened using text editors like notepad
+
+
+File is in secondary storage device, and any operation, we do using program, (read/ write) cannot be done directly in the secondary storage.
+We need to represent the file as an object in memory. 
+All operations can be performed only on the object in the memory.
+
+if i cannot remember the operands, i cannot do the operation (called sum)		
+
+so, computer also, needs to load the file from secondary storage to main memory as object and then only we can perform any operation (read/write)
+
+When i represent a file as an object in memory, 
+	File obj;
+
+File is a class in java.io package.
+
+File can be
+	file
+	folder		(directory)
+
+d:\jag\sameer.txt
+
+in java string literals
+	\ is an escape sequence
+
+\\	is 	\
+\"	is 	"
+
+
+list out all the files and folders present in a location:
+because, File class represents not only file, but also folders also
+
+demo:
+	list all the files and folder names of D:\\Jag
+
+TasK:
+	Write a java program to display only the files present in a specific folder (do not display folder name, display only the file names)
+
+Hint:	instead of calling "list()", call listFiles() method
+
+
+import java.io.File;
+
+public class App3 {
+
+	public static void main(String[] args) {
+		File f=new File("d:\\jag");
+		for(File x:f.listFiles())
+		{
+			if(!x.isDirectory())
+				System.out.println(x);
+		}
+	}
+
+}
+
+
+
+
+
+
+
+File handling
+----------------
+Create a file
+import java.io.File;
+import java.io.IOException;
+
+public class App4 {
+
+	public static void main(String[] args) throws IOException {
+		File f=new File("abcd.txt");
+		if(!f.exists())
+		{
+			f.createNewFile();
+			System.out.println("File not found. So we created it now");
+		}else
+		{
+			System.out.println("File already present in "+f.getAbsolutePath());
+		}
+	}
+
+}
+
+Create a folder
+
+Reading and writing files:
+------------------------------
+text/ binary
+
+binary:
+	anything other than text is binary
+
+picture
+video
+audio
+dat
+
+Example:
+	read all bytes from a picture 
+	create a new file
+	write all bytes into that file
+
+
+C:\Users\rjaga\Pictures\paratta.jpg
+
+how can we read all the bytes from this file?
+	InputStream
+		is an abstract class
+
+	FileInputStream
+		should be used to read bytes from a file
+		where do we keep the bytes that are read from the file????
+			byte array	(what should be the size of this array?)
+				length of the file	(File)
+
+after that, we need to write those bytes into a file. Which class should we use?
+	FileOutputStream
+
+
+
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+public class App6_ReadingBytes {
+
+	public static void main(String[] args) throws IOException {
+		File f=new File("C:\\Users\\rjaga\\Pictures\\paratta.jpg");
+		int len = (int) f.length();
+		byte []arr=new byte[len];
+		
+		FileInputStream fis=new FileInputStream(f);
+		fis.read(arr);
+		fis.close();
+		//-----------------------------------------------
+		
+		FileOutputStream fos=new FileOutputStream("D:\\Jag\\wipro\\wipro1\\wipro1\\roti.jpg");
+		fos.write(arr);
+		fos.flush();
+		fos.close();
+		System.out.println("Done");
+	}
+
+}
+
+
+-------------------------------
+sometimes, the file size is huge
+	a blue ray file 	8 GB
+
+	if RAM is 4 GB or even 8 GB
+
+it is not possible sometimes to keep the 
+	entire content of the file as byte array
+
+So, we read 1 byte at a time and
+	write that 1 byte into the file 
+	and repeat until there is any more byte 
+
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+public class App7 {
+
+	public static void main(String[] args) throws IOException, InterruptedException {
+		FileInputStream fis=new FileInputStream("C:\\Users\\rjaga\\Pictures\\briyani1.jfif");
+		FileOutputStream fos=new FileOutputStream("D:\\Jag\\wipro\\wipro1\\wipro1\\images\\briyani2.jpg");
+		int data=-1;
+		while((data=fis.read())!=-1)
+		{
+//			Thread.sleep(10);
+			fos.write(data);
+			fos.flush();
+		}
+		fis.close();
+		fos.close();
+	}
+
+}
+
+
+
+
+---------------------------------------------
+What is the java.io class that is used to write text data into a file	
+	FileWriter
+and read text data from a file
+	FileReader
+
+Task:
+	Write a program to get the following inputs from the user
+		Name
+		Address
+	Store this information in a text file
+
+
+
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class App8 {
+
+	public static void main(String[] args) throws IOException {
+		File f=new File("D:\\Jag\\wipro\\wipro1\\wipro1\\sameer.txt");
+		FileReader fr=new FileReader(f);
+		int i=-1;
+		while((i=fr.read())!=-1)
+		{
+			System.out.print((char)i);
+		}
+	}
+
+}
+
+
+
+
+
+--------------------------------------------
+Scanner
+	can also be used to read from a file
+		Scanner sc=new Scanner(System.in);
+
+
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+public class App9 {
+
+	public static void main(String[] args) throws FileNotFoundException {
+		File f=new File("D:\\Jag\\wipro\\wipro1\\wipro1\\sameer.txt");
+		Scanner sc=new Scanner(f);
+		String str="";
+		while(sc.hasNext())
+		{
+			str=sc.nextLine();
+			System.out.println(str);
+		}
+	}
+
+}
+
+-----------------------
+Task:
+	download the txt file from
+		https://github.com/jagasia/wipro1/blob/jag3/AllCityMonthlyRainfall.txt
+
+	it is a csv file.
+	read the lines 1 by 1 using Scanner
+	and in each line, display the 
+		zipCode, cityName and then the average of the given marks
+
+
+
+10002,New York,24,15,17,16,11,10,9,4,24,36,40,32
+99501,Alaska,14,24,36,40,27,16,15,34,15,10,9,32
+20019,Washington,11,20,12,20,10,15,20,21,19,10,11,12
+30381,Atlanta,25,26,23,20,21,22,21,21,20,19,18,11
+27565,Oxford,6,7,11,14,9,8,14,15,9,9,10,11
+85054,Phoenix,12,11,12,11,10,14,15,14,15,12,10,9
+90080,Los Angeles,6,5,4,5,4,5,6,8,4,5,9,4
+
+
+
+
+
+
+
+
+D:\Jag\wipro\wipro1\wipro1\AllCityMonthlyRainfall.txt
+
+
+
+
+
+
+
+
+
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+public class App10 {
+
+	public static void main(String[] args) throws FileNotFoundException {
+		File f=new File("D:\\Jag\\wipro\\wipro1\\wipro1\\AllCityMonthlyRainfall.txt");
+		Scanner sc=new Scanner(f);
+		while(sc.hasNext())
+		{
+			String line=sc.nextLine();
+			String[] arr = line.split(",");
+			//find avg of all the marks
+			int totalLength=arr.length;
+			int numbersLength=totalLength-2;
+			int marks[]=new int[numbersLength];
+			int count=0;
+			int sum=0;
+			for(int i=2;i<totalLength;i++)
+			{
+				sum+=Integer.parseInt(arr[i]);
+				count++;
+			}
+			float avg=(float)sum/count;
+			System.out.printf("%5s\t%-15s\t%.2f",arr[0],arr[1],avg);
+			System.out.println();
+		}
+	}
+
+}
+
+--------------------------------------------------
+DataInputStream
+DataOutputStream
+
+	data means primitive data
+		int, char, float, byte, short, long, double, boolean
+
+to write primitive data into a file, use DataOutputStream
+
+import java.io.DataOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class App11 {
+
+	public static void main(String[] args) throws IOException {
+		Scanner sc=new Scanner(System.in);
+		int sno=sc.nextInt();
+		float avg=sc.nextFloat();
+		boolean isSelected=sc.nextBoolean();
+		//write all of them into the file
+		FileOutputStream fos=new FileOutputStream("mydat.dat");
+		DataOutputStream dos=new DataOutputStream(fos);
+		dos.writeInt(sno);
+		dos.writeFloat(avg);
+		dos.writeBoolean(isSelected);
+		dos.flush();
+		dos.close();
+		System.out.println("Done");
+	}
+
+}
+
+
+
+
+
+
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+
+public class App12 {
+
+	public static void main(String[] args) throws IOException{
+		DataInputStream dis=new DataInputStream(new FileInputStream("mydat.dat"));
+		int i=dis.readInt();
+		float f=dis.readFloat();
+		
+		boolean b=dis.readBoolean();
+		
+		System.out.println(i);
+		System.out.println(f);
+		
+		System.out.println(b);
+		
+		
+	}
+
+}
+
+
+
+we need to use ObjectOutputStream and ObjectInputStream
+so that we can write objects into the files
+
+objects will solve this problem. 
+
+But whenever we write objects into a stream, we call it as Serialization
+whenever we read objects from a file, and store it in an object, it is called Deserialization
+
+What is serialization?
+	the process of converting an object into a series of bytes
+
+how to do?
+	this is done by ObjectOutputStream itself, but only those classes that implements Serializable interface can be serialized.
+
+Serializable is a marker interface
+	what is marker interface?
+		an interface that do not have any abstract method is called as marker interface.
+

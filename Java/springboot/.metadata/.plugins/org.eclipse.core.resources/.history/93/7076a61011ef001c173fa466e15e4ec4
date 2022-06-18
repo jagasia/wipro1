@@ -1,0 +1,20 @@
+package com.wirpo.hrms.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.wirpo.hrms.entity.Food;
+import com.wirpo.hrms.service.FoodService;
+
+@RestController
+public class FoodController {
+	@Autowired
+	private FoodService fs;
+	
+	public List<Food> retrieveAllFoods()
+	{
+		return fs.read();
+	}
+}

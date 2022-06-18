@@ -1,0 +1,320 @@
+Feedback link in chat window:
+
+Regarding Assessment on sat:
+	Hello All, Informing you again, On This saturday - 16h April, You will have MCQ Assessment. Kindly attend & it
+ is mandatory.You can attend the assessment on both from Saturday 9.00 am to Sunday 6.00 pm as well. Duration is for 1 hour.
+
+---------------------------------------------------------
+UI Essentials
+	HTML
+	HTML5
+
+	CSS
+		inline
+		internal
+		external
+
+
+CSS
+	selectors
+		element
+		id
+		class
+		universal
+		pseudo
+
+		events	during which the style should apply
+
+	how to link a css file in a html file?
+		
+
+events
+	click
+	focus
+	blur	is opposite to focus
+
+	how to select only
+		the first element
+		the last element
+		even elements
+		odd elements
+
+	ex:
+		a table has several rows
+
+		every alternate row, we need to apply a different style
+
+table
+	tr
+		td
+			
+	nth-child(even)
+
+
+color
+	#red green blue
+	range of each color can be between
+		00 and FF
+
+	Hexadecimal
+		0-9 and after 9????????
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+A
+B
+C
+D
+E
+F
+
+	00 - FF
+
+FF is the max
+00 is the min
+
+if we give 00 00 00
+a combination of red green blue can give you any color
+
+all 0 means black
+all FF means white
+
+
+
+HOVER
+	
+
+1) pseudo selector
+	first-child
+	last-child
+	nth-child(number)
+	nth-child(even|odd)
+2) event
+	focus
+	click
+	hover
+
+
+
+background:	this is a combination of many styles together
+
+
+
+background-color
+
+
+
+
+font: Arial 32px bold;
+font-family: Arial
+font-size
+
+
+
+border: solid transparent 1px;
+
+
+	border-style: solid;
+	border-color: transparent;
+	border-width: 1px;
+
+
+
+
+
+Task:
+	selectors
+		first-child
+		last-child
+		nth-child(number)
+		nth-child(even|odd)
+	colors
+	background
+	border
+
+
+-----------------------------
+Bootstrap
+-----------
+	Bootstrap is an application of CSS, Javascript, Jquery
+
+suppose, i have created a css file
+	that contains style for 
+		p
+		div
+		h1
+		span
+		table
+		nav
+		a
+
+	and many common elements
+
+YOU JUST NEED TO REFERENCE
+	link that CSS File in your html page
+
+id
+class
+element
+
+<input type="button" class="class1 class2 class3" />
+
+1) use bootstrap cdn
+	referring to an online URL for the bootstrap.css		bootstrap.min.css
+2) local copy of bootstrap.css
+
+
+bootstrap Typography
+
+
+Bootstrap treats a page as 12 column grid
+----------------------------------------------------
+
+Scaffolding
+	basic structure of a web page
+		we are no more using tables for scaffolding
+
+
+
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+
+Semantic
+	success			green
+	info			blue
+	warning			orange
+	danger			red
+	primary			
+	default
+
+	
+
+Task:
+	create a html file and refer to the bootstrap CDN
+	button
+	textbox
+	jumbotron
+	row	
+		3 columns
+
+	Identify as many classes in Typography
+
+Task:
+	Create a web page
+		contains 3 rows
+		i) Jumbotron
+			image/ logo
+			title of website
+		2) nav bar
+		3) login form
+		4) table
+			title row
+			every alternate row
+			mouse over a row, that row should be highlighted
+			table should have border
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="jumbotron">
+        <h1 class="text-center">Title here</h2>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-3">
+            <form class="container-fluid">
+                User Name: <input type="text" name="" id="" class="form-control">
+                Password: <input type="password" name="" id="" class="form-control">
+                <br>
+                <input type="button" value="Login" class="btn btn-success">&nbsp;
+                <input type="reset" value="Reset" class="btn btn-warning">
+            </form>
+        </div>
+        <div class="col-md-3"></div>
+        <div class="col-md-3"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>S.No.</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Ram</td>
+                        <td>Kumar</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Zaheer</td>
+                        <td>Khan</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Abdul</td>
+                        <td>Raheem</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Ramesh</td>
+                        <td>Kanna</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Suresh</td>
+                        <td>Kumar</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Ram</td>
+                        <td>Prakash</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</body>
+
+</html>

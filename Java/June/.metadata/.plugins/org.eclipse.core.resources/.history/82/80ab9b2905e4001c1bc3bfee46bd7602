@@ -1,0 +1,22 @@
+package com.wipro.swiggy;
+
+import org.hibernate.SessionFactory;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.hibernate5.HibernateTemplate;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+
+public class App {
+
+	public static void main(String[] args) {
+		DriverManagerDataSource dmds=new DriverManagerDataSource();
+		
+		LocalSessionFactoryBean sf= new LocalSessionFactoryBean();
+		HibernateTemplate ht=new HibernateTemplate();
+		
+		
+		
+		
+		System.out.println("Hello world");
+	}
+
+}

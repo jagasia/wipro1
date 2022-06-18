@@ -1,0 +1,10 @@
+INDEX VERSION 1.4+D:\Jag\wipro\wipro1\wipro1\Java\spring\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+641628717.index
+1231328724.index
+1188712287.index
+3862636712.index
+3571237866.index
+3435648363.index
+3875306065.index
+2924577507.index
+4121499686.index

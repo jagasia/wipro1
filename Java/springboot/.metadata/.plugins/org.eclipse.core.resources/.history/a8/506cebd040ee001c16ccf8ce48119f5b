@@ -1,0 +1,15 @@
+package com.wipro.hrms.controller;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.core.Response;
+
+@Path("/")
+public class MyController {
+	
+	@GET
+	public Response home()
+	{
+		return Response.status(200).entity("Hi welcome to our rest api").build();
+	}
+}

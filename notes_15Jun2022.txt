@@ -1,0 +1,206 @@
+Spring Security
+---------------------
+	basic security
+		using generateed password
+		using password configured in application.properties
+		using username and password (dummy) in UserDetailsService
+		using Spring data JPA for user repository
+
+next
+	OAuth2
+	JWT
+
+	We need to obtain the security context and find who has logged in.
+
+All the requests should not be authenticated.
+There are some URLs anybody can access. Ex: Signup	(who will login and then signup)
+
+Problem:
+	Every url in our application demands the user to login first. Then only it shows the view.
+	But "showSignup" url must be allowed without authentication.
+
+Solution:
+	we need to configure this.
+
+
+@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http
+		.authorizeRequests().antMatchers("/showLogin","/showSignup").permitAll()
+		.anyRequest().authenticated();
+	}
+
+
+
+The above configuration, provides "permit" for the specified urls to allow without authentication.
+	showLogin
+	showSignUp
+
+are allowed
+Any other urls are authenticated.
+
+
+
+  @Bean 
+   public PasswordEncoder passwordEncoder() { 
+      return new BCryptPasswordEncoder(); 
+   } 
+
+
+
+
+ @Override 
+   protected void configure(HttpSecurity http) throws Exception { 
+      http 
+      .csrf().disable()
+      .authorizeRequests().antMatchers("/register**")
+      .permitAll() .anyRequest().authenticated() 
+      .and() 
+      .formLogin() .loginPage("/login")
+      .permitAll() 
+      .and() 
+      .logout() .invalidateHttpSession(true) 
+      .clearAuthentication(true) .permitAll(); 
+   }
+
+------------------------------------------
+OAuth2
+	Open Authentication
+
+	what is the purpose of open authentication?
+		for example, 
+			Facebook, Gmail, GitHub allows other applications to login using their security authentication.
+
+	Lets see how to allow users to login to our application using 
+		Gmail
+
+
+Steps for OAuth2 using Gmail.
+	1) go to GCP
+		Google Cloud Platform
+			we need to create a project
+				we can generate
+					client id
+					client secret
+
+	go to:
+		console.cloud.google.com
+
+
+
+
+
+http://localhost:5001/callback
+
+
+
+
+
+TasK:
+	Go to console.cloud.google.com
+
+	create a project
+		dashboard
+			API & Services
+				Credentials
+					create credentials
+						choose OAuth2 client ids
+	copy the 
+		client id
+		client secret
+
+--------------------------------
+1) Create a spring boot application
+2) dependencies
+	spring web
+	spring security
+	oauth2Client
+3) application.properties
+	
+security.oauth2.client.clientId=
+security.oauth2.client.clientSecret=
+security.oauth2.client.preEstablishedRedirectUri=http://localhost:5001/callback
+security.oauth2.client.accessTokenUri=https://www.googleapis.com/oauth2/v3/token
+security.oauth2.client.userAuthorizationUri=https://accounts.google.com/o/oauth2/auth
+security.oauth2.client.tokenName=oauth_token
+security.oauth2.client.authenticationScheme=query
+security.oauth2.client.clientAuthenticationScheme=form
+security.oauth2.client.scope=profile
+security.oauth2.resource.user-info-uri=https://www.googleapis.com/userinfo/v2/me
+security.oauth2.client.useCurrentUri=false
+
+4) enable OAuth2
+	go to @SpringBootApplication
+	or
+	any @Configuration class
+
+
+
+Task:
+	create a project in GCP console.
+	download
+		https://github.com/jagasia/spring-security-gcp-demo
+	and use your client id and client secret and run the project
+
+
+-----------------------------------
+Spring security using facebook account:
+
+Exactly same method.
+
+go to 
+	https://developers.facebook.com/
+
+like we created a project in GCP 
+and generated the client id and client secret,
+
+the same way, we do in https://developers.facebook.com/
+
+	login
+		go to "My Apps"
+
+			create an app
+				go to settings (basic) and copy the client id and client secret
+
+45/5
+
+there should be 9 teams
+
+
+Any project will have something common
+
+There is a business means,
+	customer
+	product
+	sales
+
+this is common in any project
+
+Tell me how a customer is called as in
+	Hospital		-	Patient
+	College		-	Student
+	Transporation	-	Passenger
+	Real estate		-	Tenent
+	Hotel		-	Guest
+	
+Product
+	Hospital		-	Medicine, Treatment, Surgery, Medication
+	College		-	Course, Book, 
+	Transportation	-	Booking
+	Hotel		-	Booming, Room, Conference Hall, Party Hall, 
+	Restaurant		-	Menu
+
+
+
+
+
+OLX
+	buying is a service
+	selling is a service
+
+9 teams
+	i need 9 domains
+		Hospital
+		College
+		Transportation
+

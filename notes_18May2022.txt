@@ -1,0 +1,184 @@
+Yesterday we created a git repository (i created) "may171" and 7 collaborators are added to the repository.
+
+I have pushed an empty project to this repository.
+
+7 collaborators have cloned my project into their system.
+
+after cloning, each of them will add their java file into the project
+ex:
+	Jag.java
+
+Each collaborator have to push the project to this repository, in their name as branch
+
+	git config --global user.name jagasia
+	git config --gloabl user.email rjagadeeswaran@Yahoo.com
+
+	git config --global user.password "1234321"
+
+to save credentials:	
+	git config --global credential.helper store
+
+
+go to cmd (your current location should have the project)
+
+git init
+git add .
+git commit -m "first commit"
+git branch -M jana
+git remote add origin https://github.com/jagasia/may171.git
+git push -u origin jana
+
+
+----------------------------
+git clone	vs	git pull
+
+you all have done "git clone"
+
+so you got my repository as a folder that got downloaded to your system
+	repository is "may171" this is downloaded as a folder
+
+but
+
+if we use git pull 
+	the contents get pulled into the current folder
+
+you create may171 folder and go inside and pull 
+
+
+do not clone because, it is downloading the may181 repo as a folder
+
+already downloaded, fine
+go inside the folder
+	now you will see, "jag-demo-1"
+	this is the correct location
+
+if binny already pushed as "binny", now you try as "binny1"
+
+you can delete .git folder
+
+del .git
+y/n		y
+
+
+git init
+git add .
+git branch -M binny1
+git commit -m "second commit"
+git remote add origin https://github.com/jagasia/may171.git
+git push -u origin binny1
+
+
+
+all of you, even if not collaborator, can see all the branches
+you can pull
+you can merge
+
+see, if you can see 
+	Jag.java
+	Jana.java
+	Spandana.java
+
+
+
+
+
+
+git pull origin/jag
+git merge origin/jag --allow-unrelated-histories
+
+5 members in one POD
+each member pull the empty project created by the POD leader
+
+all of them contribute to the same project. But in different manner.
+
+each of them will pull before push
+
+after pull, we will be able to see the changes.
+
+until you merge, both branches are available separately.
+
+
+
+anybody can access git hub.
+
+gitlab
+
+
+Signup to Gitlab now
+
+
+Agile
+-------
+	SDLC
+
+has lot of phases
+	if we follow from 1st phase to last phase in same order, can we called it as "Waterfall model"
+Only if you have very clear idea about the project. And you have done this type of project several times, THEN only you can follow waterfall approach.
+
+But, now a days, we do projects, that are new idea
+
+Agile is a spiral model
+
+	iterative
+	multiple iterations
+
+we will have sprints
+	sprint means?
+		in cricket, you know quick single
+
+
+Sprint 1 
+Sprint 2
+
+these are example for milestones
+
+Scrum Master
+	
+---------------------------------
+JQuery
+	is an application of javascript.
+	that allows any javascript code to be used in jquery
+
+
+Imagine, if there is an external javascript file.
+	one.js
+
+is it possible to use this js file in a html file?
+
+	Yes. 
+		<script src="one.js">
+		</script>
+
+
+we can use a js file like above.
+
+
+Somebody has created a .js file and given it to us 
+we can refer that in <script src=
+
+and use it 
+
+That is JQuery
+
+JQuery can be obtained using 
+	CDN
+	local file
+
+
+how to use jquery cdn
+
+
+$(<<selector>>)
+
+
+id selector
+	#
+
+class selector
+	.
+
+universal selector
+	*
+
+
+

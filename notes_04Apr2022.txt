@@ -1,0 +1,317 @@
+import java.util.Scanner;
+
+public class App4_Shapes {
+
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("1: Triangle\r\n" + 
+				"2: Rectangle\r\n" + 
+				"3: Circle\r\n" + 
+				"4: Exit\r\n" + 
+				"");
+		int choice=sc.nextInt();
+		Shape s=null;
+		switch(choice)
+		{
+		case 1:		//Triangle
+			s=new Triangle();					//			Shape s=new Triangle();
+			
+//			s.calculateArea();
+			break;
+		case 2:		//Rectangle
+			s=new Rectangle();
+			
+//			s.calculateArea();
+			break;
+		case 3:		//Circle
+			s=new Circle();
+			
+//			s.calculateArea();
+			break;
+		default:
+			System.exit(0);
+			break;
+		}
+		s.acceptDetails();
+		s.displayDetails();
+	}
+
+}
+
+
+
+
+
+
+Employee is a super class
+Programmer is a sub class
+ProjectManager is a sub class
+
+Employee raja=null;
+raja=new Programmer();
+raja=new ProjectManager();
+
+
+can you see a dynamic polymorphism
+
+
+
+import java.util.Scanner;
+
+public class Shape {
+	private String name;
+	private String color;
+
+	public Shape() {}
+
+	public Shape(String name, String color) {
+		super();
+		this.name = name;
+		this.color = color;
+	}
+	
+
+public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	//	calculateArea()					l*b
+	public void acceptDetails()
+	{
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Name:");
+		name=sc.nextLine();
+		System.out.println("Color");
+		color=sc.nextLine();
+	}
+	
+	public void displayDetails()
+	{
+		System.out.println("Name:"+name);
+		System.out.println("Color:"+color);
+	}
+	
+	public void calculateArea()
+	{
+		//what is the formula for calculating area of a shape??????
+		//we cannot say because, Shape is abstract		(unclear)
+	}
+}
+
+
+
+
+
+
+
+
+
+What is an abstract method?
+	public abstract void calculateArea();
+
+		the above method does not have any details inside.
+
+		this is abstract method and this method must be overridden by the sub class COMPULSORILY
+
+	an abstract method must be present inside an abstract class or interface.
+
+
+What is the need for abstract method?
+	this method is declared in super class just to 
+		provide an option for dynamic polymorphism
+		force the sub classes to implement
+----------------------------------------
+Abstract class
+	the class is declared abstract so we cannot create object for abstract class
+	
+Abstract method
+	the method is declared in super class as abstract. so that it will force the sub classes to override
+
+opposite to abstract is "Final"
+
+we declare 
+	a data member as final.	Then, the data member becomes CONSTANT
+	a method as final.		Then, this method cannot be overridden by the sub classes
+	a class as final.		Then, this class cannot be inherited. In that case, all the methods in the final class also implies to be final.
+				because, class itself is final means, there is no sub class. When there is no sub class, then there is no overriding.
+
+
+a data member is declared as final is called as constant.
+	final variable !!!!!		final means constant. variable is opposite to constant.
+
+	final int COUNT=20;		//this is a constant. In java language, a constant must be FULL CAPITALS
+
+static
+final
+abstract
+
+
+
+public class App5 {			//example for final data member.		means, CONSTANT
+
+	public static void main(String[] args) {
+		final int COUNT;
+		COUNT=20;			//You are allowed to assign a value to a constant only once
+		COUNT=21;			//not allowed to assign any value to the constant.
+		
+		System.out.println(COUNT);
+	}
+
+}
+
+
+
+
+public final class String				//String class is final. Means, you cannot inherit String class
+
+public class MyString extends String			//THIS IS NOT ALLOWED	
+
+
+
+abstract
+final
+
+static
+	what is static?
+		is a keyword.
+		particular member belongs to the type itself.
+		common for all objects.
+		we can access static members of a class without even creating an object of the class
+
+static is different in c, c++ languages.
+static is different in java language.
+	In java language, we cannot declare static inside any method
+
+	static can be used at class level
+
+
+static variable
+static method
+static block
+
+
+
+static variable
+	is opposite to instance variable
+	
+
+ex:
+
+There is a class
+	for this class you create 4 objects.
+	each objects have a copy of instance varia
+
+
+public class Employee {
+	private Integer id;
+	private String firstName;
+	private String lastName;
+	private Double salary;
+	private static String companyName;	//NOT every employee has different company.
+
+
+
+NOTICE THAT "companyName" is declared as "static".
+	This means, for all the employees, the "companyName" is same.
+
+static member for a class does not belong to any particular instance of the class.
+This static member is a class member and not object member
+
+
+
+1) Inheritance
+2) Overriding
+	rule:
+3) Abstract method 
+4) Abstract class
+
+
+Overriding rules:	
+	a super class method is overridden by the sub class method. in that case, 
+	i) sub class method and the super class method signature must be same
+		what is signature?
+			number of arguments
+			type of arguments
+			order of the type of arguments
+	ii) return type also should be same
+	iii) sub class method cannot reduce the visibility
+		if super class method is public, then the sub class method must be public only. NOT LESS THAT super class visibility
+			what is the order of access specifiers
+				PUBLIC > DEFAULT	 > PROTECTED > PRIVATE
+	iv) the sub class method cannot declare with "throws" throwing additional exceptions (that are not declared in the super class method)		
+		if super class method does not throw any expection	(throws)
+		then sub class method cannot throw any expection	(throws)
+
+
+Overloading rule:
+	a class having multiple methods with same name but different signature
+	even if a super class has a method and
+	sub class has a method with same name but different signature, then it is also overloading. Because, super class method a copy is available in sub class
+
+	return type can be same or different. NO PROBLEM
+	But if return type is the only difference, then that is not allowed. There must be a difference in the signature, otherwise, a class cannot have 2 methods of same name
+
+1) Create 2 objects of a class.
+	And check if those 2 objects are equal or not.
+
+	To check if 2 primitives are equal or not, we can use == operator.
+
+	To check if 2 objects are equal????? what should we do?
+		use "equals" method
+
+
+
+when you compare 2 objects, why are we using == operator?
+
+what does == operator do?
+	== operator, compares the values of the operands if they are equal or not (if the operands are value types)
+	== operator, compares the references of the operancds, if they are equal or not (if the operands are reference types)
+
+	String is reference type. So when i compare 2 strings using == operator, their references are compared.
+
+		String str1="india";
+		String str2="india";
+		System.out.println(str1==str2); 
+
+	SURPRISINGLY, these strings hold the same reference		str1 and str2 hold the same reference
+
+	ANSWER IS true
+
+
+
+
+User u1=new User();
+User u2=new User();
+
+if(u1.equals(u2))			//		similar to str1.equals(str2)
+	//equal
+else
+	//not equal
+
+
+
+
+Name: "name"
+Website: "website"
+Mobile: "mobile"
+Founder: "founder"
+Number of Dept: "numberOfDept"
+Location: "location"
+Starting Date: "startingDate"
+
+
+SimpleDateFormat
+to convert a string into date, use sdf.parse
+to convert a date into string, use sdf.format

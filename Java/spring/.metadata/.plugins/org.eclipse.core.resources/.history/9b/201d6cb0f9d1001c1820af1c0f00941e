@@ -1,0 +1,12 @@
+package com.wipro.hrms.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
+import com.wipro.hrms.api.ProductApi;
+
+@Controller
+public class ProductControll {
+	@Autowired
+	private ProductApi pa;
+}

@@ -1,0 +1,17 @@
+<p>item-grid works!</p>
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Id</th><th>Name</th><th>Price</th><th>Category</th><th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let i of items">
+            <td>{{i.id}}</td>
+            <td>{{i.name}}</td>
+            <td>{{i.price}}</td>
+            <td>{{i.category}}</td>
+            <td><img width="100" [src]="'data:image/png;base64,'+i.picture" alt=""></td>
+        </tr>
+    </tbody>
+</table>

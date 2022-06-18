@@ -1,0 +1,127 @@
+Yesterday, we learnt 
+	Eureka server
+	Eureka client
+
+Every eureka client is actually a client of Eureka server only. But actually it is a REST api, that means, a server side app, a web service, RESTful webservice
+Every eureka client is a rest api means, a microservice
+
+@RestController
+@GetMapping
+@PostMapping
+@PutMapping
+@DeleteMapping
+
+instead of creating one rest api, we created multiple rest apis ie., based on microservices architecture.
+
+While trying to access one controller from another controller, we used feign client/ open feign.
+
+Swagger
+----------
+	is also related to REST apis/ microservices
+
+What is the need for Swagger?
+	Before REST apis were introduced, we had webservices based on SOAP
+	Simple Object Access Protocol
+
+SOAP web services, had WSDL
+	WebServices Description Language
+
+	this WSDL acts as a documentation for the SOAP Webservices
+
+Why we need a documentation for a web service?
+	The web services are meant to be called by front end applications.
+
+
+Enter your mobile number:...........................
+Enter the text here:.......................................
+	Send SMS	(button)
+
+
+sms web service
+i got SOAP webservice
+
+there are some code, we cannot write. We need to borrow from the owner of the code
+Sending sms is one such scenario, where we cannot write that code
+
+that web service, sent the SMS on behalf of us.
+
+similarly,
+i want the list of countries
+How many countries are there in Earth.
+
+imagine, there is a web service, that provides a method.
+You call that method from anywhere in the world. Using a program written in any language, running in any platform.
+
+That is the advantage of a web service.
+
+Web service is a component that runs in a web app server.
+
+that allows us to call those web methods from anywhere in the world
+
+
+wsdl
+	is the documentation for a soap webservice.
+
+Problem:
+
+But RESTful webservices, by default, do not have documentation
+
+So, we need to create documentation for our REST api.
+
+
+
+Solution:
+
+Swagger is used to generate documentation for REST apis
+
+----------------------------------
+Steps for Swagger:
+
+1) add a dependency to our spring boot app in pom.xml
+<dependency>
+    <groupId>io.springfox</groupId>
+    <artifactId>springfox-boot-starter</artifactId>
+    <version>3.0.0</version>
+</dependency>
+2) Enable swagger2 in configuration class
+	@SpringBootApplication			this itself is a @Configuration
+	@EnableSwagger2
+3) in application.properties
+	spring.mvc.pathmatch.matching-strategy=ant-path-matcher
+4) run the project
+5) http://localhost:8080/swagger-ui/	
+
+
+
+
+
+without database, we can use an arraylist
+GET
+POST
+
+
+
+1) create a spring boot application
+	pavan-rest-api
+
+	this is a .jar application (rest)
+2) lets create an entity
+
+
+
+
+Similar to postman, you can try Restlet 
+	Restlet is a browser extension
+
+
+
+Task:
+Create a REST api
+with couple of mappings like GET, POST, etc
+
+follow the steps given in chat window 6:34 pm
+and run
+
+http://localhost:8080/swagger-ui/
+
+---------------------------------------------------

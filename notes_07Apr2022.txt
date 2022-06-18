@@ -1,0 +1,271 @@
+String
+StringBuilder
+StringBuffer
+Regex
+Date and Time
+Wrapper classes
+
+-------------------------------------
+String is immutable
+	what is meant by immutable?
+		can't change
+
+
+
+String class does not allow us to inherit.	String is final	
+public class App1 {
+
+	public static void main(String[] args) {
+		String str="hello";
+		str="hell";			//hell is a different object in diff memory. we have shifted from "hello" to "hell"
+		//i cannot change the value of str. This is what you mean?
+		str="world";
+		System.out.println(str);
+	}
+
+}
+
+
+
+look at the above code, it looks like i am able to change the value of a string
+
+then how can we call the string as immutable?
+
+	str="world";	// i am not changing the value of the str. i am changing the reference of the string
+
+
+
+Employee rama=new Employee();
+Employee john=new Employee();
+
+Employee x=rama;
+x=john;
+
+Do you say that x has changed its value???
+	NO, the reference (the object itself) has changed
+	we will not say that x was rama and 
+		x is john. Both are same object????no they are diff obj
+
+
+
+
+
+
+
+
+
+int i=20;
+i=21;		i is always in same memory location
+
+Date dt=new Date();
+dt has 
+	day
+	month
+	year
+i am allowed to change the values	(without changing the ref of the object)
+Date dt1=dt;		//both dt and dt1 are ref to same memory
+
+
+String is peculiar that will change or jump to diff memory if you want to change the value
+
+in java old versions,
+	String was not stored in "heap" memory. 
+	String was stored in a memory structure called, "Permanent generation" area, 	permgen.
+
+	Garbage Collector removes memory from "heap" only.
+
+--------------------------------------------------------------------
+String str1="hello";	//string literal
+String str2="hello";
+str1==str2		//what is the output?
+
+	== operator compares the values, if the operands are value types
+	== operator compares the reference, if the operands are ref types
+
+
+int i=20;
+int j=20;
+
+i==j		the values of i and j are compared
+		bcos i and j are value types
+
+		primitives are value types
+
+Task:
+	accept an input from the user as a String
+	print the output as 
+		"Palindrome" or "Not Palindrome"
+
+Hint:	What is a palindrome?		
+		is a string which is same when read forward or reverse.
+ex:
+	Malayalam		(case insensitive)
+	Madam
+	Mom
+	Dad
+
+
+while checking if the given input is a palindrome or not?
+	did any of you thought like, if there is a method to reverse a string,
+	then we can compare, the string with its own reverse
+	if both are equal, then it is palindrome.
+
+
+
+Yes, but String class do not have "reverse" method.
+StringBuilder has
+
+StringBuilder
+StringBuffer
+
+	both these classes have exactly same set of properties and  methods
+	the only difference between StringBuilder and StringBuffer is that StringBuffer is "Synchronized". Means, StringBuffer does not allow multiple threads to access at a time.	Hence, StringBuffer enforces lock, so it is slow. 
+
+StringBuilder has "reverse" method.
+
+lets see how to solve this problem using sb
+
+
+Task:
+	Identify as many methods of StringBuilder
+
+
+
+Task:
+	Accept a sentence as input from the user.
+	Replace all the "is" into "was"
+
+
+replace(start,end,str)
+indexOf("is")
+
+
+
+
+
+
+import java.util.Scanner;
+
+public class App3 {
+
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		String input=sc.nextLine();
+		String result = input.replaceAll(" is ", " was ");
+		System.out.println(result);
+	}
+
+}
+
+
+
+String class:
+	substring
+	indexOf
+	indexOf(str,fromIndex)		means, you want to search from given index
+	lastIndexOf()			
+	charAt
+	toLowerCase
+	toUpperCase
+	toCharArray
+	equals
+	equalsIgnoreCasae
+	startsWith
+
+
+Task:
+	accept an input and tell whether the person is a Lady or Gentleman.
+
+	hint:
+		The input starts with Mr. means, a gentleman
+		The input starts with Ms. or Mrs. means, a lady
+
+		
+
+Regular Expression:
+------------------------
+	email  address
+	password
+		must contain atleast 
+			1 upper case
+			1 lower case
+			1 number
+			1 symbol
+		8 characters minimum
+
+	Employee id should be like
+		E001			Starts with "E" followed by 3 digit number
+
+	Name of the persion should 
+		start with upper case alphabet only
+		contain atleast 2 character
+		not contain any number
+
+	Pin code must be 6 digit. 	All of them are numeric digits only.
+
+	mobile number can start with 
+		+91 followed  by 0 digit number
+		
+
+
+Reg ex in java:
+	there are 2 operations that can be done in Regular Expression
+	i) check if the given string matches a pattern or not		boolean	true/false
+	ii) extract the portions of the string that matches a pattern
+		ex:
+			Please note down this number 9898989898 and contact him immediately. If that number is not reachable then call landline 			0443939393939. Thank you
+		from this above string, extract only the numbers and display
+
+
+
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class ExtractNumbers {
+
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		String input=sc.nextLine();
+		Pattern p= Pattern.compile("[0-9]+");
+		Matcher m = p.matcher(input);
+		while(m.find())
+		{
+			System.out.println(m.group());
+		}
+	}
+
+}
+
+
+Identify the symbols used in Regular Expression:-
+------------------------------------------------------------
+\d		digit
+\D		non digit
+
+
+
+in reg ex, there should be a symbol for  pattern, and multiplicity
+
+	ex:	\d{3}			3 digits
+		\d+			1 or more
+		\d*			0 or more
+		\d?			0 or 1 	optional
+
+		\d{1,3}			minimum 1, maximum 3
+		\d{1,}			minimum 1, maximum ??? unbounded		1 or more
+		
+[]	used to specify the list of possible characters that can come. One among the list
+[.]	it means . as a character. Else . is a symbol that matches with anything
+
+[aeiou]		either	a/ e/ i/ o/ u
+[a-z]		a to z
+[A-Za-z0-9]	means, an upper case or lower case alphabet or a digit	
+
+.		dot means, anything
+
+()		brackets to group an expression, so that for that group, you can specify a multiplicity
+
+|		or operator
+
+(http://)|(https://)(www.)?[A-Za-z]+[.][a-z]{2,6}([.][a-z]{2,6}){0,1}

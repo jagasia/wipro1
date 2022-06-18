@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from CalculatorImplService WSDL service -->
+
+  <service name="CalculatorImpl" provider="java:RPC" style="document" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://ws.hrms.wipro.com"/>
+      <parameter name="wsdlServiceElement" value="CalculatorImplService"/>
+      <parameter name="schemaQualified" value="http://ws.hrms.wipro.com"/>
+      <parameter name="wsdlServicePort" value="CalculatorImpl"/>
+      <parameter name="className" value="com.wipro.hrms.ws.CalculatorImpl"/>
+      <parameter name="wsdlPortType" value="CalculatorImpl"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:retNS="http://ws.hrms.wipro.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="sum" qname="sum" returnQName="retNS:sumReturn" returnType="rtns:int" soapAction="">
+        <parameter xmlns:pns="http://ws.hrms.wipro.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:i" type="tns:int"/>
+        <parameter xmlns:pns="http://ws.hrms.wipro.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:j" type="tns:int"/>
+      </operation>
+      <operation xmlns:retNS="http://ws.hrms.wipro.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="difference" qname="difference" returnQName="retNS:differenceReturn" returnType="rtns:int" soapAction="">
+        <parameter xmlns:pns="http://ws.hrms.wipro.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:i1" type="tns:int"/>
+        <parameter xmlns:pns="http://ws.hrms.wipro.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:j1" type="tns:int"/>
+      </operation>
+      <operation xmlns:retNS="http://ws.hrms.wipro.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="product" qname="product" returnQName="retNS:productReturn" returnType="rtns:int" soapAction="">
+        <parameter xmlns:pns="http://ws.hrms.wipro.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:i2" type="tns:int"/>
+        <parameter xmlns:pns="http://ws.hrms.wipro.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:j2" type="tns:int"/>
+      </operation>
+      <parameter name="allowedMethods" value="product difference sum"/>
+
+  </service>
+</deployment>

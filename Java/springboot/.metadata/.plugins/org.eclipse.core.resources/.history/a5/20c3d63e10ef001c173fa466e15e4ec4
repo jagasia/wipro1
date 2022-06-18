@@ -1,0 +1,29 @@
+package com.wirpo.hrms.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.wirpo.hrms.entity.Food;
+import com.wirpo.hrms.repository.FoodRepository;
+
+@Service
+public class FoodService {
+	@Autowired
+	private FoodRepository fr;
+	
+	public Food create(Food food) {
+		return fr.save(food);
+	}
+	public List<Food> read() {
+		return fr.findAll();
+	}
+	public Optional<Food> read(Integer id) {
+		return fr.findById(id);
+	}
+	public void update(Food food) {}
+	public void delete(Integer id) {}
+	
+}

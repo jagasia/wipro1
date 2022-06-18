@@ -1,0 +1,51 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+xmlns:context="http://www.springframework.org/schema/context"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:tx="http://www.springframework.org/schema/tx"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context.xsd
+   http://www.springframework.org/schema/tx
+   http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<tx:annotation-driven/>
+	
+	<bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+	    <property name="sessionFactory" ref="sessionFactory" />
+	</bean>	
+ 
+
+	<bean id="dmds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">		
+		<property name="url" value="jdbc:mysql://localhost:3306/wipro3" />
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="username" value="root" />
+		<property name="password" value="" />
+	</bean>
+
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dmds" />
+		<property name="hibernateProperties">
+   		<props>
+   			<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+   			<prop key="hibernate.show_sql">true</prop>
+   			<prop key="hibernate.hbm2ddl.auto">update</prop>
+   		</props>
+   	</property>
+   	<property name="annotatedClasses">
+   		<list>
+   			<value>com.wipro.swiggy.model.Food</value>
+   		</list>
+   	</property>
+	</bean>
+	
+	<bean id="ht" class="org.springframework.orm.hibernate5.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="fdao" class="com.wipro.swiggy.model.FoodDaoImpl">
+		<property name="ht" ref="ht" />
+	</bean>
+</beans>

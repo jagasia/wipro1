@@ -1,0 +1,299 @@
+Servlets & JSP
+------------------
+Java editions:
+	Java Standard Edition		(Java SE)
+	Java Enterprise Edition	(Java EE)
+	Java Mobile Edition		(Java ME)		(earlier called as Micro Edition)
+
+Core java is Java SE
+Servlets & JSP comes under Java EE
+
+What is a servlet/ JSP?
+---------------------------
+	It is a web component developed in Java language.
+
+What is the need for a web component?
+	You know HTML, CSS, Javascript, JQuery, Bootstrap. All these programs run in the browser.
+	A website/ a web application is stored in the web server. They are sent to the browser. The browser is capable of processing these programs.
+
+But a java program is not understood by a browser.
+	So, the web server should provide support for running java programs. When a web server provides runtime environment for java, then it is called as App Server/ Web App Server.
+
+ex for app server:
+	Apache Tomcat Server
+	JBoss
+	Websphere
+	Weblogic
+	
+
+Unlike HTML, javascript, 
+servlets and JSP are executed at server and the results are sent to the browser
+
+That is why, Servlets & JSP are called as server side scripting languages
+	PHP
+	VB.net
+	C#
+	
+Because, they are executed in the server.
+
+Suppose, there is a dropdownlist
+	select component
+		when i select, something, 
+		if javascript program can run in browser itself
+		but if it is servlet???	jsp??
+		it will go to server and compute and the output is sent to browser
+
+		by default, dropdownlist change event do not trigger a post back to server. we have to make it.
+
+	<input type=submit />	
+
+the form is sent to server
+
+other event like click event on a button or keyup event
+all are client side events.
+
+From client side event, we can call server side script	AJAX
+
+JSP as a view (frontend)
+
+Servlet & JSP are web components
+
+So, i said, an app server (like tomcat)
+provides runtime environment for servlets and JSP
+
+that runtime environment is called as "Web Container"
+
+Web container?
+	is a special JVM
+
+
+Lab setup:
+	download "Apache Tomcat server"
+
+just download and unzip 
+	no need for installation
+	no need for setting the env var
+
+we are going to create "Dynamic Web Project" in eclipse/sts		
+
+Which version of apache tomcat should i download?
+	first identify the version supported by your eclipse / sts
+	
+File -> New -> Project -> Dynamic Web Project
+	here, check "target runtime" and see what is the version of apache tomcat is supported. It is 9 as latest version. So we downloaded version 9
+
+
+after download, 
+	unzip
+
+and copy the location that contains "bin","lib" etc
+
+D:\Softwares\apache-tomcat-9.0.37
+
+Lets go back to eclipse/sts
+	in file -> new -> dynamic web project
+		target runtime
+			initially it is "None"
+				browse
+		and paste the location
+
+
+we have created a dynamic web project now
+
+Task:
+	Create a dynamic web project
+	add a html file
+	run the file (run on server)
+	if port 8080 is already in use,
+	change the port number and run
+
+
+
+
+Servlets:
+----------
+	a java class that extends HttpServlet	belongs to javax.servlet.http package
+
+HttpServlet is derived from GenericServlet
+
+GenericServlet belongs to javax.servlet package
+
+
+Servlet runs in server
+
+Applet runs in browser		(browser should support)
+
+
+has life cycle 
+	construction
+	service
+	destruction
+
+init, service, destroy
+
+
+service methods can be
+	doGet
+	doPost
+
+GET		from browser, we can access
+POST		<form method="POST">		or using postman
+
+Task:
+
+Lets create a servlet now.
+
+1) right click the project
+	-> new -> servlet
+
+	package:	view		(view/controller)			servlet cannot be a model
+
+2) right click the code
+	run as "Run on server"
+
+
+
+Task:
+How to call a servlet from a HTML form?
+
+	Login form
+
+		when i submit, a servlet should be called
+
+
+
+
+How can a servlet take input from the FORM?
+
+look at the signature of the service method.
+	doGet
+	doPost
+		are the service method
+
+
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	request => inputs
+	response => outputs
+
+to get input from form,
+	request.getParameter("username");
+	request.getParameter("password");
+
+what is "username" and what is "password"
+These are the name of the text boxes
+
+
+<form action="HelloServlet">
+	User Name: <input type="text" name="username" /><br/>
+	Password: <input type="password" name="password" /><br/>
+	<input type="submit" value="Login" />
+</form>
+
+
+
+http://localhost:8081/may25-demo-1/HelloServlet?username=dinesh&password=srinivasan
+
+<form>	WHEN we do not mention the method, it is by default, GET method only
+<form method="GET">
+
+
+
+
+Task:
+	Accept the username and password from the html <form>
+	and display the same by the servlet.
+
+	Hint:
+		use
+			request.getParameter
+
+
+Task:
+	create a html file "one.html"
+	create a servlet called "CalculatorServlet"
+	
+in html file
+	Number 1:
+	Number 2:
+
+	on submit, the sum of these 2 numbers should be displayed by the servlet
+
+
+
+
+A servlet can have more than 1 alias name
+
+@WebServlet({ "/CalculatorServlet", "/calc" })
+public class CalculatorServlet extends HttpServlet {
+
+
+
+Task:
+Do this same example using JSP (instead of HTML)
+
+Do not rename the file from html to JSP
+
+Right click project and add new JSP file
+
+
+The output should be displayed in the same page.
+
+In html, it is not possible to show dynamic content.
+
+But in jsp, it is possible.
+
+response.sendRedirect("one.jsp");
+
+
+
+TasK
+	In jsp file, below the form
+		display the output
+			${output}					${} means EL	Expression Language	(only for output)
+
+	In servlet
+		HttpSession session = request.getSession();
+		session.setAttribute("output", result);
+		response.sendRedirect("one.jsp");
+
+
+
+
+${param.no1 }
+	is equivalent to 
+		request.getParameter("no1")
+
+?no1=20&no2=30
+
+
+no1 is a request param
+
+in spring
+	@RequestParam
+
+Task:
+
+	while submitting the form, the servlet
+	should add them and display the output in
+	same jsp file
+
+	the jsp form should show the inputs as well as output
+
+		int x=Integer.parseInt(request.getParameter("no1"));
+		int y=Integer.parseInt(request.getParameter("no2"));
+		int result=x+y;
+//		response.getWriter().append("Served at: ").append(request.getContextPath());
+		PrintWriter out = response.getWriter();
+		out.print("The sum of  "+x+" and "+y+" is "+result);
+		HttpSession session = request.getSession();
+		session.setAttribute("output", result);
+		response.sendRedirect("one.jsp?no1="+x+"&no2="+y);
+
+
+<form action="calc">
+Number 1: <input type="number" name="no1" value="${param.no1 }" /><br/>
+Number 2: <input type="number" name="no2" value="${param.no2 }" /><br/>
+<input type="submit"  value="Add" />
+</form>
+<br/>
+${output }

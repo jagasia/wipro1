@@ -1,0 +1,8 @@
+
+Jun 08, 2022 18:34:11.40 NEW SESSION
+Jun 08, 2022 18:34:11.40 [28268:21416:0608/183411.402:ERROR:device_event_log_impl.cc(214)] [18:34:11.402] USB: usb_device_handle_win.cc:1048 Failed to read descriptor from node connection: A device attached to the system is not functioning. (0x1F)
+Jun 08, 2022 18:35:09.30 [28268:15636:0608/183509.307:ERROR:util.cc(127)] Can't create base directory: C:\Program Files\Google\GoogleUpdater
+Jun 08, 2022 19:51:21.83 [28268:21416:0608/195121.732:ERROR:device_event_log_impl.cc(214)] [19:51:21.731] USB: usb_service_win.cc:104 SetupDiGetDeviceProperty({{A45C254E-DF1C-4EFD-8020-67D146A850E0}, 6}) failed: Element not found. (0x490)
+Jun 08, 2022 19:53:36.36 [28268:21416:0608/195336.360:ERROR:interface_endpoint_client.cc(665)] Message 0 rejected by interface blink.mojom.WidgetHost
+Jun 08, 2022 19:55:37.91 [28268:21416:0608/195537.916:ERROR:interface_endpoint_client.cc(665)] Message 0 rejected by interface blink.mojom.WidgetHost
+Jun 08, 2022 20:03:09.42 [28268:21416:0608/200309.420:ERROR:interface_endpoint_client.cc(665)] Message 0 rejected by interface blink.mojom.WidgetHost

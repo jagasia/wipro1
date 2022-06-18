@@ -1,0 +1,21 @@
+package com.wipro.hrms;
+
+import java.sql.SQLException;
+
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import com.wipro.hrms.config.MyConfiguration;
+import com.wipro.hrms.model.StudentDaoImpl;
+
+public class App {
+
+	public static void main(String[] args) throws SQLException {
+		AnnotationConfigApplicationContext ctx=new AnnotationConfigApplicationContext(MyConfiguration.class);
+		StudentDaoImpl sdao=(StudentDaoImpl) ctx.getBean("sdao");
+		
+		System.out.println(sdao.getJt().getDataSource().getConnection().getMetaData().getURL()());
+		System.out.println("Hello world");
+		
+	}
+
+}

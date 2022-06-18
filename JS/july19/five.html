@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function fn1()
+        {
+            var a=20;
+            var b=30;
+            var result=addNumbers();        //a & b are actual paramters. Because, a and b are defined while calling the function
+            alert(result);
+        }
+
+        function addNumbers(x,y)    //x & y are formal parameters. Because, x and y are defined in function definition
+        {            
+            var x=x||10;            //default parameter
+            var y=y||10;
+            return x+y;
+        }
+    </script>
+</head>
+<body>
+    <input type="button" value="Click me" onclick="fn1()">
+</body>
+</html>

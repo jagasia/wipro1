@@ -1,0 +1,11 @@
+package com.wipro.ecom.config;
+
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class MyConfiguration {
+	public void dmds()
+	{
+		
+	}
+}

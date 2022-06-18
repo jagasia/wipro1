@@ -1,0 +1,247 @@
+DevOps, Cloud & Agile
+-----------------------------
+Git
+Jira
+
+
+GitHub
+GitLab
+
+and installed git in our system
+
+GitLab
+	project management tools
+		create project
+			create milestones
+				create issues and allocate to team member
+				close issues and the completion % is updated
+
+Yesterday, we have seen how to merge branches in cmd prompt
+
+in GitLab, 
+	Repository
+		Branches
+			"Merge Request"
+
+	There are 2 types of merge
+		merge and retain the branches
+		merge and remove a branch
+
+
+
+CI/CD
+	Continuous Integration
+	Continuous Deployment	
+
+
+After development,
+	we integrate and deploy
+
+Jenkins
+	which allows us to run the project
+	we can specify the command to run
+		java -jar Abcd.jar
+
+	this can run our project
+
+
+we deploy the application in server.
+after deployment, we may need to change / update the code
+
+Every time when there is a change or update,
+we do not need to redeploy the application, if
+	CI/CD pipelines are defined
+
+They will be capable of getting the code updated in the server
+	based on your git push
+
+These are used by Project management team
+
+
+---------------------------------
+Jira
+	https://www.atlassian.com/software/jira
+
+Get it Free
+	Next
+		Sign in with email
+			use your personal email
+			Full Name
+
+				click Agree
+
+	it will send confirmation email to your email
+	but sometimes, it will be found in "spam" folder
+	from spam, select "Not Spam" option
+	then come to inbox, open the email
+	click the confirmation
+
+set a password of your choice
+
+create a site name
+
+Login
+
+Choose JIRA software
+
+Create Project
+
+Epic
+Story
+Bug
+Task
+Sub-task
+
+
+From JIRA, connect to gitlab
+	for this, go to Repositories in left side pane
+
+--------------------------------------
+Task:
+
+there are few email addresses given in the chat window.
+include mine also
+	rjagadeeswaran@yahoo.com
+
+You create a project in JIRA
+	and invite team mate	(these email addresses)
+
+	Create a team and include the team mates there (use name to include (not email there))
+
+----------------------------------------
+
+JQuery
+--------
+How jquery is related/ different from Javascript
+
+JQuery is an application of javascript.
+
+It simplifies the way we code javascript programs.
+
+Ex:
+	in javascirpt:
+		document.getElementById("div1").innerHTML="<b>This is output</b>";
+
+	in jquery:
+		$("#div1").html("<b>This is output</b>");
+
+Look at the simplicity of jquery
+
+javascript				jquery
+value				val()
+value="India"			val("India")
+innerText				text
+innerHTML			html
+.style.color=red			.css("color","red")
+
+
+
+
+function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("demo").innerHTML =
+      this.responseText;
+    }
+  };
+  xhttp.open("GET", "ajax_info.txt", true);
+  xhttp.send();
+}
+
+
+$(document).ready(function(){
+    $("button").click(function(){
+        $.ajax({url: "demo_test.txt", success: function(result){
+            $("#div1").html(result);
+        }});
+    });
+});
+
+--------------------------------------------
+jquery syntax:
+
+	selector.event(handler)
+
+
+ex:
+	$("p").click(function(){	alert('hi');	})
+
+
+here,
+	selector:		p		(element selector)
+	event:		click
+	handler:		function(){}
+
+this is anonymous function that means, there is no name for the function
+
+
+ var x=document.getElementById("no1").value;
+                var y=document.getElementById("no2").value;
+                
+                var result=x+y;
+                document.getElementById("result").innerHTML=result;
+
+------------------the same code is done in jquery as follows--------------
+
+
+	var x=parseInt($("#no1").val());
+                var y=parseInt($("#no2").val());
+
+                var result=x+y;
+
+                $("#result").html(result);
+
+
+------------------------------------
+Task:
+	create 5 text boxes and whenever cursor comes inside a text box,
+	the background color of the textbox should become yellow
+
+
+Hint:
+	use focus event of the textboxes
+
+
+
+
+
+
+
+input:[type='text']:focus
+{
+	background-color:yellow
+}
+
+
+
+
+attr
+	used to change the attribute of a html element
+
+<element attribute="value" />
+
+
+Task:
+	create a login page
+
+	User Name:..................
+	Password:.................
+	show password
+
+
+The show password check box can be turn on or off
+
+if checkbox is turned on, then password should be visible
+
+
+<element attribute="value" />
+
+<input type="text" />			then the password is visible
+<input type="password" />		then the password is masked
+
+
+------------------------------
+Do you have an account in AWS?
+
+

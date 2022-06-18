@@ -1,0 +1,17 @@
+package com.wipro.swiggy;
+
+import org.hibernate.SessionFactory;
+import org.springframework.orm.hibernate5.HibernateTemplate;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+
+public class App {
+
+	public static void main(String[] args) {
+		HibernateTemplate ht=new HibernateTemplate();
+		SessionFactory sf=LocalSessionFactoryBean();
+		
+		
+		System.out.println("Hello world");
+	}
+
+}

@@ -1,0 +1,184 @@
+we have a rest api
+	the rest api allow us to do CRUD operations using different http url mapping
+		GET
+		POST
+		PUT
+		DELETE
+
+This rest api will become microservice
+for ex:
+	UserService
+		create	(signup)
+		read	(login)		validateLogin		check if username, password entered is correct
+
+	ProductService			Product is general term. 	Books, Medicine, Ticket
+		create
+		read
+		update
+		delete
+	
+	CustomerService			Customer is general term.	Passenger, Student, Patient
+		create
+		read
+		update
+		delete
+
+	SalesService
+
+	FeedbackService
+
+
+so, we will be able to create every single entity as a separate microservice
+
+Have you every heard about microservice?
+	Instead of creating a large application that has
+		several entities, repositories, service classes, controllers
+
+	why not we create them as separate REST API?
+
+a separate spring boot app for each of those services?
+
+if a single project has all those services together
+	even, UI also, 
+	view, model, controller
+
+	MVC, 
+
+MONOLITHIC APPLICATION
+
+SOAP webservices were having all the web methods in one URL
+
+But now, RESTful webservices/ REST API provides a different/ separate URL for every method
+
+
+Microservice architecture, suggests creation of these services as individual and separate services, each running simultaneously in different port number or different servers itself.
+
+localhost		is a server
+
+if everything is localhost, then they are in same server.
+
+but different server also possible.
+
+---------------------------------------
+There will be lot of issues when we create them as multiple applications/ apis
+
+rest apis can be accessed from POSTMAN
+rest apis can be accessed from Angular applications
+
+But from Java??????
+But if one rest api, want to access another rest api???????
+
+how can we call a rest api from another controller/ rest controller
+
+Feign client
+--------------
+	Allows java programs to call  REST APIs
+
+we will transform the rest api into an interface, that can be autowired into any other controllers. Then call the rest api methods just like calling any method.
+
+Example:
+-----------
+1) we will create a REST API		8383
+2) we will create a spring boot mvc project	8484
+	from mvc project, from controller, how to call the rest api methods?
+
+for rest api, lets take Product service as example
+
+the mvc should provide all the UI and controller part for the Product
+	product.jsp
+	ProductController	in mvc project
+
+	what about 
+		ProductRepository
+		ProductService
+	these are already available in rest api. so we do not create them in mvc project
+
+
+i can run multiple spring boot applications using a spring tool suite/eclipse at a time, as they are running in different port numbers
+
+
+
+
+We have created a rest api for Product service.
+Now, lets create a Spring boot MVC project and access that rest api
+
+we should use Feign client to allow a controller to access another controller by transforming the rest api into an interface that can be autowired into a controller
+
+1) create a spring boot app
+	may12-product-mvc
+
+2) dependencies 
+	spring web
+	open feign
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
+
+
+3) i will create an interface
+	that contains declaration of all methods in the rest api
+
+
+Error:
+"Path with "WEB-INF" or "META-INF": [WEB-INF/views/product.jsp]"
+
+add the following dependency:
+
+Download the mvc project and import to STS/Eclipse:
+	
+	https://github.com/jagasia/product-mvc
+
+
+Load Balancer
+Circuit Breaker
+
+Montior the microservices using Eureka server
+
+1 eureka server portal
+	can show us which are all the microservices running
+	which are UP
+	and which are DOWN
+
+
+
+Demo:
+--------
+
+1) create a spring boot application with following dependency:
+			<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+		</dependency>
+	enable eureka server
+		in application class,
+			@EnableEurekaServer
+	specify a port number for this server
+in application.properties
+	eureka.client.registerWithEureka = false
+	eureka.client.fetchRegistry = false
+	server.port = 8761
+
+go to 
+	localhost:8761
+
+you will be able to see the eureka server console, where you can monitor the microservices
+
+2) create lot of microservices
+	each will enable eureka client
+	specify the port number of the server
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
+
+server.port=8383
+spring.application.name=account-service
+eureka.instance.hostname=localhost
+eureka.client.serviceUrl.defaultZone=http://${eureka.instance.hostname}:8761/eureka/
+server.context-path=/account
+
+
+

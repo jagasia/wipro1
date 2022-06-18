@@ -1,0 +1,5 @@
+package com.wirpo.hrms.repository;
+
+public interface FoodRepository {
+
+}

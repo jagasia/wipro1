@@ -1,0 +1,41 @@
+package com.wipro.hrms.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
+
+import com.wipro.hrms.model.Employee;
+
+@Path("/")
+public class MyController {
+	
+	List<Employee> empList=new ArrayList<>();
+	
+	@GET
+	@Produces("text/json")
+	public Response home()
+	{
+		return Response.status(200).entity("<p>Hi welcome to our rest api</p>").build();
+	}
+	
+	@GET
+	@Path("/employee")
+	@Produces("text/json")
+	public Response emp()
+	{
+		Employee employee=new Employee(1, "Raja", "Sivakumar", 121212.0f);
+		return Response.status(200).entity(employee).build();
+	}
+	
+	@GET
+	@Path("/employees")
+	@Produces("text/json")
+	public Response emps()
+	{
+		return Response.status(200).entity(empList).build();
+	}
+}

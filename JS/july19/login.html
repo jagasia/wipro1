@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+       
+
+
+        function fnLogin()
+        {
+            var username=document.getElementById("txtUserName").value;
+            var password=document.getElementById("txtPassword").value;
+            console.log(username);
+            console.log(password);
+            //check if the checkbox is tick or not?
+            // var chk=document.getElementById("chkRememberMe");
+            // console.log(chk.checked);
+            if(document.getElementById("chkRememberMe").checked)
+            {
+                //store the credentials in localStorage
+                localStorage.setItem("username",username);
+                localStorage.setItem("password",password);
+                console.log("The user credentials are stored in local storage   ")
+            }
+        }
+    </script>
+</head>
+<body>
+    <form>
+        <label for="txtUserName">User Name</label>: <input type="text" name="" id="txtUserName"><br>
+        <label for="txtPassword">Password</label>: <input type="password" name="" id="txtPassword"><br>
+        <input type="checkbox" name="" id="chkRememberMe"><label for="chkRememberMe">Remember Me</label>
+        <br>
+        <input type="button" value="Login" onclick="fnLogin()">&nbsp;
+        <input type="reset" value="Reset">
+    </form>
+
+    <script>
+         var username=localStorage.getItem("username");
+        var password=localStorage.getItem("password");
+        console.log(username);
+        console.log(password);
+        if(username!=null)
+            document.getElementById("txtUserName").value=username;
+        
+        if(password!=null)
+            document.getElementById("txtPassword").value=password;
+
+    </script>
+</body>
+</html>

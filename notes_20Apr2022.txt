@@ -1,0 +1,296 @@
+index.html
+	home page
+		welcome to home page
+	navbar
+		Home		SignUp	Login
+	jumbotron
+
+	there are 3 columns in a row
+
+	
+when i click, Login.
+	Login page is displayed
+
+html
+bootstrap
+login form
+	is able to remember me
+
+
+diff between cookie and localStorage
+
+	cookie is created by server side script, but created in client's machine
+	localStorage is created by client side script, and created in client's machine
+
+Javascript vs Typescript
+
+a typescript program is converte (compiled) into a javascript program before execution
+
+javascript is not compiler based language. We do not compile javascript.
+
+typescript is a compiler based language. we must compile a typescript program 
+
+1) download and install node js
+2) we will get npm once we install node js.
+	that npm, is used to install many tools
+		i) typescript compiler		tsc
+		ii) angular			ng
+
+
+
+https://nodejs.org/en/download/
+
+after installing nodejs
+	node -v
+	npm -v
+
+---------------
+we are going to install
+	tsc		
+	angular cli
+
+run the below command:
+	npm install -g typescript		
+
+check if typescript is installed
+	tsc -v
+	tsc --version
+
+next, we install angular
+	npm install -g @angular/cli
+
+	
+----------------------------------------
+Typescript
+
+a language
+	that is compiled 
+	after compilation, we get js code
+
+Now, have you ever run a .js program alone?
+	so far, we run js along with html only
+
+now, i am going to show you how to run a .js program separately
+in command prompt
+
+we have installed node
+
+but still, only when i run this javascript program, i confirm that there is no error in this program.
+
+but js does not have compilation process.
+
+syntax error???
+
+whenever a new version of js comes, browser needs upgradation
+
+so the idea is not to introduce new version of js
+but a new language called typescript
+
+any new version of typescript is not going to affect the browser
+
+because, we are going to compile a typescript program into js
+
+two.js
+	this is a typescript file
+
+
+compile a ts program
+	tsc two.ts
+run a js program
+	node two.js
+
+
+Task:
+-------
+
+create .ts file
+	declare couple of variables
+	add them
+	and display them in console
+
+compile this .ts file		(tsc)
+and you will get .js file
+
+run that .js file(node)
+
+-------------------------------------------------------
+typescript
+Data types:
+
+number
+string
+boolean
+enum		(fixed set of values)
+	enum Days {Monday, Tuesday, Wednesday};
+	let x:Days=Days.Monday;
+	console.log(x);	//0
+void			(functions)
+null			no value is assigned
+undefined		no type is assigned
+any
+		var z:any;
+		z=20;
+		z='rama';
+		z=true;
+never
+		function fn1():never		
+		{
+			//somewhere we raise exception 		for sure
+		}
+array
+		let arr:number[]=[1,2,3,4,5];
+tuple
+		let person:[string,number]=["Ram",100];
+
+		many variable of diff types inside tuple
+
+
+
+
+
+old version of typescript allowed us to declare variable
+	without data type, without default value
+
+new versions of typescript forces us to have default value
+
+in java language, how do we do casting
+float f=1.2f;
+int i=(int)f;
+
+
+
+now, in typescript, we can cast a string into number
+
+var str:string='123';
+var i:number=<number><any>str;
+
+
+java-student.ts		file name
+class JavaStudent
+
+	typeof			returns the data type of the variable
+	instanceof			returns true if it is instance of specified class
+
+	if(x instanceof y)
+		true if x is an object of y or any of its sub class
+
+
+
+
+
+int i;		//java
+i:number;		//typescript
+
+
+int sum()		//java
+sum:number	//typescript
+
+
+------------------------------------------
+Task:
+	do all this in a single file	.ts file
+
+i) create a function 
+	sum that accepts 2 numbers and return a number
+ii) call the function and supply 2 number variables
+iii) display the result in console.
+
+
+----------------------------
+Angular
+	history of angular
+	the first version was called as Angular JS		version 1	
+		no components
+		controllers
+
+	version 2 onwards, called as Angular
+
+		components and services 
+
+
+navbar
+	
+i could have stored that alone as a html segment
+	.htm
+
+	this segment file will not contain top html elements
+		
+
+that only contains html code.
+
+a component in angular 
+	is not only html code
+		i) html code
+		ii) css
+		iii) typescript
+		iv) testing code
+
+all these 4 together forms a component
+
+it is easy to plug or remove a component
+
+First thing to do in angular is to create a project.
+------------------------------------------------------------
+As we have already installed angular CLI in our computer		(CLI stands for Command Line Interface)
+in cmd prompt, we can run a command, and that is going to create an angular project
+
+an angular project is a folder
+	that contains
+		node_modules	
+
+ng new first-project
+
+ng new my-new-project --style=css --routing
+
+Lets understand the project that is being created
+
+once the project is created, go inside the project folder
+
+cd first-project
+
+once you go inside the folder
+	code .
+
+
+SPA
+	Single Page Application
+
+
+the only html page is
+	index.html
+		this is the only page that contains
+			<html>
+				<head>
+				</head>
+				<body>
+				</body>
+			</html>
+
+
+There can be many components, that can be plugged
+but each component can have html code
+	that does not have root or top html elements
+A module called app is already there in the project
+
+a module contains many components
+
+while creating a project itself a component is created
+	App component
+
+To run angular project,
+	go to cmd prompt 	(visual studio code terminal also)
+		inside the project folder
+
+	to run:
+		ng serve -o
+
+localhost:4200
+
+@Component
+	in java, we call it as annotation.
+	in typescript, we call it as decorator
+
+
+
+
+

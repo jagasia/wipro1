@@ -1,0 +1,14 @@
+package com.wirpo.hrms.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.wirpo.hrms.repository.FoodRepository;
+
+@Service
+public class FoodService {
+	@Autowired
+	private FoodRepository fr;
+	
+	
+}

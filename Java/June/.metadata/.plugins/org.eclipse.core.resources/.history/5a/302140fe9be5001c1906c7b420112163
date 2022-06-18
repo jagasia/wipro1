@@ -1,0 +1,5 @@
+package com.wipro.bank.config;
+
+public class MyConfiguration {
+
+}

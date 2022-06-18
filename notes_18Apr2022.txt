@@ -1,0 +1,579 @@
+At the end of this module:
+	HTML
+	CSS
+	Bootstrap
+	Javascript
+
+signup form
+	we can validate the data not only using pattern/ regex. But sometimes, using a program with if condition/ switch case
+	from responsive web designing, we need to move toward dynamic web pages
+	dynamic aspect?
+
+What is a dynamic web page?
+	responsively occupies the screen size		(responsive web designing)
+	in static web page, the data remains unchanged. 
+	for ex:
+		if i display  date and time in a html web page, the date and time remains same forever.	That is static
+
+HTML
+	in html itself we can responsively occupy the screen size using media queries, ie., viewport
+
+
+a dynamic web page can be created using
+	client side scripts (or)
+	server side scripts
+
+Client side script
+	the script (is a program) that runs in client (browser)
+
+	ex:
+		javascript	
+		vb script
+		applet
+
+
+
+ES6
+	ECMA Script 6		(is the last version of Javascript)
+	ECMA	-	European Computer Manufacturer Association
+Javascript ES6
+	is very popular  client side scripting language
+	Object Oriented programming language
+		classes
+		interfaces
+		constructors
+		arrays
+		language features 
+			if
+			else if
+			switch
+			for
+			while
+			
+
+	Javascript is not java. Different language
+	but some syntax resemblence is there
+
+javscript programs are not compiled. They are interpreted
+Top Down execution
+
+
+Hello world program in javascript
+
+javascript code is written inside <script> tag
+	in <head> or <body>
+
+if the script is put inside <head> then
+the script is loaded even before the page is rendered
+
+alert('hello world')
+window.alert('hello world');
+
+both of the above code are same.
+notice that ; is always optional in javascript
+
+console.log('hi world');
+
+	notice single quote instead of double quote
+	both are allowed in js. it is always good to have single quote
+
+how to view the console?
+	right click the browser -> Inspect -> console tab
+
+in the course of execution of the program, 
+	we can always record some log entries
+	to debug the code
+
+Language features:
+	data types?????
+	javascript does not declare the variable with a specific datatype
+	based on the value allocated, the type is inferred
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function fn1()
+        {
+            window.alert('hello india');
+        }
+    </script>
+</head>
+<body onload="fn1()">
+    Welcome 
+</body>
+</html>
+
+
+
+
+
+
+<body>
+    Welcome!
+    <br/>
+    <input type="button" value="Click here" onclick="fn1()">
+</body>
+
+If i want to access the HTML elements from a javascript program?
+	Javascript treats the entire page as an object (DOM)
+	DOM
+		Document Object Model
+		represent the page as a document object. and object can have child objects
+
+		Tree
+			root node is the page itself
+			node can have children
+			
+	but, we can access any node in the document directly if the node have an ID
+
+	id, class, name etc
+
+	id
+		must be unique among all the elements
+
+	name	
+		can be same across many elements
+		why?
+		radio/ checkboxes usually have same name to form a group
+
+
+Demo:
+	Create a login form and check if username and password are same. If they are same, then login should be failure. Else, success
+
+
+we used == operator to compare 2 strings.
+=== operator
+	both operands are same or not????
+		same means? equal by value and data type also
+
+
+
+TasK:
+	create a html page that accepts 2 numbers as input.
+	when i click a button, the sum of those 2 numbers must be displayed.
+
+
+
+Test case 1:
+	no1=2
+	no2=3
+	
+	sum=5		(not 23)
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function fnAdd()
+        {
+            alert('adding...')
+            var no1=parseInt(document.getElementById("no1").value);
+            var no2=parseInt(document.getElementById("no2").value);
+            // alert(no1+no2);     //string + string is appended
+            alert(no1+no2);
+        }
+    </script>
+</head>
+<body>
+    Number 1: <input type="number" name="" id="no1"><br>
+    Number 2: <input type="number" name="" id="no2"><br>
+    <input type="button" value="Add" onclick="fnAdd()">
+</body>
+</html>
+
+
+
+Someone asked me how to get input in javascript
+	prompt()
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function fn1()
+        {
+            var no1=prompt("Enter the first number:",2);
+            var no2=prompt("Enter the second number:",3);
+            alert(no1+no2);
+        }
+    </script>
+</head>
+<body>
+    <input type="button" value="Click me" onclick="fn1()">
+</body>
+</html>
+
+
+
+
+why am i writing js code in html file?
+as a js developer, i am supposed to write in js file?
+
+
+yes, i am going to create a .js file
+how will i reference the .js file from a html file?
+
+<script src="one.js">
+	//do not write anything here
+</script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="one.js">
+       
+    </script>
+</head>
+<body>
+    Number 1: <input type="number" name="" id="no1"><br>
+    Number 2: <input type="number" name="" id="no2"><br>
+    <input type="button" value="Add" onclick="fnAdd()">
+</body>
+</html>
+
+
+here, one.js is an external js file that is referred from a html file 
+
+a html file can have several <script> tags
+
+we can have these script tags in head or body or both
+
+A very good js program must do everything independently
+
+we can ask the html programmer to just reference our script
+
+
+in javascript itself, we should be able to bind the event to a function
+	
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="one.js">
+       
+    </script>
+</head>
+<body>
+    Number 1: <input type="number" name="" id="no1"><br>
+    Number 2: <input type="number" name="" id="no2"><br>
+    <input type="button" value="Add" id="btnAdd">
+    <script>
+        document.getElementById("btnAdd").addEventListener("click",fnAdd);
+    </script>
+    
+</body>
+</html>
+
+-----------------------------------------
+Array:
+--------
+	everything is declared as 
+	var arr;
+
+arrays in javascript can be represented using []
+
+[1,2,3,4,5]		an array
+
+in js, 
+	[] for array elements
+	{} for object
+
+we can create an array in js that can grow or shrink
+
+how to push elements into an array in js?
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+         var arr=[];
+         var i=1;
+        function fn1()
+        {
+            arr.push(i++);
+            console.log(arr);
+        }
+    </script>
+</head>
+<body>
+    <input type="button" value="Click me" onclick="fn1()">
+</body>
+</html>
+
+
+Task:
+-------
+	Create a html page, that allows user to enter the countries in a text box
+
+	Enter the country:________________________ <<button>> to add
+	
+when the button is clicked, the country should be added to an array and the array is displayed in console.
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var arr=[];
+
+        function fnAdd()
+        {
+            var country=document.getElementById("txtCountry").value;
+            arr.push(country);
+            console.log(arr);    
+        }
+    </script>
+</head>
+<body>
+    Enter the country: <input type="text" name="" id="txtCountry">
+    <input type="button" value="Add" onclick="fnAdd()">
+</body>
+</html>
+
+
+
+
+
+
+To display the output, in the browser itself, we need to decide, which location in the page, the output should be displayed
+for that we put a place holder called "div"
+
+div 
+	is a container that can hold any html element
+		
+value property is used for scalar elements like textboxes
+
+but div, p are container elements, they have
+	innerHTML	(means, the html elements are processed and produce output)
+	innerText		(means, whatever it is, it is displayed as text. Means, <b> india </b> will be presented not in bold but as <b> india </b>
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var arr=[];
+
+        function fnAdd()
+        {
+            var country=document.getElementById("txtCountry").value;
+            arr.push(country);
+            //now, lets loop the array elements and add them to the div
+            document.getElementById("divResult").innerHTML="";
+            for(var c of arr)
+            {
+                    // alert(c);
+                    var txt=document.getElementById("divResult").innerHTML;
+                    txt+="<br/>";
+                    txt+=c;
+                    document.getElementById("divResult").innerHTML=txt;
+            }
+            
+            console.log(arr);    
+        }
+    </script>
+</head>
+<body>
+    Enter the country: <input type="text" name="" id="txtCountry">
+    <input type="button" value="Add" onclick="fnAdd()">
+    <br>
+    <div id="divResult"></div>
+</body>
+</html>
+
+
+this is the code for adding elements into an array.
+Now, put one more button to remove an element from the array
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var arr=[];
+
+        function output()
+        {
+            document.getElementById("divResult").innerHTML="";
+            for(var c of arr)
+            {
+                    // alert(c);
+                    var txt=document.getElementById("divResult").innerHTML;
+                    txt+="<br/>";
+                    txt+=c;
+                    document.getElementById("divResult").innerHTML=txt;
+            }
+        }
+
+        function fnRemove()
+        {
+            arr.pop();      //removes the last element in the array.
+            output();
+        }
+
+        function fnAdd()
+        {
+            var country=document.getElementById("txtCountry").value;
+            arr.push(country);
+            //now, lets loop the array elements and add them to the div
+            
+            output();
+            console.log(arr);    
+        }
+    </script>
+</head>
+<body>
+    Enter the country: <input type="text" name="" id="txtCountry">
+    <input type="button" value="Remove" onclick="fnRemove()">
+    <input type="button" value="Add" onclick="fnAdd()">
+    <br>
+    <div id="divResult"></div>
+</body>
+</html>
+
+
+Remove the element from the array based on the user selection
+
+if user, enters "Japan", then japan should be removed
+
+
+Demo:
+	we are going to learn to use JSON
+	JavaScript Object Notation
+
+{}	is used to  represent an object in js
+
+an object has key:value pair
+
+every pair is separated by ,
+
+A form can be represented as an object
+
+
+{"id":123,"firstName":"Raja ram","lastName":"Mohan roy","email":"raja@ram.com"}
+
+this is called as JSON string
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function fnSubmit()
+        {
+            var empObject={};
+            empObject.id=parseInt(document.getElementById("id").value);
+            empObject.firstName=document.getElementById("firstName").value;
+            empObject.lastName=document.getElementById("lastName").value;
+            empObject.email=document.getElementById("email").value;
+            console.log(empObject);
+            console.log(JSON.stringify(empObject)); //convert object into json string
+
+        }
+        function fnImport()
+        {
+            var jsonStr=document.getElementById("txt1").value;
+            // alert(jsonStr);
+            
+        //convert json string to object
+            var obj=JSON.parse(jsonStr);
+            document.getElementById("id").value=obj.id;
+            document.getElementById("firstName").value=obj.firstName;
+            document.getElementById("lastName").value=obj.lastName;
+            document.getElementById("email").value=obj.email;
+        }
+    </script>
+</head>
+<body>
+    <form>
+        <input type="text" name="" id="txt1"><input type="button" value="Import" onclick="fnImport()">
+        <br>
+        Id: <input type="number" name="" id="id"><br>
+        First Name: <input type="text" name="" id="firstName"><br>
+        Last Name: <input type="text" name="" id="lastName"><br>
+        Email id: <input type="email" name="" id="email"><br>
+        <br>
+        <input type="button" value="Submit" onclick="fnSubmit()">&nbsp;
+        <input type="reset" value="Reset">
+    </form>
+</body>
+</html>
+
+
+Task:
+	create a form with username and password
+	on clicking the login button
+
+	the JSON string containing
+
+	{"username":"jag", "password":"jag"}
+
+should be displayed in the console.
+
+Hint:
+	create an object
+
+	var user={};
+
+	user.username=document.getElementById("username").value;
+	user.password=document.getElementById("password").value;
+
+	console.log(user);			//this will display the object
+	console.log(JSON.stringify(user));		//this will display the json string of the user object
+
+
+
+
+
+
+

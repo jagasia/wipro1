@@ -1,0 +1,72 @@
+package com.wipro.ecom.controller;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.wipro.ecom.entity.User;
+
+@Controller
+public class MyController {
+	@RequestMapping("/")
+	public String home()
+	{
+		return "index";
+	}
+	
+	@RequestMapping("/signup")
+	public String signup()
+	{
+		return "signup";
+	}
+	
+	@RequestMapping("/home")
+	public String home1()
+	{
+		return "index";
+	}
+	
+	@RequestMapping("/login")
+	public String showLoginPage()
+	{
+		return "login";
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "/two")
+	public String two(User user, HttpServletResponse response, ModelMap model)
+	{
+		System.out.println(user);
+		
+		return "otp";
+	}
+	
+	
+	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+}
