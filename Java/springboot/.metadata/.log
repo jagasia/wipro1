@@ -3120,3 +3120,294 @@ Caused by: org.eclipse.lsp4j.jsonrpc.ResponseErrorException: Internal error.
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
 	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-18 20:02:31.343
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.SmhwuPmW
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-18 20:02:31.354
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.SmhwuPmW
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-18 20:02:31.354
+!MESSAGE subsribers = null
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-18 20:02:31.404
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.SmhwuPmW => OK
+!SESSION 2022-06-20 18:16:14.582 -----------------------------------------------
+eclipse.buildId=4.3.1.201907120711-RELEASE
+java.version=1.8.0_281
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_IN
+Framework arguments:  -product org.springframework.boot.ide.branding.sts4
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.springframework.boot.ide.branding.sts4
+
+!ENTRY org.eclipse.egit.core 1 0 2022-06-20 18:16:28.827
+!MESSAGE Using Apache MINA sshd as ssh client.
+
+!ENTRY org.eclipse.jface 2 0 2022-06-20 18:16:31.305
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2022-06-20 18:16:31.305
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@e645600,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@e7b3e54,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:16:52.158
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:16:52.159
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@1a4236fd[org.springframework.tooling.boot.ls:1.9.0.201907120625(id=624)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:16:52.238
+!MESSAGE SpringBootLanguageServer exists!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:16:52.897
+!MESSAGE Instantiating ReusableClasspathListenerHandler
+
+!ENTRY org.eclipse.egit.ui 2 0 2022-06-20 18:16:53.005
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\rjaga'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2022-06-20 18:16:56.053
+!MESSAGE C:\Program Files\Git\etc\.probe-e19e78e6-349f-44eb-a399-d6570a68c3a0
+!STACK 0
+java.nio.file.AccessDeniedException: C:\Program Files\Git\etc\.probe-e19e78e6-349f-44eb-a399-d6570a68c3a0
+	at sun.nio.fs.WindowsException.translateToIOException(Unknown Source)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at sun.nio.fs.WindowsFileSystemProvider.newByteChannel(Unknown Source)
+	at java.nio.file.Files.newByteChannel(Unknown Source)
+	at java.nio.file.Files.createFile(Unknown Source)
+	at org.eclipse.jgit.util.FS$FileStoreAttributeCache.<init>(FS.java:234)
+	at org.eclipse.jgit.util.FS$FileStoreAttributeCache.getFsTimestampResolution(FS.java:211)
+	at org.eclipse.jgit.util.FS.getFsTimerResolution(FS.java:321)
+	at org.eclipse.jgit.internal.storage.file.FileSnapshot.<init>(FileSnapshot.java:186)
+	at org.eclipse.jgit.internal.storage.file.FileSnapshot.save(FileSnapshot.java:122)
+	at org.eclipse.jgit.storage.file.FileBasedConfig.load(FileBasedConfig.java:156)
+	at org.eclipse.jgit.internal.storage.file.FileRepository.loadSystemConfig(FileRepository.java:245)
+	at org.eclipse.jgit.internal.storage.file.FileRepository.<init>(FileRepository.java:203)
+	at org.eclipse.jgit.storage.file.FileRepositoryBuilder.build(FileRepositoryBuilder.java:88)
+	at org.eclipse.jgit.storage.file.FileRepositoryBuilder.create(FileRepositoryBuilder.java:108)
+	at org.eclipse.egit.core.RepositoryCache.lookupRepository(RepositoryCache.java:58)
+	at org.eclipse.egit.core.project.GitProjectData.map(GitProjectData.java:693)
+	at org.eclipse.egit.core.project.GitProjectData.remapAll(GitProjectData.java:651)
+	at org.eclipse.egit.core.project.GitProjectData.load(GitProjectData.java:634)
+	at org.eclipse.egit.core.project.GitProjectData.get(GitProjectData.java:220)
+	at org.eclipse.egit.core.GitProvider.getData(GitProvider.java:108)
+	at org.eclipse.egit.core.project.RepositoryMapping.getProjectData(RepositoryMapping.java:340)
+	at org.eclipse.egit.core.project.RepositoryMapping.findMapping(RepositoryMapping.java:356)
+	at org.eclipse.egit.core.project.RepositoryMapping.getMapping(RepositoryMapping.java:296)
+	at org.eclipse.egit.core.internal.util.ResourceUtil.getRepository(ResourceUtil.java:712)
+	at org.eclipse.egit.ui.internal.resources.ResourceStateFactory.getIndexDiffDataOrNull(ResourceStateFactory.java:103)
+	at org.eclipse.egit.ui.internal.decorators.GitLightweightDecorator.decorateResource(GitLightweightDecorator.java:224)
+	at org.eclipse.egit.ui.internal.decorators.GitLightweightDecorator.decorate(GitLightweightDecorator.java:201)
+	at org.eclipse.ui.internal.decorators.LightweightDecoratorDefinition.decorate(LightweightDecoratorDefinition.java:247)
+	at org.eclipse.ui.internal.decorators.LightweightDecoratorManager$LightweightRunnable.run(LightweightDecoratorManager.java:105)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.ui.internal.decorators.LightweightDecoratorManager.decorate(LightweightDecoratorManager.java:360)
+	at org.eclipse.ui.internal.decorators.LightweightDecoratorManager.getDecorations(LightweightDecoratorManager.java:346)
+	at org.eclipse.ui.internal.decorators.DecorationScheduler$1.ensureResultCached(DecorationScheduler.java:333)
+	at org.eclipse.ui.internal.decorators.DecorationScheduler$1.run(DecorationScheduler.java:300)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2022-06-20 18:17:04.363
+!MESSAGE Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2022-06-20 18:17:04.368
+!MESSAGE Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2022-06-20 18:17:08.742
+!MESSAGE Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2022-06-20 18:17:08.746
+!MESSAGE Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.ui 2 2 2022-06-20 18:18:00.245
+!MESSAGE Invalid property category path: org.springframework.ide.eclipse.beans.ui.properties.ProjectPropertyPage (bundle: org.springframework.ide.eclipse.xml.namespaces, propertyPage: org.springframework.ide.eclipse.beans.ui.namespaces.projectPropertyPage)
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:16.640
+!MESSAGE Boot LS startup time from start to initialized: 1431ms
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.206
+!MESSAGE Boot LS startup time from start to initialized: 1998ms
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.401
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.lwdaCbUDisBatched = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.401
+!MESSAGE subscribing to classpath changes: sts4.classpath.lwdaCbUD isBatched = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.413
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.416
+!MESSAGE subsribers = {sts4.classpath.lwdaCbUD=Send Classpath Notifications(211)}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.416
+!MESSAGE Sending initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.491
+!MESSAGE project jun20-rest-security-1 ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.492
+!MESSAGE project Servers ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.492
+!MESSAGE Preparing classpath changed notification jun20-rest-security-1
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.493
+!MESSAGE project Servers SKIPPED
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.493
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.493
+!MESSAGE project jun16-soap-1 ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.494
+!MESSAGE project jun17-jax-ws-1 ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.494
+!MESSAGE project jun17-jersey-rest-1 ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.494
+!MESSAGE project jun18-food-rest-1 ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.495
+!MESSAGE project jun18-spring-boot-rest-1 ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.495
+!MESSAGE project jun18-spring-rest-1 ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.495
+!MESSAGE Sending initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.495
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.lwdaCbUD => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.509
+!MESSAGE classpath=89 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.512
+!MESSAGE buffering callback sts4.classpath.lwdaCbUD jun20-rest-security-1 false 89
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.526
+!MESSAGE Preparing classpath changed notification jun16-soap-1
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.526
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.527
+!MESSAGE classpath=56 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.528
+!MESSAGE buffering callback sts4.classpath.lwdaCbUD jun16-soap-1 false 56
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.529
+!MESSAGE Preparing classpath changed notification jun17-jax-ws-1
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.529
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.530
+!MESSAGE classpath=56 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.531
+!MESSAGE buffering callback sts4.classpath.lwdaCbUD jun17-jax-ws-1 false 56
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.531
+!MESSAGE Preparing classpath changed notification jun17-jersey-rest-1
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.531
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.534
+!MESSAGE classpath=94 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.536
+!MESSAGE buffering callback sts4.classpath.lwdaCbUD jun17-jersey-rest-1 false 94
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.537
+!MESSAGE Preparing classpath changed notification jun18-food-rest-1
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.537
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.547
+!MESSAGE classpath=107 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.550
+!MESSAGE buffering callback sts4.classpath.lwdaCbUD jun18-food-rest-1 false 107
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.550
+!MESSAGE Preparing classpath changed notification jun18-spring-boot-rest-1
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.551
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.554
+!MESSAGE classpath=83 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.556
+!MESSAGE buffering callback sts4.classpath.lwdaCbUD jun18-spring-boot-rest-1 false 83
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.556
+!MESSAGE Preparing classpath changed notification jun18-spring-rest-1
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.556
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.558
+!MESSAGE classpath=85 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.560
+!MESSAGE buffering callback sts4.classpath.lwdaCbUD jun18-spring-rest-1 false 85
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.560
+!MESSAGE executing callback sts4.classpath.lwdaCbUD 7 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 18:18:17.617
+!MESSAGE executing callback sts4.classpath.lwdaCbUD SUCCESS [done]
+
+!ENTRY org.eclipse.equinox.p2.transport.ecf 4 1002 2022-06-20 19:12:57.102
+!MESSAGE HTTP Server 'Bad Gateway' : http://dl.bintray.com/testng-team/testng-p2-release/content.xml
+!STACK 1
+org.eclipse.ecf.filetransfer.BrowseFileTransferException: HttpComponents connection error response code 502.
+	at org.eclipse.ecf.provider.filetransfer.httpclient45.HttpClientFileSystemBrowser.runRequest(HttpClientFileSystemBrowser.java:278)
+	at org.eclipse.ecf.provider.filetransfer.browse.AbstractFileSystemBrowser$DirectoryJob.run(AbstractFileSystemBrowser.java:69)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SUBENTRY 1 org.eclipse.ecf.identity 4 0 2022-06-20 19:12:57.114
+!MESSAGE HttpComponents connection error response code 502.
+
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2022-06-20 19:12:59.508
+!MESSAGE No repository found at file:/C:/Users/rjaga/Dropbox/My%20PC%20(LAPTOP-PV39E17L)/Downloads/tekstac-eclipse-plugin-2.6.9.6/.
+
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2022-06-20 19:13:36.117
+!MESSAGE No repository found at http://download.eclipse.org/technology/m2e/releases/.
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 20:36:22.585
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.lwdaCbUD
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 20:36:22.679
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.lwdaCbUD
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 20:36:22.689
+!MESSAGE subsribers = null
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-20 20:36:22.713
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.lwdaCbUD => OK

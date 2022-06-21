@@ -1,0 +1,156 @@
+Angular as a Front End
+------------------------------
+Spring boot REST api as a Back End
+---------------------------------------------
+
+
+integration
+
+How to use Spring security JWT with Angular front end.
+	JWT is the best choice for angular front end + rest api backend
+
+because, every rest api call is independant. That means, statelessness. Does not remember.
+
+E-Commerce
+----------------
+1) User can register themselves as a Merchant (or) Customer
+	you can separately have 
+		merchant registration page
+		customer registration page
+	separately also for a beginner.
+
+Merchant Registration Page					Customer Registration page
+
+
+MERCHANT table
+CUSTOMER table
+
+both are different classes in java
+
+2) PRODUCT
+	merchants can add products
+
+3) customers can view products
+
+when view, they can see "Add to Cart" option
+
+List of entities:
+1) Merchant
+2) Customer
+3) Product
+4) Cart
+5) Order
+
+Start from Backend
+	create entity classes
+	create repository interfaces
+	create service classes
+	create controller classes
+
+	we have completed REST api
+
+Front end
+	Angular
+
+ONly if you have team, which can work parallely,
+	allocate the task of frontend to the team member
+
+
+
+when we push the project to git repository.
+We face problems:
+	if the current folder has
+		lot of projects
+			lot of angular projects
+			lot of spring projects
+
+	then pushing those 2 projects (front & back)
+		we face issues in git.
+
+	so we later want to move the projects to a
+		different location
+
+	but, have ever moved an angular project?
+		very difficult.		
+			node_modules folder is huge
+
+			to delete also very difficult
+
+in beginning itself, plan a folder that has only 
+	frontend folder
+	backend folder
+
+wiproproject 
+	database is created
+
+
+Sprint 1		basic functionalities
+Sprint 2		validations, exception handling
+
+
+
+we can represent a <form> as an object
+then when submit, the form is sent as an object to the rest api
+this is simple when you use Reactive Forms Module
+
+in reactive forms module,
+	we create a form group object in TS code
+	AND the form will be created in HTML based on that object
+
+1) app.module.ts
+	import
+		ReactiveFormsModule
+
+
+for angular to spring integration
+	1) create a service class
+	2) we need http client module for calling rest apis
+		i) app.module.ts
+			import HttpClientModule
+		ii) inject the httpclient to the constructor of service class
+
+	the service must be injected to the component constructor
+
+CORS policy restricts the rest api calling from a different port number
+@CrossOrigin in the controller to solve this
+
+pull the git
+	https://github.com/jagasia/wipro-project.git
+
+and run the angular and spring rest and tell me what issue you face
+
+Now the merchant has registered themselves in our app.
+They can login now
+
+create a class in rest api
+	AuthRequest
+		id
+		password
+
+
+
+we have created
+	Merchant registration
+	Merchant login
+
+remaining
+	Product rest api
+	Product component
+		manage all operations CRUD
+		merchant will be able to access this component
+
+
+
+https://github.com/jagasia/wipro-project
+	pull the repository and run, tell me the issues.
+	then create Product part
+		entity
+		repo
+		service
+		controller
+			test it in swagger
+	then
+		in angular
+			create product component
+			create product service
+				and test it
