@@ -1,0 +1,119 @@
+3:00 PM start
+5:00 PM break
+8:00 PM leave
+------------------
+One important activity to begin the project coding part:
+
+1) The team leader will create a git repository
+2) Push empty/ starter projects into the git
+	frontend
+	backend
+		rest-api-1
+		rest-api-2
+		
+3) The team leader creates Collaborators for the git repository.
+4) The team members receive the invitation to collaborate by email. They accept.
+5) Now, team members
+	choose an empty folder where they will 
+	pull the project from git
+6) Then the team members 
+	import backend to spring tool suite
+----------------------------------------------------------
+Activity #2:
+----------------
+So now, each team leader have created the project structure.
+And shared with the team members.
+
+Now, each team member now, has allocated entity.
+
+Team member to create
+	1) entity class
+	2) repository interface
+	3) service class
+	4) controller class
+
+	and test with postman
+
+
+PUT YOUR GIT LINK IN THE GOOGLE SHEET
+----------------------
+Each team leader have created the git hub repository
+and added the team members as collaborators.
+(If this is pending, kindly complete this)
+
+Each team member to pull the git repo to their project folder
+	first
+		git init
+		git remote add origin https://github.com/Neeraja4716/Project_Team4.git
+		git pull
+
+
+
+
+
+
+https://github.com/Neeraja4716/Project_Team4.git
+
+
+
+https://github.com/sumi-dj/group1
+
+
+git init
+git remote add origin https://github.com/sumi-dj/group1.git
+git pull origin dj
+
+
+@SpringBootApplication(exclude=SecurityAutoConfiguration.class)
+
+
+Each team member
+	first time for pulling the git
+	git init
+	git remote add origin https:///.....git
+	git pull origin <<leader's branchname>>
+
+	after that they will work on the project and want to push 
+	you will push as your own branch.
+	steps:
+	
+	git add .
+	git commit -m "after adding my entities Product, Customer"
+	git branch -M jag
+	git push -u origin jag
+
+understand onething:
+	remote is already added. So in my above commands, i did not add remote	(otherwise it will say "remote already exists")
+
+	git branch -M jag		(need not be repeated next time. git will remember your current branch)
+
+next time
+	git add .
+	git commit -m message
+	git push -u origin jag
+
+
+But, if your branch in git hub, is modified by you or someone from anywhere
+	you need to pull, and then only you can push
+
+	git will tell you in that case:
+		remote contains work that you do not have locally. Consider pull before push
+	
+
+go and see what are the branches found in github
+	git pull origin branch1
+	git pull origin branch2
+		if you repeat pull command, if it says "already upto date" then you can go and push now.
+
+then 
+	git push -u origin jag
+
+
+
+
+
+
+
+
+
+

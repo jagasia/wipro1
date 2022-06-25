@@ -1,0 +1,166 @@
+Yesterday
+we created another REST api
+	we will see how to integrate both rest apis 
+
+has been blocked by CORS policy: 
+Response to preflight request doesn't pass access control check: 
+No 'Access-Control-Allow-Origin' header is present on the requested resource.
+
+
+CORS policy error can be solved by
+1) @CrossOrigin annotation in the controller
+	this is fine
+but no sufficient when we use spring security.
+2) enable cors in security configuration also.
+-----------------------
+
+we have 2 projects
+	wipro3-ecom-rest-api
+	wipro3-rest-jwt
+
+how can we integrate these 2 projects.
+
+
+one of the team member will do a project for Product
+another team member do Customer
+
+let both projects run separately	(in different port number)
+
+2 microservices running simultaneously.
+
+eureka server and client
+feign client
+docker 
+
+all are related to microservice technology
+
+What is feign client?
+
+	web service client
+	
+a rest api has URLs
+i want to add
+		post + url
+i want to update
+		put + url
+
+i want to read
+		get +url
+
+these urls to be transformed into an interface
+that can be autowired to a controller
+
+so that from our controller, we can call the 
+	another rest api
+
+-------------------------------------
+Demo for feign client
+1) jun23-feign-rest-1
+2) jun23-feign-rest-2
+
+rest2 should be able to call the rest 1 methods
+
+Task:
+	refer
+		https://github.com/jagasia/feign
+
+
+Create the below 2 projects
+	1) jun23-feign-rest-1		(product)
+	2) jun23-feign-rest-2		(customer)
+
+both have 1 entities each
+	repository
+	service
+	controller
+
+rest2 project should be able to call the rest1 methods
+	using feign client
+
+
+1) in eclipse/sts
+	create a project jun23-feign-rest-1
+		spring boot 
+			.jar
+			java
+				spring web
+				spring data jpa
+				mysql driver
+
+	application.properties
+		server.port=8081
+		configure the db properties
+
+		Product.java		private variables, constructors, getters and setters
+		ProductRepository.java	interface that extends JpaRepository
+		ProductService.java		autowire the repository		CRUD
+		ProductController.java		GET, POST, PUT, DELETE
+
+	test the rest api in post man / swagger
+
+we have completed rest api 1
+
+2) create jun23-feign-rest-2
+
+
+
+Steps for feign:
+
+we are transforming a rest api into an interface.
+i mean a controller in another rest api, will become an interface in our rest api (or mvc project)
+
+Problems:
+	that another rest api, uses Product class
+	in our project if Product class is not there, then how can we call that api?
+
+Solution:
+	Copy the Product.java
+		and remove the annotations (here, this is just a type definition. thats all)
+
+
+
+Create an interface now
+	ProductApi
+
+
+
+
+
+
+
+	@PostMapping
+	public Product addProduct(@RequestBody Product product);	
+
+	@GetMapping
+	public List<Product> getAllProducts();
+
+	@GetMapping("/{id}")
+	public Product findProductById(@PathVariable("id") Integer id);
+	
+	@PutMapping
+	public Product updateProduct(@RequestBody Product product);
+	
+	@DeleteMapping
+	public Product deleteProduct(@PathVariable("id")Integer id);
+
+
+
+Project title
+document contains the scope of the project
+	we understand the project
+	later the understanding improves
+	new requirements will evolve
+	new restrictions, validations, features will evolve	
+	change is allowed.
+	change request
+
+
+
+will complete the basic functionality in 5 days		if i enter data properly, it will be update, added etc it works fine
+but integration, validation, testing, exception handling, user friendliness
+	2 weeks
+
+
+id
+Product
+productId

@@ -1,0 +1,126 @@
+We start Project
+	we have already 
+		created the project title
+		formed teams
+		created a case study for each team
+
+	now, it is performing phase.
+
+Identify the technologies used in the project
+Frontend:
+	Angular
+Backend:
+	Spring boot REST api
+
+------------------------------------------------
+You can start identifying the entities involved in the project
+ex:
+	For a shopping website, 
+		customer
+		product
+		cart
+		order
+		address
+
+ellaborate the entities
+	create the entity classes
+
+ex:
+	i ellaborate the entity called "customer"
+
+Customer
+	id
+	firstName
+	lastName
+	address
+	phone
+	email
+	dateOfBirth
+--------------------------------------------------------------------------
+Activity #1:
+Create the list of entities in your project
+	Each team leader can create 
+		a good doc (online word document)
+		where you share the link to your team members
+		you can write, see others typing and finalize the list of entities.
+
+
+
+
+
+addMenu(@RequestParam("id") Integer id, @RequestParam("name") String name, @RequestParam("price") Double price
+
+
+----------------------------------------------------------------
+Team 10
+
+Simply, to create a document and list the entities, these teams are not able to do in 74 minutes. Still i am waiting for them.
+
+Activity #2:
+--------------
+Allocate each entity to a team member
+
+---------------------------------------------------
+Each Team leader,
+	should create a git repository
+
+all of you 
+
+decide a folder in your system:
+	that is not a part of git already.
+
+
+ProjectNo3			this will be pushed into GIT
+	frontend
+	backend
+
+notice a project1 folder has
+	2 folders
+	
+
+team leader
+creates the git repository
+and shares the url to their team
+
+
+
+git init
+git add .
+git commit -m "jun24_first"
+git remote add origin https://github.com/jagasia/ProjectNo1.git
+git branch -M jag
+git push -u origin jag
+
+
+
+
+Leaders, first create these 2 folders
+and 
+in frontend
+	create angular project
+in backend
+	create a rest api
+
+and push to the git
+
+share the git url to other team members
+
+Now, other team members cannot push anything
+until they become collaborators
+
+How do you add collaborators?
+
+
+frontend:
+	angular project name
+		ng new super-store-frontend --routing --style=css
+
+backend:
+	spring boot project name
+		super-store-product-rest
+		super-store-customer-rest
+		super-store-dealer-rest
+
+
+3 pm - 8 pm
+

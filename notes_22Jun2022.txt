@@ -1,0 +1,100 @@
+backend is REST api
+frontend is Angular
+
+in project
+login and logout
+	how do we want to use in project?
+		Spring security
+			we can allow certain URLs using permitAll()
+				merchant registration		allowed
+				merchant login		allowed
+				customer registration		allowed
+				customer login		allowed
+
+
+*registration
+*login
+
+
+
+Normalization
+	split a large table into multiple smaller tables
+
+USER
+	common fields for 
+		Customer
+		Merchant
+
+merchant related info
+	separate table
+
+customer 
+	customer_address
+		there can be more than one address for a customer
+
+
+
+USER
+	id
+	password
+	name
+	email
+	contact
+	role	(customer/merchant)
+
+
+get user object
+	
+
+JWT
+angular + rest api jwt
+
+
+
+eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYWphIiwiZXhwIjoxNjU1OTQyMzgzLCJpYXQiOjE2NTU5MDYzODN9.84Uk1uvuVRYUVo--8U8rkZtLU_HQdZhMGXGOIpBOEDM
+
+
+Task:
+	https://github.com/jagasia/spring-jwt-jun22
+
+run this spring security jwt project and tell me if you face any issues.
+
+
+
+ const httpOptions = {
+      headers: new HttpHeaders({
+          // 'Content-Type':  'application/json',
+           Authorization: 'Bearer ' + jwt,
+      })
+  };
+
+
+
+
+in Angular
+	how we are going to use jwt?
+
+1) login and signup are free access. So no need to worry about jwt
+2) but when login is successful, we get a JWT token as a response data.
+	that jwt should be stored in the localStorage
+		localStorage for permanent.	But token is valid only for 10 hours (as per our jwtUtil)
+		sessionStorage for temporary.
+
+
+3) whenever we access any other urls,
+	take the jwt from localStorage and
+	use it in the header
+
+	if token is not found in localStorage,
+		we can display 
+			"You have not logged in, click here to go to login page"
+
+
+
+
+
+
+
+
+
+
