@@ -19,6 +19,7 @@
 	</section>
 	<section name="org.eclipse.m2e.core.pom.dependencies">
 	</section>
+<<<<<<< HEAD
 	<section name="wizardPage">
 		<list key="groupId">
 			<item value="com.wipro.hrms"/>
@@ -98,4 +99,6 @@
 			<item value="0.0.1-SNAPSHOT"/>
 		</list>
 	</section>
+=======
+>>>>>>> 4c5e4075974ef245745a2cc75396a8d8f51c25ff
 </section>

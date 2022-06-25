@@ -4841,6 +4841,7 @@ java.nio.file.AccessDeniedException: C:\Program Files\Git\etc\.probe-8d2ca6dd-18
 	at org.eclipse.ui.internal.decorators.DecorationScheduler$1.ensureResultCached(DecorationScheduler.java:333)
 	at org.eclipse.ui.internal.decorators.DecorationScheduler$1.run(DecorationScheduler.java:300)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+<<<<<<< HEAD
 2022-06-17 18:25:35,564 [Worker-2: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
 2022-06-17 18:25:41,631 [Worker-4: Decoration Calculation] WARN  org.eclipse.jgit.util.FS - C:\Program Files\Git\etc\.probe-45710604-7cf7-47e3-852b-8b35eae7065c
 java.nio.file.AccessDeniedException: C:\Program Files\Git\etc\.probe-45710604-7cf7-47e3-852b-8b35eae7065c
@@ -6154,3 +6155,5 @@ java.nio.file.AccessDeniedException: C:\Program Files\Git\etc\.probe-e19e78e6-34
 2022-06-20 18:19:13,624 [Worker-4: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2022-06-20 18:19:13,624 [Worker-4: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
 2022-06-20 18:19:13,624 [Worker-4: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Jag\wipro\wipro1\wipro1\Java\springboot\jun20-rest-security-1\src\test\resources
+=======
+>>>>>>> 4c5e4075974ef245745a2cc75396a8d8f51c25ff

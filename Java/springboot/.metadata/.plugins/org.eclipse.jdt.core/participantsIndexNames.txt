@@ -1,4 +1,5 @@
 INDEX VERSION 1.131
+<<<<<<< HEAD
 D:\Jag\wipro\wipro1\wipro1\Java\springboot\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1756412593.index
 \jag-demo-1\src\main\java
 D:\Jag\wipro\wipro1\wipro1\Java\springboot\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2853678613.index
@@ -9,6 +10,16 @@ D:\Jag\wipro\wipro1\wipro1\Java\springboot\.metadata\.plugins\org.eclipse.jst.js
 \jun14-security-jpa-demo-1\src\main\java
 D:\Jag\wipro\wipro1\wipro1\Java\springboot\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2988977747.index
 \jun14-security-basic-1\src\main\java
+=======
+D:\Jag\wipro\wipro1\wipro1\Java\springboot\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2853678613.index
+\jun10-mvc-2-add-subtract-multiply\src\main\java
+D:\Jag\wipro\wipro1\wipro1\Java\springboot\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1756412593.index
+\jag-demo-1\src\main\java
+D:\Jag\wipro\wipro1\wipro1\Java\springboot\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2988977747.index
+\jun14-security-basic-1\src\main\java
+D:\Jag\wipro\wipro1\wipro1\Java\springboot\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1006833513.index
+\jun14-security-jpa-demo-1\src\main\java
+>>>>>>> 4c5e4075974ef245745a2cc75396a8d8f51c25ff
 D:\Jag\wipro\wipro1\wipro1\Java\springboot\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\4282106931.index
 \jun10-mvc-1\src\main\java
 D:\Jag\wipro\wipro1\wipro1\Java\springboot\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\984785292.index

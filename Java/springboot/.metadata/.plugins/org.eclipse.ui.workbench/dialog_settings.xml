@@ -25,9 +25,15 @@
 		<item key="DIALOG_Y_ORIGIN" value="146"/>
 	</section>
 	<section name="NewWizardAction">
+<<<<<<< HEAD
 		<item key="NewWizardSelectionPage.STORE_SELECTED_ID" value="org.eclipse.wst.xml.ui.internal.wizards.NewXMLWizard"/>
 		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
 			<item value="org.eclipse.wst.XMLCategory"/>
+=======
+		<item key="NewWizardSelectionPage.STORE_SELECTED_ID" value="org.eclipse.jst.jsp.ui.internal.wizard.NewJSPWizard"/>
+		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
+			<item value="org.eclipse.wst.web.ui"/>
+>>>>>>> 4c5e4075974ef245745a2cc75396a8d8f51c25ff
 		</list>
 	</section>
 </section>
