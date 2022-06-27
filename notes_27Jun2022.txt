@@ -1,0 +1,140 @@
+Each sprint is for 5 days
+Sprint 1	23-Jun-2022 	to		27-Jun-2022
+Spring 2 	28-Jun-2022	to		02-Jul-2022
+
+
+User story:
+	User registration
+	Manage Products
+	Place Order
+	
+
+JSP front end
+or
+Angular front end
+
+
+class Cart
+{
+	id
+	Customer customer;
+	Product product;
+}
+
+c.product.name
+c.product.price
+
+
+
+table:
+CART
+	ID
+	CID
+	PID
+	QTY
+
+order
+	id
+	cid
+	pid
+	qty
+	amount
+
+
+angular
+	routing
+
+route module file
+	define the routes.
+
+home		HomeComponent
+product		ProductComponent
+
+<router-outlet>
+
+App component
+	is always visible
+
+redirect to home
+	Welcome
+
+button to add an user
+
+
+first check if email id already exist or not
+if already exist, then display error message
+else
+add the user to the table
+
+
+https://docs.google.com/spreadsheets/d/1X0LSpuVWKK70Sz2VY836HQJz-vO-CFaF_Fiy0J4kByk/edit?usp=sharing
+
+
+1) entity
+2) repository
+3) service
+4) controller		@CrossOrigin(origins={"http://localhost:4200","*"})
+5) test it in post man
+
+Angular
+component
+service
+	call the rest api using http client
+component to call the service method
+
+
+Angular routing:
+-------------------
+Why routing?
+	because, even thought an angular component has .html file, it is not a complete page.
+	html file do not have 
+		<html>	or <head> or <body> nothing. only the segment of the code is there
+	so we do not give hyperlink to html files in angular.
+
+in order to give link to components, we need routing.
+
+for each component, we need to create a "path". 
+
+when we choose routing while creating the project:
+	--routing
+
+then a file will be created in our project folder
+
+	app-routing.module.ts
+
+		this is where we create the paths
+		a path is a mapping to component
+
+ex:
+
+login component
+signup component
+home component
+
+
+i will place a <router-outlet> in the 2nd column
+
+whenever we give link to a component, that component will be displayed in the 2nd column	(wherever the router-outlet is found)
+
+
+
+routing navigation can be done in .ts also
+
+if condition is true
+	navigate to home
+else
+	navigate to signup
+
+for that,
+you can inject the router to the constructor of the component
+
+
+
+import { Router, ActivatedRoute } from '@angular/router';
+constructor(private router: Router, private route: ActivatedRoute)
+
+
+this.router.navigate(['about']);
+
+
+
