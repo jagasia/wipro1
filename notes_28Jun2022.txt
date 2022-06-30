@@ -1,0 +1,87 @@
+REST API
+Angular
+Integration
+
+master - transaction
+
+PRODUCT MASTER
+CUSTOMER MASTER
+SALES TRANSACTION
+
+there is only 1 row for a product in Product table		PRIMARY key
+but the same product is sold many times in sales table.		FOREIGN key
+
+when transactions happens,
+we normally do not fill the form like
+
+SID....................	auto generated		remove
+PID.....................	we dont enter. we will choose the product from a gallery
+QTY....................	we dont enter. qty becomes 1 when we add to cart		there can be - + buttons to change the quantity
+AMOUNT...........	we dont enter, based on pid and qty, we can compute it
+CID...................	we dont enter, because, who has logged in??? he is only buying
+
+We do not type everything in a transaction. That is what it makes little complex when compared to a master
+
+PRODUCT
+
+PID.......................
+NAME.................
+DESC.............
+PRICE...................
+
+
+login
+home
+lot of categories
+products 
+every product
+	buy now
+	add to cart
+
+Order page
+	show his
+		cid
+		pid	along with other details
+		qty	can be edited
+	
+task in hand:
+
+Spring boot mvc project
+------------------------------
+.jar
+
+do not choose .war
+
+because, you are going to deploy the project to AWS
+
+Elastic beanstalk
+	.war can be deployed as a tomcat application.
+most of them will use
+ECS
+	Elastic Container Service
+
+	docker image will be deployed
+
+	docker image of .jar
+
+
+dynamic web project			response.sendRedirect
+	war
+
+spring boot mvc project
+	while creating spring boot starter project
+		.jar
+
+@Controller
+
+prefix
+suffix
+	for jsp
+
+
+spring boot rest api
+	.jar
+
+angular front end can access rest api from localhost
+or from ECS also
+

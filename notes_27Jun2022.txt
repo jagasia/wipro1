@@ -136,5 +136,20 @@ constructor(private router: Router, private route: ActivatedRoute)
 
 this.router.navigate(['about']);
 
+selected food item in the cart
+
+table
+	rows
+
+add to cart button, 
+	a row is added to the cart in the db table
+
+view cart
+	show all the rows found in cart (where cid is current cid)
+
+place order
+	then remove from cart
+
+
 
 

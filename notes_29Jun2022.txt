@@ -1,0 +1,110 @@
+1) Problems solving
+2) Every team to complete the backend REST APIs and test them using 
+	Postman (or)
+	Swagger
+3) Start working on angular frontend part.
+
+------------------
+
+Who are all need support or help?
+-------------------------------------------
+
+class Order
+{
+}
+
+
+CREATE TABLE ORDER
+
+Actually ORDER is a keyword in SQL language
+
+so we cannot create a table named as ORDER
+
+
+Add to Cart:
+----------------
+
+Display all the products 
+
+bootstrap cards 
+	picture
+	Name
+	description
+	price
+	"Add to Cart"
+
+*ngFor
+
+every card is an object of Product
+
+let p of products
+
+
+{path:"atoc/:pid", component:AddToCartComponent}
+
+<input type="button" class="btn btn-info" value="Add to Cart" (click)="fnAdd()" ngClass="{}" />
+
+
+in .ts code
+
+fnAdd()
+{
+	//add a row into the cart table
+	this.cs.addToCart(x).subscribe((data)=>{});	
+	change the button text into "Added" and disable the button
+	
+}
+
+
+
+
+
+view cart
+	show a component
+		that displays all rows from cart
+			getCartByCid
+
+
+
+
+
+class Cart
+{
+	id
+	cid
+	pid
+	qty
+
+}
+
+
+
+cart controller
+
+findCartByCid(cid)
+	List<Cart>
+
+
+in angular,
+once a customer logs in 
+	localStorage.setItem("cid",cid");
+
+
+whenever
+	view cart
+
+		get cart by cid
+
+
+
+app.module.ts
+	import
+		HttpClientModule
+
+create a service class
+	to constructor, inject the 
+		http:HttpClient
+
+	call the rest api
+		this.http.get(this.URL);
+

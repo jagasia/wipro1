@@ -1,0 +1,82 @@
+Angular + Spring rest integration
+----------------------------------------
+
+in app.module.ts
+	import
+		HttpClientModule
+
+import { HttpClientModule } from '@angular/common/http';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule
+
+
+
+
+
+in service.ts
+	inject HttpClient to the constructor
+
+	use this object to call rest api
+
+in rest api controller
+	@CrossOrigin
+
+1) create a display-products component
+2) create a component service
+	will connect with rest api
+3) in the display-products component,
+	inject the product service and call method to get all products
+	display all products
+
+
+
+
+to display all products in html using a loop
+	FormsModule
+		*ngFor
+		*ngIf
+
+
+
+in angular create a component for adding a product
+
+ng g c add-product
+
+
+ReactiveFormsModule		in app.module.ts
+
+
+2022-06-30 18:48:16.928 DEBUG 23512 --- [nio-8081-exec-2] org.hibernate.SQL                        : select product0_.id as id1_0_, product0_.name as name2_0_, product0_.picture as picture3_0_, product0_.price as price4_0_ from product product0_
+Hibernate: select product0_.id as id1_0_, product0_.name as name2_0_, product0_.picture as picture3_0_, product0_.price as price4_0_ from product product0_
+2022-06-30 18:55:32.637  WARN 23512 --- [nio-8081-exec-3] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' not supported]
+
+
+
+
+
+
+
+
+
+a cart object should have
+	id auto so ignore
+	customer object		we need to call the customer rest api to obtain a customer object based on id
+	product object		we need to call the product rest api to 
+	qty
+
+
+2022-06-30 19:57:39.013 TRACE 27424 --- [nio-8082-exec-3] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [1]
+
+
+
+
+
+
+
